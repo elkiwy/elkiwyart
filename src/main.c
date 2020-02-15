@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
@@ -34,6 +35,35 @@ typedef struct Page{
 } Page;
 
 
+
+
+void build_nav_level(FILE* f, Page* p){
+	fputs("<ul>", f);
+	for (int i=0; i < p->children_len; ++i){
+		char* name = p->children[i]->name;
+        fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);  
+	}
+	fputs("</ul>", f);
+}
+
+
+
+void build_nav(FILE* f, Page* p){
+	fputs("<nav>", f);
+	if (p->parent != NULL){
+		if (p->parent->parent != NULL){
+			if (p->parent->parent->parent != NULL){
+				build_nav_level(f, p->parent->parent->parent);
+			}
+			build_nav_level(f, p->parent->parent);
+		}
+		build_nav_level(f, p->parent);
+	}
+	build_nav_level(f, p);
+	fputs("</nav>", f);
+}
+
+
 void build_page(Page* page){
 	char filename[STR_BUF_LEN];
 	to_lowercase(page->name, filename, STR_BUF_LEN);
@@ -51,46 +81,57 @@ void build_page(Page* page){
 	fprintf(f, html_head, page->name);
 	fputs(html_header, f);
 	fputs("<main>", f);
-	fputs("test", f);
+	build_nav(f, page);
+
+	fprintf(f,"<h1>%s</h1>", page->name);  
 	fputs("</main>", f);
 	fputs(html_footer, f);
 	fclose(f);
 }
 
 
-Page create_page(Page* parent, char* name){
-	Page p;
-	p.name = name;
-	p.parent = parent;
+
+Page* create_page(Page* parent, char* name){
+	Page* p = malloc( sizeof(Page) );
+	p->name = name;
+	p->parent = parent;
+	p->children_len = 0;
+
+	printf("creating %s\n", name); fflush(stdout);
+	if (parent!=NULL){
+		//Assign this page as a child for his parent
+		printf("Children count %d for %s.\n", parent->children_len, parent->name); fflush(stdout);
+		parent->children[parent->children_len] = p;
+		parent->children_len++;
+	}
+
 	return p;
 }
 
 
+void build_page_recursively(Page* page){
+	if (page==NULL) return;
+	printf("Building page and his %d childs.\n", page->children_len); fflush(stdout);
+	build_page(page);
+
+	for (int i=0; i<page->children_len; i++){
+		build_page_recursively(page->children[i]);
+	}
+}
+
 
 int main(){
+	Page* home = create_page(NULL, "home");
+	create_page(home, "blog");
+	create_page(home, "art");
+	create_page(home, "programs");
+	create_page(home, "games");
+	create_page(home, "about");
 
-	Page home     = create_page(NULL, "home");
-	Page blog     = create_page(&home, "blog");
-	Page art      = create_page(&home, "art");
-	Page programs = create_page(&home, "programs");
-	Page games    = create_page(&home, "games");
-	Page about    = create_page(&home, "about");
 
-	Page* pages[] = { &home, &blog, &art, &programs, &games, &about};
+	printf("-----\nStart building\n-----\n"); fflush(stdout);
 
-	int pages_count = sizeof pages / sizeof pages[0];
-
-	for (int i=0; i<pages_count; ++i){
-		Page* p = pages[i];
-		if (p->parent){
-			p->parent->children[p->parent->children_len] = p;
-			p->parent->children_len++;
-		}
-	}
-
-	for (int i=0; i<pages_count; ++i){
-		build_page(pages[i]);
-	}
+	build_page_recursively(home);
 
 	return 0;
 }
