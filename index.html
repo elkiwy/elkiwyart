@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+	<meta charset='utf-8'>
+	<meta name='author' content='Stefano Bertoli'>
+	<meta name='description' content="The home for anything I did, I'm doing and I'll do."/>
+	<meta name='keywords' content='Elkiwy, ElkiwyArt, Stefano, Bertoli' />
+	<meta name='license' content='name=BY-NC-SA(4.0), url=https://creativecommons.org/licenses/by-nc-sa/4.0/'/>
+	<!--<meta name='thumbnail' content='' /> -->
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<meta name='twitter:card' content='summary'>
+	<meta name='twitter:site' content='@elkiwydev'>
+	<!--<meta name='twitter:title' content=''>-->
+	<!--<meta name='twitter:description' content=''>-->
+	<!--<meta name='twitter:creator' content=''>-->
+	<!--<meta name='twitter:image' content=''>-->
+	<!--<meta property='og:title' content='' />-->
+	<meta property='og:type' content='article' />
+	<meta property='og:url' content='http://elkiwyart.com/' />
+	<!--<meta property='og:image' content='' />-->
+	<!--<meta property='og:description' content='' /> -->
+	<meta property='og:site_name' content='ElkiwyArt' />
+	<noscript>
+	  <meta http-equiv="refresh" content="0; url=site/home.html" />
+	</noscript>
+	<!--<link rel='alternate'  type='application/rss+xml' title='Feed' href='links/rss.xml' />-->
+	<!--<link rel='icon' type='image/x-icon' href='media/services/favicon.ico'>-->
+	<!--<link rel='icon' type='image/png' href='media/services/rss.jpg'>-->
+	<link rel='apple-touch-icon' href='media/services/rss.jpg' />
+	<title>ElkiwyArt</title>
+  </head>
+  <body>
+	<p>Continue to <a href='site/home.html' target='_blank'>home page</a>.</p>
+	<script>
+	  'use strict'
+
+	  if(window.location.hash !== ''){
+		  window.location.replace(`./site/${toFilename(window.location.hash)}.html`)
+	  }else{
+		  window.location.replace(`./site/home.html`)
+	  }
+
+	  function toFilename(str){
+		  return str.replace('#','').replace(/[\W_]+/g,"_").trim()
+	  }
+	</script>
+  </body>
+</html>
