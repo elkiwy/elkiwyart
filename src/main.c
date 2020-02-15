@@ -14,10 +14,9 @@
 
 
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
-
 char* html_header = "<header><a id='logo' href='home.html'>ElKiwyArt</a></header>";
-
 char *html_footer = "FOOTER</body></html>";
+
 
 
 typedef struct Page{
