@@ -37,11 +37,19 @@ typedef struct Page{
 
 
 
-void build_nav_level(FILE* f, Page* p){
+void build_nav_level(FILE* f, Page* p, char** path){
 	fputs("<ul>", f);
 	for (int i=0; i < p->children_len; ++i){
+		//Search if you find this page in the path
 		char* name = p->children[i]->name;
-        fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);  
+		bool inPath = false;
+		for (int j=0; j < 4; ++j){
+			if (name == path[j]){inPath = true;}
+		}
+
+		//Add the item
+		if (inPath){fprintf(f, "<li><span>%s</span></li>", name);  
+		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);}
 	}
 	fputs("</ul>", f);
 }
@@ -50,18 +58,25 @@ void build_nav_level(FILE* f, Page* p){
 
 void build_nav(FILE* f, Page* p){
 	fputs("<nav>", f);
+	//Saves the page path
+	char* path[4];
+	path[0] = p->name;
 	if (p->parent != NULL){
+		path[1] = p->parent->name;
 		if (p->parent->parent != NULL){
+			path[2] = p->parent->parent->name;
 			if (p->parent->parent->parent != NULL){
-				build_nav_level(f, p->parent->parent->parent);
+				path[3] = p->parent->parent->parent->name;
+				build_nav_level(f, p->parent->parent->parent, path);
 			}
-			build_nav_level(f, p->parent->parent);
+			build_nav_level(f, p->parent->parent, path);
 		}
-		build_nav_level(f, p->parent);
+		build_nav_level(f, p->parent, path);
 	}
-	build_nav_level(f, p);
+	build_nav_level(f, p, path);
 	fputs("</nav>", f);
 }
+
 
 
 void build_page(Page* page){
@@ -80,8 +95,8 @@ void build_page(Page* page){
 
 	fprintf(f, html_head, page->name);
 	fputs(html_header, f);
-	fputs("<main>", f);
 	build_nav(f, page);
+	fputs("<main>", f);
 
 	fprintf(f,"<h1>%s</h1>", page->name);  
 	fputs("</main>", f);
