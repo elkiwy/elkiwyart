@@ -139,10 +139,18 @@ int main(){
 	Page* home = create_page(NULL, "home");
 	create_page(home, "blog");
 	create_page(home, "art");
-	create_page(home, "programs");
-	create_page(home, "games");
-	create_page(home, "about");
 
+	Page* programs = create_page(home, "programs");
+	create_page(programs, "Gisp");
+	create_page(programs, "PaYnter");
+
+	Page* games = create_page(home, "games");
+	create_page(games, "BeardedBear");
+	create_page(games, "BuildTutto");
+	create_page(games, "WaveJump");
+	create_page(games, "AsciiRush");
+
+	create_page(home, "about");
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 
