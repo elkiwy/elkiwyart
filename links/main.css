@@ -1,4 +1,7 @@
-* { margin:0;padding:0;box-sizing:border-box;text-decoration:none;color:black }
+html{--col-fg: black; --col-bg: white;}
+html[data-theme='dark']{--col-fg: white; --col-bg: black;}
+
+* { margin:0;padding:0;box-sizing:border-box;text-decoration:none;color:var(--col-fg);background-color:var(--col-bg) }
 body { padding:30px } 
 body > * { margin-bottom:30px }
 body > * > * { margin-bottom:30px }
@@ -10,9 +13,9 @@ header #logo { background:none }
 
 nav { margin:0 0 30px } 
 nav ul { padding:0;margin-bottom:12px;display:flex } 
-nav ul li { list-style-type:none; white-space:pre; float:left; margin-right:16px; } 
-nav ul li a:hover { background:black;color:white } 
-nav ul li span { background:black;color:white } 
+nav ul li { list-style-type:none; var(--col-bg)-space:pre; float:left; margin-right:16px; } 
+nav ul li a:hover { background:var(--col-fg);color:var(--col-bg) } 
+nav ul li span { background:var(--col-fg);color:var(--col-bg) } 
 
 main { max-width:600px;clear:both }
 main figure:first-child img { margin-left: -30px;max-width: calc(100vw - 15px);width: 900px }
