@@ -12,6 +12,7 @@
 #define PAGE_LINK_BUFFER 32
 #define PAGE_CHILD_BUFFER 32
 #define STR_BUF_LEN 64
+#define MAX_PARAGRAPHS 32
 
 
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
@@ -19,6 +20,9 @@ char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
 char *html_footer = "FOOTER<button onclick=\" if(document.documentElement.getAttribute('data-theme')=='dark'){document.documentElement.setAttribute('data-theme', 'light');}else{document.documentElement.setAttribute('data-theme', 'dark');} \" type=\"button\">Theme</button></body></html>";
 
 
+typedef struct Paragraph{
+	char* content;
+} Paragraph;
 
 typedef struct Page{
 	char* name;
@@ -32,7 +36,14 @@ typedef struct Page{
 	int children_len;
 	struct Page* children[PAGE_CHILD_BUFFER];
 	struct Page* parent;
+
+	int paragraph_count;
+	Paragraph* paragraphs[MAX_PARAGRAPHS];
+
 } Page;
+
+
+
 
 
 
@@ -79,6 +90,21 @@ void build_nav(FILE* f, Page* p){
 
 
 
+void build_paragraph(FILE* f, Paragraph* p){
+	if (p==NULL) return;
+	fprintf(f,"<p>%s</p>", p->content);  
+}
+
+
+void build_content(FILE* f, Page* p){
+	fputs("<main>", f);
+	fprintf(f,"<h1>%s</h1>", p->name);  
+	for (int i=0; i<p->paragraph_count; ++i){
+		build_paragraph(f, p->paragraphs[i]);
+	}
+	fputs("</main>", f);
+}
+
 void build_page(Page* page){
 	char filename[STR_BUF_LEN];
 	to_lowercase(page->name, filename, STR_BUF_LEN);
@@ -96,10 +122,9 @@ void build_page(Page* page){
 	fprintf(f, html_head, page->name);
 	fputs(html_header, f);
 	build_nav(f, page);
-	fputs("<main>", f);
 
-	fprintf(f,"<h1>%s</h1>", page->name);  
-	fputs("</main>", f);
+	build_content(f, page);
+
 	fputs(html_footer, f);
 	fclose(f);
 }
@@ -111,6 +136,7 @@ Page* create_page(Page* parent, char* name){
 	p->name = name;
 	p->parent = parent;
 	p->children_len = 0;
+	p->paragraph_count = 0;
 
 	printf("creating %s\n", name); fflush(stdout);
 	if (parent!=NULL){
@@ -135,22 +161,21 @@ void build_page_recursively(Page* page){
 }
 
 
+
+
+void add_paragraph(Page* p, char* s){
+	Paragraph* par = malloc(sizeof(Paragraph));
+	par->content = s;
+	p->paragraphs[p->paragraph_count] = par;
+	p->paragraph_count++;
+}
+
+
+
 int main(){
-	Page* home = create_page(NULL, "home");
-	create_page(home, "blog");
-	create_page(home, "art");
 
-	Page* programs = create_page(home, "programs");
-	create_page(programs, "Gisp");
-	create_page(programs, "PaYnter");
+    #include "content.c"
 
-	Page* games = create_page(home, "games");
-	create_page(games, "BeardedBear");
-	create_page(games, "BuildTutto");
-	create_page(games, "WaveJump");
-	create_page(games, "AsciiRush");
-
-	create_page(home, "about");
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 
