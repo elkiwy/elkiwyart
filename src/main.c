@@ -37,6 +37,9 @@ typedef struct Page{
 	struct Page* children[PAGE_CHILD_BUFFER];
 	struct Page* parent;
 
+	char* preview_description;
+	bool has_preview;
+
 	int paragraph_count;
 	Paragraph* paragraphs[MAX_PARAGRAPHS];
 
@@ -105,6 +108,17 @@ void build_content(FILE* f, Page* p){
 	fputs("</main>", f);
 }
 
+void build_child_previews(FILE* f, Page* p){
+	for (int i=0; i<p->children_len; ++i){
+		if (p->children[i]->has_preview){
+			fprintf(f,"<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+			fputs("<p>", f);
+			fputs(p->children[i]->preview_description, f);
+			fputs("</p>", f);
+		}
+	}
+}
+
 void build_page(Page* page){
 	char filename[STR_BUF_LEN];
 	to_lowercase(page->name, filename, STR_BUF_LEN);
@@ -125,6 +139,8 @@ void build_page(Page* page){
 
 	build_content(f, page);
 
+	build_child_previews(f, page);
+
 	fputs(html_footer, f);
 	fclose(f);
 }
@@ -137,6 +153,8 @@ Page* create_page(Page* parent, char* name){
 	p->parent = parent;
 	p->children_len = 0;
 	p->paragraph_count = 0;
+	p->preview_description = "";
+	p->has_preview = false;
 
 	printf("creating %s\n", name); fflush(stdout);
 	if (parent!=NULL){
@@ -168,6 +186,11 @@ void add_paragraph(Page* p, char* s){
 	par->content = s;
 	p->paragraphs[p->paragraph_count] = par;
 	p->paragraph_count++;
+}
+
+void add_preview_description(Page* p, char* s){
+	p->has_preview = true;
+	p->preview_description = s;
 }
 
 
