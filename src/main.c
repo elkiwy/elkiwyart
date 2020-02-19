@@ -102,7 +102,7 @@ void build_nav(FILE* f, Page* p){
 
 
 
-void build_paragraph(FILE* f, Content* c){
+void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
 	if(c->is_paragraph){ fprintf(f,"<p>%s</p>", c->data);  }
 	else if(c->is_stub){ fprintf(f,"<p style:\"color:red\">%s</p>", c->data);  }
@@ -111,11 +111,11 @@ void build_paragraph(FILE* f, Content* c){
 }
 
 
-void build_content(FILE* f, Page* p){
+void build_contents(FILE* f, Page* p){
 	fputs("<main>", f);
 	fprintf(f,"<h1>%s</h1>", p->name);  
 	for (int i=0; i<p->contents_count; ++i){
-		build_paragraph(f, p->contents[i]);
+		build_content(f, p->contents[i]);
 	}
 	fputs("</main>", f);
 }
@@ -149,7 +149,7 @@ void build_page(Page* page){
 	fputs(html_header, f);
 	build_nav(f, page);
 
-	build_content(f, page);
+	build_contents(f, page);
 
 	build_child_previews(f, page);
 
