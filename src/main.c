@@ -134,10 +134,13 @@ void build_contents(FILE* f, Page* p){
 void build_child_previews(FILE* f, Page* p){
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
-			fprintf(f,"<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
-			fputs("<p>", f);
-			fputs(p->children[i]->preview_description, f);
-			fputs("</p>", f);
+			//Page title
+			fprintf(f, "<a href='%s.html'>", p->children[i]->name);
+			fprintf(f, "<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+			fprintf(f, "</a>");
+
+			//Page description
+			fprintf(f, "<p>%s</p>", p->children[i]->preview_description);
 		}
 	}
 }
