@@ -104,9 +104,14 @@ void build_nav(FILE* f, Page* p){
 
 void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
-	if(c->is_paragraph){ fprintf(f,"<p>%s</p>", c->data);  }
-	else if(c->is_stub){ fprintf(f,"<p style:\"color:red\">%s</p>", c->data);  }
-	else if(c->is_image){ fprintf(f,"<p>TODO IMPLEMENT IMAGE</p>");  }
+	if(c->is_paragraph){
+		fprintf(f,"<p>%s</p>", c->data);
+	} else if(c->is_stub){
+		printf("Building a stub\n"); fflush(stdout);
+		fprintf(f,"<p style=\"color:red\">TODO: %s</p>", c->data);
+	} else if(c->is_image){
+		fprintf(f,"<p>TODO IMPLEMENT IMAGE</p>");
+	}
 
 }
 
