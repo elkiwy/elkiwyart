@@ -196,7 +196,7 @@ Page* create_page(Page* parent, char* name){
 
 void build_page_recursively(Page* page){
 	if (page==NULL) return;
-	printf("Building page and his %d childs.\n", page->children_len); fflush(stdout);
+	printf("Building page %s and his %d childs.\n", page->name, page->children_len); fflush(stdout);
 	build_page(page);
 
 	for (int i=0; i<page->children_len; i++){
