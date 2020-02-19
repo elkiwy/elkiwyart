@@ -18,6 +18,8 @@ add_paragraph(home, "Welcome to ElKiwyArt website!");
 add_paragraph(home, "This is my very personal attempt to show who am I, and what I do. Since I do many different things sprinkled around the internet, the scope of this website is to try group all up and present everything to you in a nice and clear way.");
 add_paragraph(home, "But, this is not a portfolio where i present everything I made or released. There will also be random posts on anything I do in a particular time in my life, maybe some big project, or maybe just a little dumb study on something." );
 
+add_image(home, "default_1080.png");
+
 add_stub(home, "Closing");
 
 
