@@ -118,11 +118,14 @@ void build_content(FILE* f, Content* c){
 
 void build_contents(FILE* f, Page* p){
 	fputs("<main>", f);
-	//Page header
-	fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
 
-	//Parent up link
-	if (p->parent !=NULL) fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->name, p->parent->name);
+	//Page header
+	if (p->parent !=NULL) {
+		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
+		fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->name, p->parent->name);
+	}else{
+		fprintf(f,"<h1>%s</h1>", p->name);  
+	}
 
 	//Page content
 	for (int i=0; i<p->contents_count; ++i){
