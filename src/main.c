@@ -20,9 +20,18 @@ char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
 char *html_footer = "FOOTER<button onclick=\" if(document.documentElement.getAttribute('data-theme')=='dark'){document.documentElement.setAttribute('data-theme', 'light');}else{document.documentElement.setAttribute('data-theme', 'dark');} \" type=\"button\">Theme</button></body></html>";
 
 
-typedef struct Paragraph{
-	char* content;
-} Paragraph;
+
+
+
+typedef struct Content{
+	bool is_paragraph;
+	bool is_image;
+	bool is_stub;
+	char* data;
+} Content;
+
+
+
 
 typedef struct Page{
 	char* name;
@@ -40,8 +49,8 @@ typedef struct Page{
 	char* preview_description;
 	bool has_preview;
 
-	int paragraph_count;
-	Paragraph* paragraphs[MAX_PARAGRAPHS];
+	int contents_count;
+	Content* contents[MAX_PARAGRAPHS];
 
 } Page;
 
@@ -93,17 +102,20 @@ void build_nav(FILE* f, Page* p){
 
 
 
-void build_paragraph(FILE* f, Paragraph* p){
-	if (p==NULL) return;
-	fprintf(f,"<p>%s</p>", p->content);  
+void build_paragraph(FILE* f, Content* c){
+	if (c==NULL) return;
+	if(c->is_paragraph){ fprintf(f,"<p>%s</p>", c->data);  }
+	else if(c->is_stub){ fprintf(f,"<p style:\"color:red\">%s</p>", c->data);  }
+	else if(c->is_image){ fprintf(f,"<p>TODO IMPLEMENT IMAGE</p>");  }
+
 }
 
 
 void build_content(FILE* f, Page* p){
 	fputs("<main>", f);
 	fprintf(f,"<h1>%s</h1>", p->name);  
-	for (int i=0; i<p->paragraph_count; ++i){
-		build_paragraph(f, p->paragraphs[i]);
+	for (int i=0; i<p->contents_count; ++i){
+		build_paragraph(f, p->contents[i]);
 	}
 	fputs("</main>", f);
 }
@@ -152,7 +164,7 @@ Page* create_page(Page* parent, char* name){
 	p->name = name;
 	p->parent = parent;
 	p->children_len = 0;
-	p->paragraph_count = 0;
+	p->contents_count = 0;
 	p->preview_description = "";
 	p->has_preview = false;
 
@@ -182,16 +194,33 @@ void build_page_recursively(Page* page){
 
 
 void add_paragraph(Page* p, char* s){
-	Paragraph* par = malloc(sizeof(Paragraph));
-	par->content = s;
-	p->paragraphs[p->paragraph_count] = par;
-	p->paragraph_count++;
+	Content* cont = malloc(sizeof(Content));
+	cont->data = s;
+	cont->is_paragraph = true;
+	cont->is_stub = false;
+	cont->is_image = false;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
 }
+
+
+void add_stub(Page* p, char* s){
+	Content* cont = malloc(sizeof(Content));
+	cont->data = s;
+	cont->is_paragraph = false;
+	cont->is_stub = true;
+	cont->is_image = false;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
 
 void add_preview_description(Page* p, char* s){
 	p->has_preview = true;
 	p->preview_description = s;
 }
+
+
 
 
 
