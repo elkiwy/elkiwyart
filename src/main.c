@@ -71,7 +71,7 @@ void build_nav_level(FILE* f, Page* p, char** path){
 		}
 
 		//Add the item
-		if (inPath){fprintf(f, "<li><span>%s</span></li>", name);  
+		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", name, name);  
 		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);}
 	}
 	fputs("</ul>", f);
