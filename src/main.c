@@ -110,7 +110,7 @@ void build_content(FILE* f, Content* c){
 		printf("Building a stub\n"); fflush(stdout);
 		fprintf(f,"<p style=\"color:red\">TODO: %s</p>", c->data);
 	} else if(c->is_image){
-		fprintf(f,"<p>TODO IMPLEMENT IMAGE</p>");
+		fprintf(f,"<img src='../media/img/%s'/>", c->data);
 	}
 
 }
@@ -224,6 +224,17 @@ void add_stub(Page* p, char* s){
 	cont->is_paragraph = false;
 	cont->is_stub = true;
 	cont->is_image = false;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
+
+void add_image(Page* p, char* s){
+	Content* cont = malloc(sizeof(Content));
+	cont->data = s;
+	cont->is_paragraph = false;
+	cont->is_stub = false;
+	cont->is_image = true;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
