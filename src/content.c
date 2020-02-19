@@ -26,14 +26,14 @@ add_stub(home, "Closing");
 ////////////////////////////
 Page* art = create_page(home, "art");
 
+Page* gates = create_page(art, "Gates");
+add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
+
 Page* scorci = create_page(art, "Scorci");
 add_preview_description(scorci, "Second study on procedurally generated trees synthesising a Japanese panorama.");
 
 Page* spring_flowers = create_page(art, "Spring_Flowers");
 add_preview_description(spring_flowers, "First study on procedurally generated trees.");
-
-Page* gates = create_page(art, "Gates");
-add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
 
 Page* deep_stars = create_page(art, "Deep_Stars");
 add_preview_description(deep_stars, "Studies on Quil blends and shapes.");
