@@ -17,7 +17,7 @@
 
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
 char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
-char *html_footer = "FOOTER<button onclick=\" if(document.documentElement.getAttribute('data-theme')=='dark'){document.documentElement.setAttribute('data-theme', 'light');}else{document.documentElement.setAttribute('data-theme', 'dark');} \" type=\"button\">Theme</button></body></html>";
+char *html_footer = "<p>Stefano Bertoli © 2020</p><button onclick=\" if(document.documentElement.getAttribute('data-theme')=='dark'){document.documentElement.setAttribute('data-theme', 'light');}else{document.documentElement.setAttribute('data-theme', 'dark');} \" type=\"button\">Theme</button></body></html>";
 
 
 
@@ -71,7 +71,7 @@ void build_nav_level(FILE* f, Page* p, char** path){
 		}
 
 		//Add the item
-		if (inPath){fprintf(f, "<li><span>%s</span></li>", name);  
+		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", name, name);  
 		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);}
 	}
 	fputs("</ul>", f);
@@ -102,20 +102,34 @@ void build_nav(FILE* f, Page* p){
 
 
 
-void build_paragraph(FILE* f, Content* c){
+void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
-	if(c->is_paragraph){ fprintf(f,"<p>%s</p>", c->data);  }
-	else if(c->is_stub){ fprintf(f,"<p style:\"color:red\">%s</p>", c->data);  }
-	else if(c->is_image){ fprintf(f,"<p>TODO IMPLEMENT IMAGE</p>");  }
+	if(c->is_paragraph){
+		fprintf(f,"<p>%s</p>", c->data);
+	} else if(c->is_stub){
+		printf("Building a stub\n"); fflush(stdout);
+		fprintf(f,"<p style=\"color:red\">TODO: %s</p>", c->data);
+	} else if(c->is_image){
+		fprintf(f,"<img src='../media/img/%s'/>", c->data);
+	}
 
 }
 
 
-void build_content(FILE* f, Page* p){
+void build_contents(FILE* f, Page* p){
 	fputs("<main>", f);
-	fprintf(f,"<h1>%s</h1>", p->name);  
+
+	//Page header
+	if (p->parent !=NULL) {
+		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
+		fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->name, p->parent->name);
+	}else{
+		fprintf(f,"<h1>%s</h1>", p->name);  
+	}
+
+	//Page content
 	for (int i=0; i<p->contents_count; ++i){
-		build_paragraph(f, p->contents[i]);
+		build_content(f, p->contents[i]);
 	}
 	fputs("</main>", f);
 }
@@ -123,10 +137,13 @@ void build_content(FILE* f, Page* p){
 void build_child_previews(FILE* f, Page* p){
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
-			fprintf(f,"<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
-			fputs("<p>", f);
-			fputs(p->children[i]->preview_description, f);
-			fputs("</p>", f);
+			//Page title
+			fprintf(f, "<a href='%s.html'>", p->children[i]->name);
+			fprintf(f, "<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+			fprintf(f, "</a>");
+
+			//Page description
+			fprintf(f, "<p>%s</p>", p->children[i]->preview_description);
 		}
 	}
 }
@@ -149,11 +166,16 @@ void build_page(Page* page){
 	fputs(html_header, f);
 	build_nav(f, page);
 
-	build_content(f, page);
+	build_contents(f, page);
 
 	build_child_previews(f, page);
 
+
+	
+	fputs("<footer>", f);
 	fputs(html_footer, f);
+	fputs("</footer>", f);
+
 	fclose(f);
 }
 
@@ -182,7 +204,7 @@ Page* create_page(Page* parent, char* name){
 
 void build_page_recursively(Page* page){
 	if (page==NULL) return;
-	printf("Building page and his %d childs.\n", page->children_len); fflush(stdout);
+	printf("Building page %s and his %d childs.\n", page->name, page->children_len); fflush(stdout);
 	build_page(page);
 
 	for (int i=0; i<page->children_len; i++){
@@ -210,6 +232,17 @@ void add_stub(Page* p, char* s){
 	cont->is_paragraph = false;
 	cont->is_stub = true;
 	cont->is_image = false;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
+
+void add_image(Page* p, char* s){
+	Content* cont = malloc(sizeof(Content));
+	cont->data = s;
+	cont->is_paragraph = false;
+	cont->is_stub = false;
+	cont->is_image = true;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
