@@ -260,6 +260,25 @@ void add_image(Page* p, char* s){
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
+
+void add_image2(Page* p, char* s1, char* s2){
+	Content* cont = malloc(sizeof(Content));
+	char* format = "<div><img class='img2' src='../media/img/%s'/><img class='img2' src='../media/img/%s'/></div>";
+	int size = strlen(s1)+strlen(s2)+strlen(format) + 1;
+	char* buff = malloc(sizeof(char)*size);
+	sprintf(buff, format, s1, s2);
+	cont->data = buff;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
+void add_image3(Page* p, char* s1, char* s2, char* s3){
+	Content* cont = malloc(sizeof(Content));
+	char* format = "<div><img class='img3' src='../media/img/%s'/><img class='img3' src='../media/img/%s'/><img class='img3' src='../media/img/%s'/></div>";
+	int size = strlen(s1)+strlen(s2)+strlen(s3)+strlen(format) + 1;
+	char* buff = malloc(sizeof(char)*size);
+	sprintf(buff, format, s1, s2, s3);
+	cont->data = buff;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
