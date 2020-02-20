@@ -63,8 +63,15 @@ create_page(games, "BeardedBear");
 create_page(games, "BuildTutto");
 create_page(games, "WaveJump");
 create_page(games, "AsciiRush");
+create_page(games, "Shootshift");
+create_page(games, "Get The Fick Out");
 
-create_page(home, "about");
+
+
+////////////////////////////
+// About
+////////////////////////////
+Page* about = create_page(home, "about");
 
 
 
