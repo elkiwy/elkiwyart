@@ -24,9 +24,6 @@ char *html_footer = "<p>Stefano Bertoli © 2020</p><button onclick=\" if(documen
 
 
 typedef struct Content{
-	bool is_paragraph;
-	bool is_image;
-	bool is_stub;
 	char* data;
 } Content;
 
@@ -56,6 +53,12 @@ typedef struct Page{
 } Page;
 
 
+char* formattedString(char* format, char* s1){
+	int size = strlen(s1)+strlen(format)+1;
+	char* s = malloc(sizeof(char)*size);
+	sprintf(s, format, s1);
+	return s;
+}
 
 
 
@@ -124,18 +127,7 @@ void build_nav(FILE* f, Page* p){
 
 void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
-	if(c->is_paragraph){
-		fprintf(f,"<p>%s</p>", c->data);
-	} else if(c->is_stub){
-		printf("Building a stub\n"); fflush(stdout);
-		fprintf(f,"<p style=\"color:red\">TODO: %s</p>", c->data);
-	} else if(c->is_image){
-		fprintf(f,"<img src='../media/img/%s'/>", c->data);
-	} else{
-		logStr(c->data);
-		fputs(c->data, f);
-	}
-
+	fputs(c->data, f);
 }
 
 
@@ -241,12 +233,13 @@ void build_page_recursively(Page* page){
 
 
 
+
+
+
+
 void add_paragraph(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
-	cont->data = s;
-	cont->is_paragraph = true;
-	cont->is_stub = false;
-	cont->is_image = false;
+	cont->data = formattedString("<p>%s</p>", s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -254,10 +247,8 @@ void add_paragraph(Page* p, char* s){
 
 void add_stub(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
-	cont->data = s;
-	cont->is_paragraph = false;
-	cont->is_stub = true;
-	cont->is_image = false;
+	printf("!!! ADDING STUB\n"); fflush(stdout);
+	cont->data = formattedString("<p style=\"color:red\">TODO: %s</p>", s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -265,10 +256,10 @@ void add_stub(Page* p, char* s){
 
 void add_image(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
-	cont->data = s;
-	cont->is_paragraph = false;
-	cont->is_stub = false;
-	cont->is_image = true;
+	cont->data = formattedString("<img src='../media/img/%s'/>", s);
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -278,11 +269,7 @@ void add_header(Page* p, char* s, int hSize){
 	Content* cont = malloc(sizeof(Content));
 	char* buff = malloc(sizeof(char)*strlen(s)+9+1);
 	sprintf(buff, "<h%d>%s</h%d>", hSize, s, hSize);
-	logStr(buff);
 	cont->data = buff;
-	cont->is_paragraph = false;
-	cont->is_stub = false;
-	cont->is_image = false;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
