@@ -35,6 +35,7 @@ typedef struct Content{
 
 typedef struct Page{
 	char* name;
+	char* filename;
 	char* items_tags[PAGE_ITEM_BUFFER];
 	char* items_text[PAGE_ITEM_BUFFER];
 	char* items_meta[PAGE_ITEM_BUFFER];
@@ -65,14 +66,15 @@ void build_nav_level(FILE* f, Page* p, char** path){
 	for (int i=0; i < p->children_len; ++i){
 		//Search if you find this page in the path
 		char* name = p->children[i]->name;
+		char* filename = p->children[i]->filename;
 		bool inPath = false;
 		for (int j=0; j < 4; ++j){
 			if (name == path[j]){inPath = true;}
 		}
 
 		//Add the item
-		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", name, name);  
-		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", name, name);}
+		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", filename, name);  
+		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", filename, name);}
 	}
 	fputs("</ul>", f);
 }
@@ -122,7 +124,7 @@ void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
 		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
-		fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->name, p->parent->name);
+		fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->filename, p->parent->name);
 	}else{
 		fprintf(f,"<h1>%s</h1>", p->name);  
 	}
@@ -138,7 +140,7 @@ void build_child_previews(FILE* f, Page* p){
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
 			//Page title
-			fprintf(f, "<a href='%s.html'>", p->children[i]->name);
+			fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
 			fprintf(f, "<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
 			fprintf(f, "</a>");
 
@@ -150,7 +152,7 @@ void build_child_previews(FILE* f, Page* p){
 
 void build_page(Page* page){
 	char filename[STR_BUF_LEN];
-	to_lowercase(page->name, filename, STR_BUF_LEN);
+	to_lowercase(page->filename, filename, STR_BUF_LEN);
 	char filepath[STR_BUF_LEN];
 	int result = snprintf(filepath, sizeof filepath, "../site/%s.html", filename);
 	bool is_valid = result > 0 && (size_t)result < sizeof filename;
@@ -184,6 +186,9 @@ void build_page(Page* page){
 Page* create_page(Page* parent, char* name){
 	Page* p = malloc( sizeof(Page) );
 	p->name = name;
+	p->filename = stringRepl(name, ' ', '_');
+	printf("creating filename %s\n", p->filename); fflush(stdout);
+
 	p->parent = parent;
 	p->children_len = 0;
 	p->contents_count = 0;
@@ -258,13 +263,8 @@ void add_preview_description(Page* p, char* s){
 
 
 int main(){
-
     #include "content.c"
-
-
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
-
 	build_page_recursively(home);
-
 	return 0;
 }
