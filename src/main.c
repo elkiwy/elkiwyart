@@ -59,6 +59,24 @@ typedef struct Page{
 
 
 
+char* stringRepl(char* s, char old, char new){
+	char* news = malloc(sizeof(char)*strlen(s)+1);
+	int len = strlen(s);
+	for (int i=0; i<len; ++i){
+		if (s[i] == old){
+			news[i] = new;
+		}else{
+			news[i] = s[i];
+		}
+	}
+	news[len] = 0;
+	return news;
+}
+
+void logStr(char* s){
+	printf("=>log string %s\n", s); fflush(stdout);
+}
+
 
 
 void build_nav_level(FILE* f, Page* p, char** path){
