@@ -113,6 +113,9 @@ void build_content(FILE* f, Content* c){
 		fprintf(f,"<p style=\"color:red\">TODO: %s</p>", c->data);
 	} else if(c->is_image){
 		fprintf(f,"<img src='../media/img/%s'/>", c->data);
+	} else{
+		logStr(c->data);
+		fputs(c->data, f);
 	}
 
 }
@@ -248,6 +251,20 @@ void add_image(Page* p, char* s){
 	cont->is_paragraph = false;
 	cont->is_stub = false;
 	cont->is_image = true;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
+
+void add_header(Page* p, char* s, int hSize){
+	Content* cont = malloc(sizeof(Content));
+	char* buff = malloc(sizeof(char)*strlen(s)+9+1);
+	sprintf(buff, "<h%d>%s</h%d>", hSize, s, hSize);
+	logStr(buff);
+	cont->data = buff;
+	cont->is_paragraph = false;
+	cont->is_stub = false;
+	cont->is_image = false;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
