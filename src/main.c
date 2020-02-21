@@ -37,12 +37,6 @@ typedef struct Content{
 typedef struct Page{
 	char* name;
 	char* filename;
-	char* items_tags[PAGE_ITEM_BUFFER];
-	char* items_text[PAGE_ITEM_BUFFER];
-	char* items_meta[PAGE_ITEM_BUFFER];
-
-	char* link_names[PAGE_LINK_BUFFER];
-	char* link_urls[PAGE_LINK_BUFFER];
 
 	int children_len;
 	struct Page* children[PAGE_CHILD_BUFFER];
