@@ -6,6 +6,10 @@
 #include <time.h>
 #include <math.h>
 
+
+char* formattedString(char* format, char* s1);
+char* stringRepl(char* s, char old, char new);
+
 #include "utils.c"
 
 #define PAGE_ITEM_BUFFER 32
@@ -53,32 +57,6 @@ typedef struct Page{
 } Page;
 
 
-char* formattedString(char* format, char* s1){
-	int size = strlen(s1)+strlen(format)+1;
-	char* s = malloc(sizeof(char)*size);
-	sprintf(s, format, s1);
-	return s;
-}
-
-
-
-char* stringRepl(char* s, char old, char new){
-	char* news = malloc(sizeof(char)*strlen(s)+1);
-	int len = strlen(s);
-	for (int i=0; i<len; ++i){
-		if (s[i] == old){
-			news[i] = new;
-		}else{
-			news[i] = s[i];
-		}
-	}
-	news[len] = 0;
-	return news;
-}
-
-void logStr(char* s){
-	printf("=>log string %s\n", s); fflush(stdout);
-}
 
 
 
