@@ -1,9 +1,9 @@
 
-#define LINK(url)           "<a href='"url"' class='external' target='_blank'>"url"</a>"
-#define LINKTEXT(url, name) "<a href='"url"' class='external' target='_blank'>"name"</a>"
+#define LINK(url)           "<a class='link' href='"url"' class='external' target='_blank'>"url"</a>"
+#define LINKTEXT(url, name) "<a class='link' href='"url"' class='external' target='_blank'>"name"</a>"
 
-#define SEND(page)           "<a href='" page ".html'>" page "</a>"
-#define SENDTEXT(page, text) "<a href='" page ".html'>" text "</a>"
+#define SEND(page)           "<a class='link' href='" page ".html'>" page "</a>"
+#define SENDTEXT(page, text) "<a class='link' href='" page ".html'>" text "</a>"
 
 #define IMAGE(name) "<img src='../media/identity/" name "'/>"
 #define PAR(content) "<p>" content "</p>"

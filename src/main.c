@@ -9,6 +9,7 @@
 
 char* formattedString(char* format, char* s1);
 char* stringRepl(char* s, char old, char new);
+char* clickableImg(char* src, char* class);
 
 #include "utils.c"
 
@@ -113,7 +114,7 @@ void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
 		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
-		fprintf(f,"<a href='%s.html'>Back to %s</a>", p->parent->filename, p->parent->name);
+		fprintf(f,"<a class='link' href='%s.html'>Back to %s</a>", p->parent->filename, p->parent->name);
 	}else{
 		fprintf(f,"<h1>%s</h1>", p->name);  
 	}
@@ -130,7 +131,7 @@ void build_child_previews(FILE* f, Page* p){
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
 			//Page title
-			fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
+			fprintf(f, "<a class='link' href='%s.html'>", p->children[i]->filename);
 			fprintf(f, "<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
 			fprintf(f, "</a>");
 
@@ -237,7 +238,8 @@ void add_stub(Page* p, char* s){
 ///Add a new image to a page
 void add_image(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
-	cont->data = formattedString("<img src='../media/img/%s'/>", s);
+	char* img1 = clickableImg(s, "img1");
+	cont->data = img1;//formattedString("<img class='img1' src='../media/img/%s'/>", s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -245,10 +247,12 @@ void add_image(Page* p, char* s){
 ///Add two new images side by side to a page
 void add_image2(Page* p, char* s1, char* s2){
 	Content* cont = malloc(sizeof(Content));
-	char* format = "<div><img class='img2' src='../media/img/%s'/><img class='img2' src='../media/img/%s'/></div>";
-	int size = strlen(s1)+strlen(s2)+strlen(format) + 1;
+	char* img1 = clickableImg(s1, "img2");
+	char* img2 = clickableImg(s2, "img2");
+	char* format = "<div class='img2cont'>%s%s</div>";
+	int size = strlen(img1) + strlen(img2) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);
-	sprintf(buff, format, s1, s2);
+	sprintf(buff, format, img1, img2);
 	cont->data = buff;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
@@ -257,10 +261,13 @@ void add_image2(Page* p, char* s1, char* s2){
 ///Add three new images side by side to a page
 void add_image3(Page* p, char* s1, char* s2, char* s3){
 	Content* cont = malloc(sizeof(Content));
-	char* format = "<div><img class='img3' src='../media/img/%s'/><img class='img3' src='../media/img/%s'/><img class='img3' src='../media/img/%s'/></div>";
-	int size = strlen(s1)+strlen(s2)+strlen(s3)+strlen(format) + 1;
+	char* img1 = clickableImg(s1, "img3");
+	char* img2 = clickableImg(s2, "img3");
+	char* img3 = clickableImg(s3, "img3");
+	char* format = "<div class='img3cont'>%s%s%s</div>";
+	int size = strlen(img1) + strlen(img2) + strlen(img3) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);
-	sprintf(buff, format, s1, s2, s3);
+	sprintf(buff, format, img1, img2, img3);
 	cont->data = buff;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;

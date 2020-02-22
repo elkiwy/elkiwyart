@@ -5,7 +5,7 @@ html[data-theme='dark']{--col-fg: white; --col-bg: black;}
 body { padding:30px } 
 body > * { margin-bottom:30px }
 body > * > * { margin-bottom:30px }
-a:hover, ::selection { background-color:#000;color:#fff;text-decoration:none } 
+nav a:hover, ::selection { background-color:#000;color:#fff;text-decoration:none } 
 table * { vertical-align: top }
 
 header { float:left } 
@@ -23,10 +23,10 @@ main h2 { max-width:400px }
 main h4 { font-family:monospace } 
 main ul { margin:30px }
 main p { line-height:25px } 
-main a:before{ content:"{" }
-main a:after{ content:"}" }
-main a.external:before{ content:"[" }
-main a.external:after{ content:"]" }
+main .link:before{ content:"{" }
+main .link:after{ content:"}" }
+main .link.external:before{ content:"[" }
+main .link.external:after{ content:"]" }
 main q { font-family:serif;font-size:18px;font-style:italic;display:block } 
 main .img2cont {text-align:center;}
 main .img3cont {text-align:center;}
