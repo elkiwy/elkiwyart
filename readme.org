@@ -1,5 +1,6 @@
 * Todo
   - Add start-end date to Page
+  - Port galleries
   - Add technologies and languages specification for each page
 	- group pages by technology
   
