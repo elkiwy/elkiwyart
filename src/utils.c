@@ -16,13 +16,6 @@ void to_lowercase(char *str, char *target, size_t tsize) {
 }
 
 
-char* formattedString(char* format, char* s1){
-	int size = strlen(s1)+strlen(format)+1;
-	char* s = malloc(sizeof(char)*size);
-	sprintf(s, format, s1);
-	return s;
-}
-
 
 
 char* stringRepl(char* s, char old, char new){
@@ -49,6 +42,26 @@ char* clickableImg(char* src, char* class){
 	int size = strlen(format) + strlen(src)*2 + strlen(class) + 1;
 	char* buff = malloc(sizeof(char)*size);
 	sprintf(buff, format, src, class, src);
+	return buff;
+}
+
+
+
+char* formatString(char* format, int n, ...){
+	va_list args;
+	va_list args_copy;
+	char* strings[n];
+	int size = 0;
+	va_start(args, n);
+	va_copy(args_copy, args);
+	for (int i=0; i<n; ++i){
+		strings[i] = va_arg(args, char*);
+		size += strlen(strings[i]);
+	}
+	size += strlen(format) + 1;
+	char* buff = malloc(sizeof(char) * size);
+	vsprintf(buff, format, args_copy);
+	va_end(args);
 	return buff;
 }
 

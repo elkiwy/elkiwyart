@@ -8,9 +8,9 @@
 #include <math.h>
 
 
-char* formattedString(char* format, char* s1);
 char* joinStrings(int n, ...);
 char* joinStringsArr(int n, char** arr);
+char* formatString(char* format, int n, ...);
 char* stringRepl(char* s, char old, char new);
 char* clickableImg(char* src, char* class);
 
@@ -224,7 +224,7 @@ Page* create_page(Page* parent, char* name){
 ///Add a new paragraph to a page
 void add_paragraph(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
-	cont->data = formattedString("<p>%s</p>", s);
+	cont->data = formatString("<p>%s</p>", 1, s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -233,7 +233,7 @@ void add_paragraph(Page* p, char* s){
 void add_stub(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	printf("!!! ADDING STUB\n"); fflush(stdout);
-	cont->data = formattedString("<p style=\"color:red\">TODO: %s</p>", s);
+	cont->data = formatString("<p style=\"color:red\">TODO: %s</p>", 1, s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
@@ -242,7 +242,7 @@ void add_stub(Page* p, char* s){
 void add_image(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	char* img1 = clickableImg(s, "img1");
-	cont->data = img1;//formattedString("<img class='img1' src='../media/img/%s'/>", s);
+	cont->data = img1;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
