@@ -24,6 +24,7 @@ main h4 { font-family:monospace }
 main ul { margin:30px }
 main ol { margin:30px }
 main p { line-height:25px } 
+main .link:hover { background:var(--col-fg);color:var(--col-bg) } 
 main .link:before{ content:"{" }
 main .link:after{ content:"}" }
 main .link.external:before{ content:"[" }
