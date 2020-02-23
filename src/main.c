@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdarg.h>
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
@@ -8,6 +9,8 @@
 
 
 char* formattedString(char* format, char* s1);
+char* joinStrings(int n, ...);
+char* joinStringsArr(int n, char** arr);
 char* stringRepl(char* s, char old, char new);
 char* clickableImg(char* src, char* class);
 

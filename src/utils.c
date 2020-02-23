@@ -51,3 +51,45 @@ char* clickableImg(char* src, char* class){
 	sprintf(buff, format, src, class, src);
 	return buff;
 }
+
+char* joinStrings(int n, ...){
+	va_list args;
+	int size = 0;
+	char* strings[n];
+
+	//Extract args
+	va_start(args, n);
+	for (int i=0; i<n; ++i){
+		strings[i] = va_arg(args, char*);
+		size += strlen(strings[i]);
+	}
+
+	//Build the string
+	char* buff = malloc(sizeof(char) * (size + 1));
+	strcpy(buff, strings[0]);
+	for (int i=1; i<n; ++i){
+		strcat(buff, strings[i]);
+	}
+	return buff;
+}
+
+
+char* joinStringsArr(int n, char** arr){
+	int size = 0;
+
+	//Extract args
+	for (int i=0; i<n; ++i){
+		size += strlen(arr[i]);
+	}
+
+	//Build the string
+	char* buff = malloc(sizeof(char) * (size + 1));
+	strcpy(buff, arr[0]);
+	for (int i=1; i<n; ++i){
+		strcat(buff, arr[i]);
+	}
+	return buff;
+}
+
+
+
