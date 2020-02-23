@@ -32,7 +32,32 @@ add_stub(art, "Introduzione su ART");
 
 Page* gates = create_page(art, "Gates");
 add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
-add_stub(gates, "Migrare pagina");
+add_paragraph(gates, "I really enjoyed the natural look of Scorci , but after that I started to want back some of the regular and geometric feel typical of generative art. So what's better than some natural-ish tree with weird geometric shapes? ");
+add_header(gates, "One more tree iteration", HEADER_SIZE_SMALL);
+add_paragraph(gates, "This may starts to feel a bit repetitive, but I wanted to get one more artwork with this style. The process to achieve this pieces has been pretty simple this time. I had to take the old tree function and tweak it to accept a path as input for the main trunk. Before these changes, that function was accepting just a single point and a starting direction for the tree to grow, but that had two major problems:");
+
+char* l1 = "The final structure of the tree was not predictable. Half of the times the tree would start in the right spot, then curving out of the canvas letting me with a bunch of nothing on the screen.";
+char* l2 = "I could not give the tree a fixed shape and then let the minor branches go where they wanted.";
+add_number_list(gates, 2, l1, l2);
+add_image(gates, "start0.png");
+add_paragraph(gates, "After some changes I had something that could work for what I wanted to do:");
+add_image2(gates, "straight0.png", "straight1.png");
+add_paragraph(gates, "Once that the tree was following whatever the path I wanted, I had to find some nice shapes to draw.");
+add_image2(gates, "rectangles0.png", "rectangles1.png");
+add_image2(gates, "rectangle0.png", "rectangle1.png");
+add_paragraph(gates, "The concept was there, but the idea of trees floating mid-air with no roots to keep them anchored somewhere wasn't really right for this kind of artwork, so I had to add something to give some stability to the drawing.");
+add_paragraph(gates, "(Sadly I can't show this part of the process because I lost the images from that day)");
+add_paragraph(gates, "After some minor tweaks the artwork was ready to start the full resolution generation and be published.");
+add_header(gates, "What's next?", HEADER_SIZE_SMALL);
+add_paragraph(gates, "I think that I'm done for the trees, and I would like to get back at something different to avoid remaining on this kind of comfort zone. Probably I'll start from a black canvas again and see where the creative process drives me.");
+
+
+//Gates_96650.png
+//Gates_617167.png
+//Gates_619683.png
+//Gates_932704.png
+//Gates_141067.png
+//Gates_965820.png
 
 
 
@@ -62,6 +87,15 @@ add_paragraph(spring_flowers, "With the flower in place, the base of the series 
 add_header(spring_flowers, "There is more", HEADER_SIZE_SMALL);
 add_paragraph(spring_flowers, "I'm really happy with the result so far. I'm releasing this series as it is, but I feel that I can study this tree concept much more than this, so probably I'll keep working on this to expand and improve the style and composition of the artwork.");
 
+
+
+
+//"Spring Flowers 964762.png"
+//"Spring Flowers 517361.png"
+//"Spring Flowers 823523.png"
+//"Spring Flowers 422983.png"
+//"Spring Flowers 461346.png"
+//"Spring Flowers 345016.png"
 
 
 Page* deep_stars = create_page(art, "Deep Stars");
