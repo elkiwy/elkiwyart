@@ -286,6 +286,29 @@ void add_header(Page* p, char* s, int hSize){
 	p->contents_count++;
 }
 
+///Add a new number list to a page
+void add_number_list(Page* p, int n, ...){
+	va_list args;
+	char* listItems[n];
+
+	//Build all the list items
+	va_start(args, n);
+	for (int i=0; i<n; ++i){
+		listItems[i] = formatString("<li>%s</li>", 1, va_arg(args, char*));
+	}
+	va_end(args);
+
+	//Pack them into a string and add <ul> tag
+	char* joinedListItems = joinStringsArr(n, listItems);
+	char* data = formatString("<ol>%s</ol>", 1, joinedListItems);
+
+	//Create the content
+	Content* cont = malloc(sizeof(Content));
+	cont->data = data;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
 ///Add a preview description to a page
 void add_preview_description(Page* p, char* s){
 	p->has_preview = true;

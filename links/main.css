@@ -22,6 +22,7 @@ main figure:first-child img { margin-left: -30px;max-width: calc(100vw - 15px);w
 main h2 { max-width:400px } 
 main h4 { font-family:monospace } 
 main ul { margin:30px }
+main ol { margin:30px }
 main p { line-height:25px } 
 main .link:before{ content:"{" }
 main .link:after{ content:"}" }
