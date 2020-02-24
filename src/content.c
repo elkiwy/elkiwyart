@@ -30,12 +30,11 @@ add_stub(art, "Introduzione su ART");
 
 
 
-//TO REVIEW
 Page* gates = create_page(art, "Gates");
 add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
 add_paragraph(gates, "I really enjoyed the natural look of Scorci , but after that I started to want back some of the regular and geometric feel typical of generative art. So what's better than some natural-ish tree with weird geometric shapes? ");
 add_header(gates, "One more tree iteration", HEADER_SIZE_SMALL);
-add_paragraph(gates, "This may starts to feel a bit repetitive, but I wanted to get one more artwork with this style. The process to achieve this pieces has been pretty simple this time. I had to take the old tree function and tweak it to accept a path as input for the main trunk. Before these changes, that function was accepting just a single point and a starting direction for the tree to grow, but that had two major problems:");
+add_paragraph(gates, "This may starts to feel a bit repetitive, but I wanted to get one more artwork with this style. The process to achieve these pieces has been pretty simple this time. I had to take the old tree function and tweak it to accept a path as input for the main trunk. Before these changes, that function was accepting just a single point and a starting direction for the tree to grow, but that had two major problems:");
 char* l1 = "The final structure of the tree was not predictable. Half of the times the tree would start in the right spot, then curving out of the canvas letting me with a bunch of nothing on the screen.";
 char* l2 = "I could not give the tree a fixed shape and then let the minor branches go where they wanted.";
 add_number_list(gates, 2, l1, l2);
@@ -47,17 +46,13 @@ add_image2(gates, "rectangle0.png", "rectangle1.png");
 add_image2(gates, "rectangles0.png", "rectangles1.png");
 add_paragraph(gates, "The concept was there, but the idea of trees floating mid-air with no roots to keep them anchored somewhere wasn't really right for this kind of artwork, so I had to add something to give some stability to the drawing.");
 add_paragraph(gates, "(Sadly I can't show this part of the process because I lost the images from that day)");
-add_paragraph(gates, "After some minor tweaks the artwork was ready to start the full resolution generation and be published.");
-add_header(gates, "What's next?", HEADER_SIZE_SMALL);
-add_paragraph(gates, "I think that I'm done for the trees, and I would like to get back at something different to avoid remaining on this kind of comfort zone. Probably I'll start from a black canvas again and see where the creative process drives me.");
+add_paragraph(gates, "After some minor tweaks the series was ready to start the full resolution generation.");
 add_gallery(gates, 6 ,"Gates_96650.png" ,"Gates_617167.png" ,"Gates_619683.png" ,"Gates_932704.png" ,"Gates_141067.png" ,"Gates_965820.png");
 
 
 
-//TO REVIEW
 Page* scorci = create_page(art, "Scorci");
 add_preview_description(scorci, "Second study on procedurally generated trees synthesising a Japanese panorama.");
-add_paragraph(scorci, "After an adeguate amount of time, here we are with another series in our hands. I'm so happy with the result of this one that I'd skip all the unnecessary intro words and jump right into the post!");
 add_header(scorci, "A rework of Spring Flowers", HEADER_SIZE_SMALL);
 add_paragraph(scorci, "To everyone that saw my previous posts, these new pieces could feel pretty similar to the series \"Spring Flowers\" since I reused the tree and flower structure and expanded that concept into a more complete tribute to the Ukiyo-E style Japanese woodprints.");
 add_paragraph(scorci, "The previous series was pretty minimalist and plain, but this new rework aimed to give the right mood to that concept by giving more context of the surrounding of that tree.");
@@ -71,14 +66,16 @@ add_paragraph(scorci, "After some experiments I found that drawing it pretty fla
 add_paragraph(scorci, "The color for the Sun/Moon is derived from the opposite of the sky/ground gradient hue to give the image a nice contrast and balance.");
 add_image3(scorci, "sun0.png", "sun1.png", "sun2.png");
 add_header(scorci, "Creating some stability", HEADER_SIZE_SMALL);
-add_paragraph(scorci, "Adding only a simple Sun/Moon wasn't enough to emulate the style of those woodblock prints, so I still wanted to add more recurring environmental elements. The mountains are another key protagonists in many Japanese artworks and panoramas. A big centered mountain also gave a lot of balance to the artworks by filling the space evenly.");
+add_paragraph(scorci, "Mountains are another key protagonists in many Japanese artworks and panoramas. A big centered mountain also gave a lot of balance to the artworks by filling the space evenly.");
 add_paragraph(scorci, "So, to create the mountain shape I took advantage of my toolbelt functions for paths like the dispose and chaikin smoothing ones. Then the shape was filled by a gradient to blend it to the background.");
 add_image3(scorci, "mountain0.png", "mountain1.png", "mountain2.png");
 add_image(scorci, "mountain-sun-tree.png");
 add_header(scorci, "Signing the series", HEADER_SIZE_SMALL);
-add_paragraph(scorci, "To complete this work I decided to sign this series. Since I'm slowly studying Japanese in my free time, I wanted to keep following these Japan vibes and sign it using the Katakana alphabet (one of the three Japanese alphabet and the one used mainly for foreign words).");
-add_paragraph(scorci, "As I said in the intro, I'm really really happy with this results and I think that this is a good milestone for me and the style I'll use in my next works.");
+add_paragraph(scorci, "Since I'm slowly studying Japanese in my free time, I wanted to keep following these Japanese vibes and sign it using the Katakana alphabet (one of the three Japanese alphabet and the one used mainly for foreign words).");
+add_paragraph(scorci, "I'm really happy with this results and I think that this is a good milestone for me and the style I'll use in my next works.");
 add_gallery(scorci, 6, "Scorci 137931.png", "Scorci 991060.png", "Scorci 606684.png", "Scorci 313858.png", "Scorci 263414.png", "Scorci 214396.png");
+
+
 
 Page* spring_flowers = create_page(art, "Spring Flowers");
 add_preview_description(spring_flowers, "First study on procedurally generated trees.");
@@ -117,12 +114,32 @@ add_stub(color_mountains, "Migrare pagina");
 // Programs
 ////////////////////////////
 Page* programs = create_page(home, "programs");
-add_stub(programs, "Introduzione su PROGRAMS");
+add_paragraph(programs, "This section holds every coding project of decent sizes. Often I try to make things Open Source and available on GitHub, but it's not always true, especially for older projects and for the ones I code with other people.");
 
 
 
 Page* elkiwyart = create_page(programs, "ElkiwyArt");
 add_preview_description(elkiwyart, "An Open-source static website builder written in C99.");
+add_paragraph(elkiwyart, "This project is the piece of code responsible for the generation of this very website.");
+add_paragraph(elkiwyart, "The first implementation of ElkiwyArt was made mainly with PHP, a simple database, and some HTML templates. This was fine at the beginning, but it quickly became pretty hugly to improve and not really that flexible. PHP started to give errors when I was uploading new articles through forms and it was a pain to handle the creation of new posts.");
+add_paragraph(elkiwyart, "So, after I was almost abandoning the website I went through the \"Oscean\" project from Devine Lu Linvega.");
+add_paragraph(elkiwyart, "He did his website with a C99 building every page statically. That approach is ideal if you don't have dynamic pages in your website since it let you forget about PHP servers, MySQL servers, Templates, post forms, and all that crap.");
+add_paragraph(elkiwyart, "This let me focus on the only thing I want to do: create simple static pages for my website and adding anything I want.");
+add_header(elkiwyart, "The implementation", HEADER_SIZE_SMALL);
+add_paragraph(elkiwyart, "Ok, but how the crap you write a website with C? the answer is pretty simple: you don't.");
+add_paragraph(elkiwyart, "In fact, with C99 you make a program that parse some structs you define and outputs on files simple and plain HTML tags. This is beautiful because you have the change to make your own functions to parse data and output contents in a similar way you do with Templates, but on a much more precise way.");
+add_paragraph(elkiwyart, "After you made the builder you can fill it with data in any way you want, I used another C file where I call my functions directly, but you can use JSON, YAML, or any other thing to insert data in your program.");
+add_paragraph(elkiwyart, "With builder and content in place, another beauty of this method is visible: you can check the result and your entire website locally with just a normal browser! Since everything is plain HTML there is no need for webservers and database to work. Once the result is just like you desire, you can then upload the entire generated files into your web space and it's done.");
+add_paragraph(elkiwyart, "This is a friction less system compared to my previous one and it's way easier to correct, tweak and improve the website.");
+add_header(elkiwyart, "The source", HEADER_SIZE_SMALL);
+add_paragraph(elkiwyart, "As I state before, this project is heavily inspred by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
+add_paragraph(elkiwyart, "The full source is available on my GitHub here: " SENDTEXT("https://github.com/elkiwy/elkiwyart", "ElkiwyArt C99 Source") ".");
+add_stub(elkiwyart, "Continue...");
+
+
+
+Page* raspwallet = create_page(programs, "RaspberryWallet");
+add_preview_description(raspwallet, "A simple set of python scripts to handle wallet transactions through Telegram bot and Google Spreadsheet.");
 
 
 
@@ -146,6 +163,17 @@ create_page(games, "WaveJump");
 create_page(games, "AsciiRush");
 create_page(games, "Shootshift");
 create_page(games, "Get The Fick Out");
+
+
+
+////////////////////////////
+// Strudies
+////////////////////////////
+Page* studies = create_page(home, "studies");
+add_paragraph(studies, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories.");
+
+create_page(studies, "Japanese");
+create_page(studies, "6502 Assembly");
 
 
 
