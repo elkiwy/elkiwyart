@@ -101,13 +101,53 @@ add_gallery(spring_flowers, 6, "Spring Flowers 964762.png", "Spring Flowers 5173
 
 Page* deep_stars = create_page(art, "Deep Stars");
 add_preview_description(deep_stars, "Studies on Quil blends and shapes.");
-add_stub(deep_stars, "Migrare pagina");
+add_header(deep_stars, "More Chaikin experiments", HEADER_SIZE_SMALL);
+add_paragraph(deep_stars, "In other posts I talked about the Chaikin algorithm, a beautiful piece of code to make really cool and interesting curved lines. I felt that there was much more to explore and learn from those curves so I kept working and experimenting with that. At first I tried a more minimalist version of " SENDTEXT("color_mountains", "Color Mountains") " with simple pure Chaikin lines distorted with some incremental noise repeated on each line.");
+add_image(deep_stars, "lines0.png");
+add_paragraph(deep_stars, "The result was really chaotic but I felt some kind of harmony from the repeated distortions. To try to make the image more readable I reduced the lines count and added a fill color inside each couple of lines to create full shapes.");
+add_image3(deep_stars, "lines1.png", "lines2.png", "lines3.png");
+add_paragraph(deep_stars, "Aesthetically the result was really cool to me, but it felt pretty limited so I decided to revisit the concept of repetition with additive shades.");
+add_image3(deep_stars, "shades0.png", "shades1.png", "shades2.png");
+add_paragraph(deep_stars, "After some trouble with my shapes drawing function not adding light alphas correctly, I managed to make it work. I used that function with concentric elliptical shapes to create the figure displayed in Shades 2. I found that composition really interesting since it could be seen in two way:");
+char* deep_starsl1 = "From top to bottom it gave me a sense of depth, like the feel when you look down a deep lake from the surface.";
+char* deep_starsl2 = "From bottom to top it gave me a sense of height, like the feel when you look into a clear night sky full of stars.";
+add_number_list(deep_stars, 2, deep_starsl1, deep_starsl2);
+add_header(deep_stars, "Deep Stars", HEADER_SIZE_SMALL);
+add_paragraph(deep_stars, "That mix of contrasting feeling hooked my interest and made me try expand that concept more into the artwork.");
+add_paragraph(deep_stars, "The next logical step was to add color.");
+add_image2(deep_stars, "shades3.png", "shades4.png");
+add_paragraph(deep_stars, "My old canvas-like texture didn't really fit the mood of the artwork I was looking for, so I tried a bit more random and interesting texture. The final look was achieved with the generation of many random ellipses inside and outside the canvas.");
+add_image3(deep_stars, "texture0.png", "texture1.png", "texture2.png");
+add_paragraph(deep_stars, "At first I tried to draw circles on random points of the main lines in order to create all the stars of the sky, the main conceptual sketch was something like these:");
+add_image(deep_stars, "sketch0.png");
+add_paragraph(deep_stars, "Which was then translated into a more refined style with the new texture, colors, and lines into the final series called \"Deep Stars\", which you can see all its pieces at full resolution down below.");
+add_gallery(deep_stars, 5, "Deep Stars 636364.png", "Deep Stars 861183.png", "Deep Stars 385254.png", "Deep Stars 192731.png", "Deep Stars 513121.png");
 
 
 
 Page* color_mountains = create_page(art, "Color Mountains");
 add_preview_description(color_mountains, "Part of my earliest studies on Quil blends.");
-add_stub(color_mountains, "Migrare pagina");
+add_header(color_mountains, "", HEADER_SIZE_SMALL);
+add_paragraph(color_mountains, "A beautiful aspect of generative art is that you always start from the (almost) absolute zero, and as the times goes on you build a set of functions around you that stores all the various things you tried and let you create your own art (and code) style.");
+add_paragraph(color_mountains, "This toolbelt of methods is made of lines, triangles, paths, shapes, debug functions, rendering tricks... Pretty much anything. With time, this let you build a structure to ease out your future works by quite a lot, giving you also more resources to create bigger and more complex artworks. I recently changed my whole workflow, so I had to start from the ground up once again with an empty toolbelt.");
+add_paragraph(color_mountains, "Right now I already create all the most basic and useful function to do the simpler shapes and lines, but I was still lacking of some sort of path smoothing system for my drawings. So, these weeks I played with a wonderful algorithm to approximate curves in a very neat and elegant way called " LINKTEXT("http://graphics.cs.ucdavis.edu/education/CAGDNotes/Chaikins-Algorithm/Chaikins-Algorithm.html", "Chaikin\'s Algorithm for curves") ". I instantly fell in love with this algorithm because it can be tuned and modified in such interesting ways that can give your curves an unique and cool look.");
+add_paragraph(color_mountains, "The algorithm has very distinct iteration steps, so I can easily draw each of its sub-iterations to give a more complex and detailed look to the lines.");
+add_image2(color_mountains, "chaikin0.png", "chaikin1.png");
+add_image2(color_mountains, "chaikin2.png", "chaikin3.png");
+add_paragraph(color_mountains, "With slight randomization of the Chaikin parameters, you can give each line a more impredictable outcome.");
+add_image3(color_mountains, "params0.png", "params1.png", "params2.png");
+add_image2(color_mountains, "line0.png", "line1.png");
+add_image3(color_mountains, "lines0_1.png", "lines1_1.png", "lines2_1.png");
+add_paragraph(color_mountains, "Since each line is an array of points, those can be easily converted into paths describing 2D shapes.");
+add_image2(color_mountains, "shape0.png", "shape1.png");
+add_paragraph(color_mountains, "While experimenting with parameters, I even found out this \"little happy accident\" (Bonus points to who get this quote): when you use a Chaikin parameter greater than 0.5 and crank up the iterations count, the system creates a fractal like pattern inside each path's vertex.");
+add_image2(color_mountains, "shape2.png", "shape3.png");
+add_paragraph(color_mountains, "A unique shape gradient and blending can be achieved given the randomization and the iterative nature of the algorithm.");
+add_image2(color_mountains, "shape4.png", "shape5.png");
+add_image2(color_mountains, "shape6.png", "shape7.png");
+add_paragraph(color_mountains, "I really like how these shapes blends between each others and the background, so, after some experiment on various set of shapes and colors I found this style very pleasing and cool looking to give it some more work and polish.");
+add_paragraph(color_mountains, "The following images are few results of this work, which I called \"Color Mountains\" Series.");
+add_gallery(color_mountains, 8, "Color Mountains 002715.png", "Color Mountains 006869.png", "Color Mountains 045739.png", "Color Mountains 109611.png", "Color Mountains 149474.png", "Color Mountains 479907.png", "Color Mountains 739953.png", "Color Mountains 952702.png");
 
 
 ////////////////////////////
