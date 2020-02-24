@@ -50,14 +50,7 @@ add_paragraph(gates, "(Sadly I can't show this part of the process because I los
 add_paragraph(gates, "After some minor tweaks the artwork was ready to start the full resolution generation and be published.");
 add_header(gates, "What's next?", HEADER_SIZE_SMALL);
 add_paragraph(gates, "I think that I'm done for the trees, and I would like to get back at something different to avoid remaining on this kind of comfort zone. Probably I'll start from a black canvas again and see where the creative process drives me.");
-
-
-//Gates_96650.png
-//Gates_617167.png
-//Gates_619683.png
-//Gates_932704.png
-//Gates_141067.png
-//Gates_965820.png
+add_gallery(gates, 6 ,"Gates_96650.png" ,"Gates_617167.png" ,"Gates_619683.png" ,"Gates_932704.png" ,"Gates_141067.png" ,"Gates_965820.png");
 
 
 
@@ -85,14 +78,7 @@ add_image(scorci, "mountain-sun-tree.png");
 add_header(scorci, "Signing the series", HEADER_SIZE_SMALL);
 add_paragraph(scorci, "To complete this work I decided to sign this series. Since I'm slowly studying Japanese in my free time, I wanted to keep following these Japan vibes and sign it using the Katakana alphabet (one of the three Japanese alphabet and the one used mainly for foreign words).");
 add_paragraph(scorci, "As I said in the intro, I'm really really happy with this results and I think that this is a good milestone for me and the style I'll use in my next works.");
-
-
-//"Scorci 137931.png"
-//"Scorci 991060.png"
-//"Scorci 606684.png"
-//"Scorci 313858.png"
-//"Scorci 263414.png"
-//"Scorci 214396.png"
+add_gallery(scorci, 6, "Scorci 137931.png", "Scorci 991060.png", "Scorci 606684.png", "Scorci 313858.png", "Scorci 263414.png", "Scorci 214396.png");
 
 Page* spring_flowers = create_page(art, "Spring Flowers");
 add_preview_description(spring_flowers, "First study on procedurally generated trees.");
@@ -113,16 +99,7 @@ add_image2(spring_flowers, "flowers1.png", "flowers0.png");
 add_paragraph(spring_flowers, "With the flower in place, the base of the series generation was almost done. A few touches here and there to smooth out some rough edges and I was happy enough to create some high resolution images for the series. ");
 add_header(spring_flowers, "There is more", HEADER_SIZE_SMALL);
 add_paragraph(spring_flowers, "I'm really happy with the result so far. I'm releasing this series as it is, but I feel that I can study this tree concept much more than this, so probably I'll keep working on this to expand and improve the style and composition of the artwork.");
-
-
-
-
-//"Spring Flowers 964762.png"
-//"Spring Flowers 517361.png"
-//"Spring Flowers 823523.png"
-//"Spring Flowers 422983.png"
-//"Spring Flowers 461346.png"
-//"Spring Flowers 345016.png"
+add_gallery(spring_flowers, 6, "Spring Flowers 964762.png", "Spring Flowers 517361.png", "Spring Flowers 823523.png", "Spring Flowers 422983.png", "Spring Flowers 461346.png", "Spring Flowers 345016.png");
 
 
 Page* deep_stars = create_page(art, "Deep Stars");

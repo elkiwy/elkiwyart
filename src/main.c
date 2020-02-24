@@ -315,6 +315,37 @@ void add_preview_description(Page* p, char* s){
 	p->preview_description = s;
 }
 
+char* dropLast(char* src, int n){
+	int size = strlen(src)-n;
+	char* buff = malloc(sizeof(char)*(size + 1));
+	for (int i=0; i<size; ++i){
+		buff[i] = src[i];
+	}
+	buff[size] = '\0';
+	return buff;
+}
+
+void add_gallery(Page* p, int n, ...){
+	va_list ap;
+	char* strings[n];
+	va_start(ap, n);
+	for(int i=0; i<n; ++i){
+		//strings[i] = clickableImg(va_arg(ap, char*), "galleryImage");
+		char* s = va_arg(ap, char*);
+		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, dropLast(s, 4));
+	}
+	va_end(ap);
+
+	//Pack them into a string and add <ul> tag
+	char* joinedImages = joinStringsArr(n, strings);
+	char* data = formatString("<div class='gallery'>%s</div>", 1, joinedImages);
+
+	//Create the content
+	Content* cont = malloc(sizeof(Content));
+	cont->data = data;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
 
 
 //////////////////////////////////////////////////////////////////////
