@@ -135,12 +135,32 @@ add_stub(color_mountains, "Migrare pagina");
 // Programs
 ////////////////////////////
 Page* programs = create_page(home, "programs");
-add_stub(programs, "Introduzione su PROGRAMS");
+add_paragraph(programs, "This section holds every coding project of decent sizes. Often I try to make things Open Source and available on GitHub, but it's not always true, especially for older projects and for the ones I code with other people.");
 
 
 
 Page* elkiwyart = create_page(programs, "ElkiwyArt");
 add_preview_description(elkiwyart, "An Open-source static website builder written in C99.");
+add_paragraph(elkiwyart, "This project is the piece of code responsible for the generation of this very website.");
+add_paragraph(elkiwyart, "The first implementation of ElkiwyArt was made mainly with PHP, a simple database, and some HTML templates. This was fine at the beginning, but it quickly became pretty hugly to improve and not really that flexible. PHP started to give errors when I was uploading new articles through forms and it was a pain to handle the creation of new posts.");
+add_paragraph(elkiwyart, "So, after I was almost abandoning the website I went through the \"Oscean\" project from Devine Lu Linvega.");
+add_paragraph(elkiwyart, "He did his website with a C99 building every page statically. That approach is ideal if you don't have dynamic pages in your website since it let you forget about PHP servers, MySQL servers, Templates, post forms, and all that crap.");
+add_paragraph(elkiwyart, "This let me focus on the only thing I want to do: create simple static pages for my website and adding anything I want.");
+add_header(elkiwyart, "The implementation", HEADER_SIZE_SMALL);
+add_paragraph(elkiwyart, "Ok, but how the crap you write a website with C? the answer is pretty simple: you don't.");
+add_paragraph(elkiwyart, "In fact, with C99 you make a program that parse some structs you define and outputs on files simple and plain HTML tags. This is beautiful because you have the change to make your own functions to parse data and output contents in a similar way you do with Templates, but on a much more precise way.");
+add_paragraph(elkiwyart, "After you made the builder you can fill it with data in any way you want, I used another C file where I call my functions directly, but you can use JSON, YAML, or any other thing to insert data in your program.");
+add_paragraph(elkiwyart, "With builder and content in place, another beauty of this method is visible: you can check the result and your entire website locally with just a normal browser! Since everything is plain HTML there is no need for webservers and database to work. Once the result is just like you desire, you can then upload the entire generated files into your web space and it's done.");
+add_paragraph(elkiwyart, "This is a friction less system compared to my previous one and it's way easier to correct, tweak and improve the website.");
+add_header(elkiwyart, "The source", HEADER_SIZE_SMALL);
+add_paragraph(elkiwyart, "As I state before, this project is heavily inspred by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
+add_paragraph(elkiwyart, "The full source is available on my GitHub here: " SENDTEXT("https://github.com/elkiwy/elkiwyart", "ElkiwyArt C99 Source") ".");
+add_stub(elkiwyart, "Continue...");
+
+
+
+Page* raspwallet = create_page(programs, "RaspberryWallet");
+add_preview_description(raspwallet, "A simple set of python scripts to handle wallet transactions through Telegram bot and Google Spreadsheet.");
 
 
 
@@ -164,6 +184,17 @@ create_page(games, "WaveJump");
 create_page(games, "AsciiRush");
 create_page(games, "Shootshift");
 create_page(games, "Get The Fick Out");
+
+
+
+////////////////////////////
+// Strudies
+////////////////////////////
+Page* studies = create_page(home, "studies");
+add_paragraph(studies, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories.");
+
+create_page(studies, "Japanese");
+create_page(studies, "6502 Assembly");
 
 
 
