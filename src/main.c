@@ -118,7 +118,7 @@ void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
 		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
-		fprintf(f,"<a class='link' href='%s.html'>Back to %s</a>", p->parent->filename, p->parent->name);
+		fprintf(f,"<a class='link' style='display:inline-block;margin-bottom:24px' href='%s.html'>Back to %s</a>", p->parent->filename, p->parent->name);
 	}else{
 		fprintf(f,"<h1>%s</h1>", p->name);  
 	}
