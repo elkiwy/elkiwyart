@@ -173,23 +173,41 @@ add_paragraph(elkiwyart, "With builder and content in place, another beauty of t
 add_paragraph(elkiwyart, "This is a friction less system compared to my previous one and it's way easier to correct, tweak and improve the website.");
 add_header(elkiwyart, "The source", HEADER_SIZE_SMALL);
 add_paragraph(elkiwyart, "As I state before, this project is heavily inspred by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
-add_paragraph(elkiwyart, "The full source is available on my GitHub here: " SENDTEXT("https://github.com/elkiwy/elkiwyart", "ElkiwyArt C99 Source") ".");
-add_stub(elkiwyart, "Continue...");
+add_paragraph(elkiwyart, "The full source is available on my GitHub here: " LINKTEXT("https://github.com/elkiwy/elkiwyart", "Source") ".");
 
 
 
 Page* raspwallet = create_page(programs, "RaspberryWallet");
 add_preview_description(raspwallet, "A simple set of python scripts to handle wallet transactions through Telegram bot and Google Spreadsheet.");
+add_paragraph(raspwallet, "");
 
 
 
 Page* gisp = create_page(programs, "Gisp");
 add_preview_description(gisp, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
+add_paragraph(gisp, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
+add_paragraph(gisp, "");
+
+
+
+Page* gispeditor = create_page(programs, "Gisp Editor");
+add_preview_description(gispeditor, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
+add_paragraph(gispeditor, "");
 
 
 
 Page* paynter = create_page(programs, "PaYnter");
 add_preview_description(paynter, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
+add_header(paynter, "The journey", HEADER_SIZE_SMALL);
+add_paragraph(paynter, "I started to make proper generative art with a little python script to automate mouse and keyboard input to interact with Krita, a digital drawing tool. I like the complexity of the brushes and all the tool available inside Krita, but after few generations it started to feel pretty hacky and uncomfortable to use. So after that I wanted to try and replicate the brushes and complexity of an image editing software by myself by making a python program that emulated that.");
+add_paragraph(paynter, "That was the birth of PaYnter.");
+add_paragraph(paynter, "It is has a features like:");
+char* paynter1 = "Brush emulation";
+char* paynter2 = "Image layering";
+char* paynter3 = "Blending modes";
+add_number_list(paynter, 3, paynter1, paynter2, paynter3);
+add_stub(paynter, "Continue with features");
+add_paragraph(paynter, "The project got discontinued when I realize that it was terribly slow and, even through many optimization iterations the performance wasn't enough for my needs. I used a lot of matrix operation which could have been optimized a lot by using the GPU, but sadly it seems that all the decent framework for that uses nVidia drivers and I don't have a nVidia GPU, so that was not an option.");
 
 
 
