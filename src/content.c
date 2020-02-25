@@ -32,6 +32,7 @@ add_paragraph(art, "This is a collection of my studies on generative art.");
 
 Page* gates = create_page(art, "Gates");
 add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
+add_preview_image(gates, "Gates_96650.png");
 add_paragraph(gates, "I really enjoyed the natural look of Scorci , but after that I started to want back some of the regular and geometric feel typical of generative art. So what's better than some natural-ish tree with weird geometric shapes? ");
 add_header(gates, "One more tree iteration", HEADER_SIZE_SMALL);
 add_paragraph(gates, "This may starts to feel a bit repetitive, but I wanted to get one more artwork with this style. The process to achieve these pieces has been pretty simple this time. I had to take the old tree function and tweak it to accept a path as input for the main trunk. Before these changes, that function was accepting just a single point and a starting direction for the tree to grow, but that had two major problems:");
@@ -53,6 +54,7 @@ add_gallery(gates, 6 ,"Gates_96650.png" ,"Gates_617167.png" ,"Gates_619683.png" 
 
 Page* scorci = create_page(art, "Scorci");
 add_preview_description(scorci, "Second study on procedurally generated trees synthesising a Japanese panorama.");
+add_preview_image(scorci, "Scorci 137931.png");
 add_header(scorci, "A rework of Spring Flowers", HEADER_SIZE_SMALL);
 add_paragraph(scorci, "To everyone that saw my previous posts, these new pieces could feel pretty similar to the series \"Spring Flowers\" since I reused the tree and flower structure and expanded that concept into a more complete tribute to the Ukiyo-E style Japanese woodprints.");
 add_paragraph(scorci, "The previous series was pretty minimalist and plain, but this new rework aimed to give the right mood to that concept by giving more context of the surrounding of that tree.");
@@ -79,6 +81,7 @@ add_gallery(scorci, 6, "Scorci 137931.png", "Scorci 991060.png", "Scorci 606684.
 
 Page* spring_flowers = create_page(art, "Spring Flowers");
 add_preview_description(spring_flowers, "First study on procedurally generated trees.");
+add_preview_image(spring_flowers, "Spring Flowers 964762.png");
 add_paragraph(spring_flowers, "Spring is by far my favorite season of the year both for the warm clean air and for the beautiful show that trees create for us with their flowers.");
 add_paragraph(spring_flowers, "The idea for this series came by watching a tree right in front of my house. After few times passing beside it each day going to work, I thought that these branches and flowers could be recreated by some code and functions in Clojure quite nicely.");
 add_header(spring_flowers, "The style", HEADER_SIZE_SMALL);
@@ -101,6 +104,7 @@ add_gallery(spring_flowers, 6, "Spring Flowers 964762.png", "Spring Flowers 5173
 
 Page* deep_stars = create_page(art, "Deep Stars");
 add_preview_description(deep_stars, "Studies on Quil blends and shapes.");
+add_preview_image(deep_stars, "Deep Stars 636364.png");
 add_header(deep_stars, "More Chaikin experiments", HEADER_SIZE_SMALL);
 add_paragraph(deep_stars, "In other posts I talked about the Chaikin algorithm, a beautiful piece of code to make really cool and interesting curved lines. I felt that there was much more to explore and learn from those curves so I kept working and experimenting with that. At first I tried a more minimalist version of " SENDTEXT("color_mountains", "Color Mountains") " with simple pure Chaikin lines distorted with some incremental noise repeated on each line.");
 add_image(deep_stars, "lines0.png");
@@ -127,6 +131,7 @@ add_gallery(deep_stars, 5, "Deep Stars 636364.png", "Deep Stars 861183.png", "De
 
 Page* color_mountains = create_page(art, "Color Mountains");
 add_preview_description(color_mountains, "Part of my earliest studies on Quil blends.");
+add_preview_image(color_mountains, "Color Mountains 002715.png");
 add_header(color_mountains, "", HEADER_SIZE_SMALL);
 add_paragraph(color_mountains, "A beautiful aspect of generative art is that you always start from the (almost) absolute zero, and as the times goes on you build a set of functions around you that stores all the various things you tried and let you create your own art (and code) style.");
 add_paragraph(color_mountains, "This toolbelt of methods is made of lines, triangles, paths, shapes, debug functions, rendering tricks... Pretty much anything. With time, this let you build a structure to ease out your future works by quite a lot, giving you also more resources to create bigger and more complex artworks. I recently changed my whole workflow, so I had to start from the ground up once again with an empty toolbelt.");

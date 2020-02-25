@@ -1,4 +1,4 @@
-html{--col-fg: black; --col-bg: white;}
+html{--col-fg: black; --col-bg: white; --preview-img-size:96px;}
 html[data-theme='dark']{--col-fg: white; --col-bg: black;}
 
 * { margin:0;padding:0;box-sizing:border-box;text-decoration:none;color:var(--col-fg);background-color:var(--col-bg) }
@@ -35,6 +35,11 @@ main .img3cont {text-align:center;}
 main .img1 { max-height:400px;max-width:100%;display:block;margin:10px auto;} 
 main .img2 { max-height:400px;max-width:50%;display:inline-block;padding:12px 12px 10px} 
 main .img3 { max-height:400px;max-width:33%;display:inline-block;padding:4px 4px 10px} 
+
+
+main .imgprevcont {width:var(--preview-img-size); height:var(--preview-img-size); text-align:center;float:left;}
+main .imgprev {max-width:var(--preview-img-size); max-height:var(--preview-img-size);}
+main .preview {clear:both; height: var(--preview-img-size);}
 
 main .gallery { display:flex;flex-wrap:wrap;justify-content:center; }
 main .galleryImage{ text-align:center;max-width:50%; max-height:500px; padding:12px 12px 0px 12px; display:block; margin-bottom:0px; }

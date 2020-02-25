@@ -53,6 +53,7 @@ typedef struct Page{
 
 	//Preview
 	char* preview_description;
+	char* preview_image;
 	bool has_preview;
 
 	//Contents
@@ -133,13 +134,22 @@ void build_contents(FILE* f, Page* p){
 void build_child_previews(FILE* f, Page* p){
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
+			fputs("<div class='preview'>", f);
+
+			fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
+			if (p->children[i]->preview_image != NULL){
+				fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/img/%s'></div>", p->children[i]->preview_image);
+			}
+
 			//Page title
-			fprintf(f, "<a class='link' href='%s.html'>", p->children[i]->filename);
-			fprintf(f, "<h2 style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+			fputs("<div class='textprevcont'>", f);
+			fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
 			fprintf(f, "</a>");
 
 			//Page description
-			fprintf(f, "<p>%s</p>", p->children[i]->preview_description);
+			fprintf(f, "<p class='descprev'>%s</p>", p->children[i]->preview_description);
+			fputs("</div>", f);
+			fputs("</div>", f);
 		}
 	}
 }
@@ -207,6 +217,7 @@ Page* create_page(Page* parent, char* name){
 	p->children_len = 0;
 	p->contents_count = 0;
 	p->preview_description = "";
+	p->preview_image = NULL;
 	p->has_preview = false;
 
 	if (parent!=NULL){
@@ -316,6 +327,12 @@ void add_preview_description(Page* p, char* s){
 	p->has_preview = true;
 	p->preview_description = s;
 }
+
+///Add a preview image to a page
+void add_preview_image(Page* p, char* s){
+	p->preview_image = s;	
+}
+
 
 char* dropLast(char* src, int n){
 	int size = strlen(src)-n;
