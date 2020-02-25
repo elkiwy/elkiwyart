@@ -115,8 +115,6 @@ void build_content(FILE* f, Content* c){
 
 ///Build all the contents of a page
 void build_contents(FILE* f, Page* p){
-	fputs("<main>", f);
-
 	//Page header
 	if (p->parent !=NULL) {
 		fprintf(f,"<h1 style=\"margin-bottom:0px\">%s</h1>", p->name);  
@@ -129,7 +127,6 @@ void build_contents(FILE* f, Page* p){
 	for (int i=0; i<p->contents_count; ++i){
 		build_content(f, p->contents[i]);
 	}
-	fputs("</main>", f);
 }
 
 ///Build all the child previews for a parent page
@@ -169,10 +166,12 @@ void build_page(Page* page){
 	build_nav(f, page);
 
 	//Page contents
+	fputs("<main>", f);
 	build_contents(f, page);
 
 	//Child previews
 	build_child_previews(f, page);
+	fputs("</main>", f);
 	
 	//Footer
 	fprintf(f, "<footer>%s</footer>", html_footer);
