@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 
 char* joinStrings(int n, ...);
@@ -354,6 +357,12 @@ void add_gallery(Page* p, int n, ...){
 
 int main(){
     #include "content.c"
+
+	//Make site dire if not already there
+	struct stat st = {0};
+	if (stat("../site", &st) == -1) mkdir("../site", 0700);
+	
+
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 	build_page_recursively(home);
 	return 0;
