@@ -37,7 +37,7 @@ main .img2 { max-height:400px;max-width:50%;display:inline-block;padding:12px 12
 main .img3 { max-height:400px;max-width:33%;display:inline-block;padding:4px 4px 10px} 
 
 
-main .imgprevcont {width:var(--preview-img-size); height:var(--preview-img-size); text-align:center;float:left;}
+main .imgprevcont {width:var(--preview-img-size); height:var(--preview-img-size); text-align:center;float:left; margin-right: 12px}
 main .imgprev {max-width:var(--preview-img-size); max-height:var(--preview-img-size);}
 main .preview {clear:both; height: var(--preview-img-size);}
 
