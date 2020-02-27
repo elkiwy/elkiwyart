@@ -165,6 +165,7 @@ add_paragraph(programs, "This section holds every coding project of decent sizes
 
 Page* elkiwyart = create_page(programs, "ElkiwyArt");
 add_preview_description(elkiwyart, "An Open-source static website builder written in C99.");
+add_preview_image(elkiwyart, "elkiwyart-c99.png");
 add_paragraph(elkiwyart, "This project is the piece of code responsible for the generation of this very website.");
 add_paragraph(elkiwyart, "The first implementation of ElkiwyArt was made mainly with PHP, a simple database, and some HTML templates. This was fine at the beginning, but it quickly became pretty hugly to improve and not really that flexible. PHP started to give errors when I was uploading new articles through forms and it was a pain to handle the creation of new posts.");
 add_paragraph(elkiwyart, "So, after I was almost abandoning the website I went through the \"Oscean\" project from Devine Lu Linvega.");
@@ -179,24 +180,30 @@ add_paragraph(elkiwyart, "This is a friction less system compared to my previous
 add_header(elkiwyart, "The source", HEADER_SIZE_SMALL);
 add_paragraph(elkiwyart, "As I state before, this project is heavily inspred by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
 add_paragraph(elkiwyart, "The full source is available on my GitHub here: " LINKTEXT("https://github.com/elkiwy/elkiwyart", "Source") ".");
+add_image(elkiwyart, "elkiwyart-c99.png");
 
 
 
 Page* gispeditor = create_page(programs, "Gisp Editor");
 add_preview_description(gispeditor, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
+add_preview_image(gispeditor, "gisp-editor-thumb.png");
 add_paragraph(gispeditor, "");
+add_image(gispeditor, "gisp-editor-big.png");
 
 
 
 Page* gisp = create_page(programs, "Gisp");
 add_preview_description(gisp, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
+add_preview_image(gisp, "gisp-test.png");
 add_paragraph(gisp, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
 add_paragraph(gisp, "");
+add_image(gisp, "gisp-test.png");
 
 
 
 Page* paynter = create_page(programs, "PaYnter");
 add_preview_description(paynter, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
+add_preview_image(paynter, "paynter1.png");
 add_header(paynter, "The journey", HEADER_SIZE_SMALL);
 add_paragraph(paynter, "I started to make proper generative art with a little python script to automate mouse and keyboard input to interact with Krita, a digital drawing tool. I like the complexity of the brushes and all the tool available inside Krita, but after few generations it started to feel pretty hacky and uncomfortable to use. So after that I wanted to try and replicate the brushes and complexity of an image editing software by myself by making a python program that emulated that.");
 add_paragraph(paynter, "That was the birth of PaYnter.");
@@ -206,12 +213,15 @@ char* paynter2 = "Image layering";
 char* paynter3 = "Blending modes";
 add_number_list(paynter, 3, paynter1, paynter2, paynter3);
 add_stub(paynter, "Continue with features");
+add_image2(paynter, "paynter1.png", "paynter2.png");
+add_image(paynter, "paynter3.png");
 add_paragraph(paynter, "The project got discontinued when I realize that it was terribly slow and, even through many optimization iterations the performance wasn't enough for my needs. I used a lot of matrix operation which could have been optimized a lot by using the GPU, but sadly it seems that all the decent framework for that uses nVidia drivers and I don't have a nVidia GPU, so that was not an option.");
 
 
 
 Page* raspwallet = create_page(programs, "RaspberryWallet");
 add_preview_description(raspwallet, "A simple set of python scripts to handle wallet transactions through Telegram bot and Google Spreadsheet.");
+add_preview_image(raspwallet, "raspwallet.png");
 add_header(raspwallet, "The idea", HEADER_SIZE_SMALL);
 add_paragraph(raspwallet, "This is one of my earliest project and my first one on my Raspberry Pi. Today I'm thinking of deprecating it and rebuild a much more structured and better alternative to it with one my friend.");
 add_paragraph(raspwallet, "RaspberryWallet aims to be one simple solution to keep track of all my income and outcome for my finances.");
