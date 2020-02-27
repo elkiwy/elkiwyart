@@ -132,6 +132,7 @@ void build_contents(FILE* f, Page* p){
 
 ///Build all the child previews for a parent page
 void build_child_previews(FILE* f, Page* p){
+	fputs("<div style='height:24px'></div>", f);
 	for (int i=0; i<p->children_len; ++i){
 		if (p->children[i]->has_preview){
 			fputs("<div class='preview'>", f);
