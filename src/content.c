@@ -176,8 +176,11 @@ add_image(elkiwyart, "elkiwyart-c99.png");
 Page* gispeditor = create_page(programs, "Gisp Editor");
 add_preview_description(gispeditor, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
 add_preview_image(gispeditor, "gisp-editor-thumb.png");
-add_paragraph(gispeditor, "");
+add_paragraph(gispeditor, "When my project " SENDTEXT("gisp", "Gisp") " started to take shape and be usuable to create generative art I started to feel the need for a tool to integrate the workflow and avoid having a bunch of programs open on my desktop and jump between here and there to generate art. It kinda breaks the flow when trying to be creative.");
+add_paragraph(gispeditor, "So I started to work on a simple, yet functional, editor to work with the Gisp language being able to write Gisp code, call the interpreter to execute it, and visualize the preview of the generate image right in the editor.");
 add_image(gispeditor, "gisp-editor-big.png");
+add_paragraph(gispeditor, "This project is still more like a learning experiment than an actual full featured editor since I'm trying to build every feature from scratch by myself. The program is built with Electron and Clojurescript, and even the code editor is pretty bare bones I started from an editable div and I'm trying to make it work like a normal text editor.");
+add_paragraph(gispeditor, "Currently the project is on pause because I'm working on the builder for this site in C99, but when I'll finish that I'll probably get back at this one and I might replace my crappy editor from scratch and use some other javascript open source editors to be able to focus my energy on the Gisp integration instead.");
 
 Page* gisp = create_page(programs, "Gisp");
 add_preview_description(gisp, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
