@@ -23,7 +23,7 @@ char* clickableImg(char* src, char* class);
 #define PAGE_LINK_BUFFER 32
 #define PAGE_CHILD_BUFFER 32
 #define STR_BUF_LEN 64
-#define MAX_PARAGRAPHS 32
+#define MAX_CONTENTS 32
 
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
 char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
@@ -58,7 +58,7 @@ typedef struct Page{
 
 	//Contents
 	int contents_count;
-	Content* contents[MAX_PARAGRAPHS];
+	Content* contents[MAX_CONTENTS];
 } Page;
 
 
