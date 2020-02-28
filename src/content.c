@@ -14,7 +14,7 @@
 ////////////////////////////
 // Home
 ////////////////////////////
-Page* home = create_page(NULL, "home");
+Page* home = create_page(NULL, "Home");
 add_paragraph(home, "Welcome to ElKiwyArt website!");
 add_paragraph(home, "This is my very personal attempt to show who am I, and what I do. Since I do many different things sprinkled around the internet, the scope of this website is to try group all up and present everything to you in a nice and clear way.");
 add_paragraph(home, "But, this is not a portfolio where i present everything I made or released. There will also be random posts on anything I do in a particular time in my life, maybe some big project, or maybe just a little dumb study on something." );
@@ -25,10 +25,8 @@ add_stub(home, "Closing");
 ////////////////////////////
 // Art
 ////////////////////////////
-Page* art = create_page(home, "art");
+Page* art = create_page(home, "Art");
 add_paragraph(art, "This is a collection of my studies on generative art.");
-
-
 
 Page* gates = create_page(art, "Gates");
 add_preview_description(gates, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
@@ -49,8 +47,6 @@ add_paragraph(gates, "The concept was there, but the idea of trees floating mid-
 add_paragraph(gates, "(Sadly I can't show this part of the process because I lost the images from that day)");
 add_paragraph(gates, "After some minor tweaks the series was ready to start the full resolution generation.");
 add_gallery(gates, 6 ,"Gates_96650.png" ,"Gates_617167.png" ,"Gates_619683.png" ,"Gates_932704.png" ,"Gates_141067.png" ,"Gates_965820.png");
-
-
 
 Page* scorci = create_page(art, "Scorci");
 add_preview_description(scorci, "Second study on procedurally generated trees synthesising a Japanese panorama.");
@@ -76,8 +72,6 @@ add_header(scorci, "Signing the series", HEADER_SIZE_SMALL);
 add_paragraph(scorci, "Since I'm slowly studying Japanese in my free time, I wanted to keep following these Japanese vibes and sign it using the Katakana alphabet (one of the three Japanese alphabet and the one used mainly for foreign words).");
 add_paragraph(scorci, "I'm really happy with this results and I think that this is a good milestone for me and the style I'll use in my next works.");
 add_gallery(scorci, 6, "Scorci 137931.png", "Scorci 991060.png", "Scorci 606684.png", "Scorci 313858.png", "Scorci 263414.png", "Scorci 214396.png");
-
-
 
 Page* spring_flowers = create_page(art, "Spring Flowers");
 add_preview_description(spring_flowers, "First study on procedurally generated trees.");
@@ -127,8 +121,6 @@ add_image(deep_stars, "sketch0.png");
 add_paragraph(deep_stars, "Which was then translated into a more refined style with the new texture, colors, and lines into the final series called \"Deep Stars\", which you can see all its pieces at full resolution down below.");
 add_gallery(deep_stars, 5, "Deep Stars 636364.png", "Deep Stars 861183.png", "Deep Stars 385254.png", "Deep Stars 192731.png", "Deep Stars 513121.png");
 
-
-
 Page* color_mountains = create_page(art, "Color Mountains");
 add_preview_description(color_mountains, "Part of my earliest studies on Quil blends.");
 add_preview_image(color_mountains, "Color Mountains 002715.png");
@@ -155,13 +147,12 @@ add_paragraph(color_mountains, "The following images are few results of this wor
 add_gallery(color_mountains, 8, "Color Mountains 002715.png", "Color Mountains 006869.png", "Color Mountains 045739.png", "Color Mountains 109611.png", "Color Mountains 149474.png", "Color Mountains 479907.png", "Color Mountains 739953.png", "Color Mountains 952702.png");
 
 
+
 ////////////////////////////
 // Programs
 ////////////////////////////
-Page* programs = create_page(home, "programs");
+Page* programs = create_page(home, "Programs");
 add_paragraph(programs, "This section holds every coding project of decent sizes. Often I try to make things Open Source and available on GitHub, but it's not always true, especially for older projects and for the ones I code with other people.");
-
-
 
 Page* elkiwyart = create_page(programs, "ElkiwyArt");
 add_preview_description(elkiwyart, "An Open-source static website builder written in C99.");
@@ -182,15 +173,11 @@ add_paragraph(elkiwyart, "As I state before, this project is heavily inspred by 
 add_paragraph(elkiwyart, "The full source is available on my GitHub here: " LINKTEXT("https://github.com/elkiwy/elkiwyart", "Source") ".");
 add_image(elkiwyart, "elkiwyart-c99.png");
 
-
-
 Page* gispeditor = create_page(programs, "Gisp Editor");
 add_preview_description(gispeditor, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
 add_preview_image(gispeditor, "gisp-editor-thumb.png");
 add_paragraph(gispeditor, "");
 add_image(gispeditor, "gisp-editor-big.png");
-
-
 
 Page* gisp = create_page(programs, "Gisp");
 add_preview_description(gisp, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
@@ -198,8 +185,6 @@ add_preview_image(gisp, "gisp-test.png");
 add_paragraph(gisp, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
 add_paragraph(gisp, "");
 add_image(gisp, "gisp-test.png");
-
-
 
 Page* paynter = create_page(programs, "PaYnter");
 add_preview_description(paynter, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
@@ -242,8 +227,13 @@ add_paragraph(raspwallet, "Right now I'm still using this since it works, but so
 ////////////////////////////
 // Games
 ////////////////////////////
-Page* games = create_page(home, "games");
-create_page(games, "BeardedBear");
+Page* games = create_page(home, "Games");
+Page* beardedbear = create_page(games, "BeardedBear");
+create_page(beardedbear, "Concept");
+create_page(beardedbear, "Iterations");
+create_page(beardedbear, "Suspension");
+
+
 create_page(games, "BuildTutto");
 create_page(games, "WaveJump");
 create_page(games, "AsciiRush");
@@ -255,7 +245,7 @@ create_page(games, "Get The Fick Out");
 ////////////////////////////
 // Strudies
 ////////////////////////////
-Page* studies = create_page(home, "studies");
+Page* studies = create_page(home, "Studies");
 add_paragraph(studies, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories.");
 
 create_page(studies, "Japanese");
@@ -266,7 +256,7 @@ create_page(studies, "6502 Assembly");
 ////////////////////////////
 // About
 ////////////////////////////
-Page* about = create_page(home, "about");
+Page* about = create_page(home, "About");
 
 
 
