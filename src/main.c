@@ -59,6 +59,10 @@ typedef struct Page{
 	//Contents
 	int contents_count;
 	Content* contents[MAX_CONTENTS];
+
+	//References
+	int references_count;
+	Content* references[MAX_CONTENTS];
 } Page;
 
 
@@ -135,26 +139,39 @@ void build_contents(FILE* f, Page* p){
 
 ///Build all the child previews for a parent page
 void build_child_previews(FILE* f, Page* p){
-	fputs("<div style='height:24px'></div>", f);
-	for (int i=0; i<p->children_len; ++i){
-		if (p->children[i]->has_preview){
-			fputs("<div class='preview'>", f);
+	if(p->children_len>0){
+		fputs("<div style='height:24px'></div>", f);
+		for (int i=0; i<p->children_len; ++i){
+			if (p->children[i]->has_preview){
+				fputs("<div class='preview'>", f);
 
-			fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
-			if (p->children[i]->preview_image != NULL){
-				fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/img/%s'></div>", p->children[i]->preview_image);
+				fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
+				if (p->children[i]->preview_image != NULL){
+					fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/img/%s'></div>", p->children[i]->preview_image);
+				}
+
+				//Page title
+				fputs("<div class='textprevcont'>", f);
+				fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+				fprintf(f, "</a>");
+
+				//Page description
+				fprintf(f, "<p class='descprev'>%s</p>", p->children[i]->preview_description);
+				fputs("</div>", f);
+				fputs("</div>", f);
 			}
-
-			//Page title
-			fputs("<div class='textprevcont'>", f);
-			fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
-			fprintf(f, "</a>");
-
-			//Page description
-			fprintf(f, "<p class='descprev'>%s</p>", p->children[i]->preview_description);
-			fputs("</div>", f);
-			fputs("</div>", f);
 		}
+	}
+}
+
+void build_references(FILE* f, Page* p){
+	if(p->references_count>0 ){
+		fputs("<div>", f);
+		fputs("<h2 style='margin-top:32px'>References:</h2>", f);
+		for(int i=0; i<p->references_count; ++i){
+			fprintf(f, "%s", p->references[i]->data);
+		}
+		fputs("</div>", f);
 	}
 }
 
@@ -185,6 +202,9 @@ void build_page(Page* page){
 
 	//Child previews
 	build_child_previews(f, page);
+
+	//References
+	build_references(f, page);
 	fputs("</main>", f);
 	
 	//Footer
@@ -220,6 +240,7 @@ Page* create_page(Page* parent, char* name){
 	p->parent = parent;
 	p->children_len = 0;
 	p->contents_count = 0;
+	p->references_count = 0;
 	p->preview_description = "";
 	p->preview_image = NULL;
 	p->has_preview = false;
@@ -253,6 +274,17 @@ void add_stub(Page* p, char* s){
 	cont->data = formatString("<p style=\"color:red\">TODO: %s</p>", 1, s);
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
+}
+
+///Add a new reference to a page
+void add_reference(Page* p, char* text, char* link){
+	Content* cont = malloc(sizeof(Content));
+	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right'><a class='link' href='%s'>%s</a></span> </div>";
+	char* buff = malloc(sizeof(char)*(strlen(text)+strlen(format)+(strlen(link)*2)+1));
+	sprintf(buff, format, text, link, link);
+	cont->data = buff;
+	p->references[p->references_count] = cont;
+	p->references_count++;
 }
 
 ///Add a new image to a page
