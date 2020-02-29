@@ -152,7 +152,7 @@ void build_child_previews(FILE* f, Page* p){
 
 				//Page title
 				fputs("<div class='textprevcont'>", f);
-				fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\">%s</h2>", p->children[i]->name);  
+				fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\"><a class='link' href='%s.html'>%s</a></h2>", p->children[i]->filename, p->children[i]->name);  
 				fprintf(f, "</a>");
 
 				//Page description
