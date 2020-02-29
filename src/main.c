@@ -367,7 +367,7 @@ void add_header(Page* p, char* s, int hSize){
 }
 
 ///Add a new number list to a page
-void add_number_list(Page* p, int n, ...){
+void add_list(Page* p, bool numbered, int n, ...){
 	va_list args;
 	char* listItems[n];
 
@@ -380,7 +380,10 @@ void add_number_list(Page* p, int n, ...){
 
 	//Pack them into a string and add <ul> tag
 	char* joinedListItems = joinStringsArr(n, listItems);
-	char* data = formatString("<ol>%s</ol>", 1, joinedListItems);
+	char* format = "<ul>%s</ul>";
+	if (numbered) format = "<ol>%s</ol>";
+
+	char* data = formatString(format, 1, joinedListItems);
 
 	//Create the content
 	Content* cont = malloc(sizeof(Content));
