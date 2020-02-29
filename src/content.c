@@ -11,6 +11,8 @@
 
 #define HEADER_SIZE_SMALL 2
 
+
+
 ////////////////////////////
 // Home
 ////////////////////////////
@@ -34,6 +36,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Gates");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Third study on procedurally generated trees, going for a more abstract and twisted shapes.");
 			add_preview_image(p2, "Gates_96650.png");
 			add_paragraph(p2, "I really enjoyed the natural look of Scorci , but after that I started to want back some of the regular and geometric feel typical of generative art. So what's better than some natural-ish tree with weird geometric shapes? ");
@@ -56,6 +59,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Scorci");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Second study on procedurally generated trees synthesising a Japanese panorama.");
 			add_preview_image(p2, "Scorci 137931.png");
 			add_header(p2, "A rework of Spring Flowers", HEADER_SIZE_SMALL);
@@ -83,6 +87,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Spring Flowers");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "First study on procedurally generated trees.");
 			add_preview_image(p2, "Spring Flowers 964762.png");
 			add_paragraph(p2, "Spring is by far my favorite season of the year both for the warm clean air and for the beautiful show that trees create for us with their flowers.");
@@ -108,6 +113,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Deep Stars");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Studies on Quil blends and shapes.");
 			add_preview_image(p2, "Deep Stars 636364.png");
 			add_header(p2, "More Chaikin experiments", HEADER_SIZE_SMALL);
@@ -135,6 +141,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Color Mountains");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Part of my earliest studies on Quil blends.");
 			add_preview_image(p2, "Color Mountains 002715.png");
 			add_header(p2, "", HEADER_SIZE_SMALL);
@@ -173,6 +180,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "ElkiwyArt");
+			set_status(p2, STAT_ONGOING);
 			add_preview_description(p2, "An Open-source static website builder written in C99.");
 			add_preview_image(p2, "elkiwyart-c99.png");
 			add_paragraph(p2, "This project is the piece of code responsible for the generation of this very website.");
@@ -194,6 +202,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Gisp Editor");
+			set_status(p2, STAT_ONGOING);
 			add_preview_description(p2, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
 			add_preview_image(p2, "gisp-editor-thumb.png");
 			add_paragraph(p2, "When my project " SENDTEXT("gisp", "Gisp") " started to take shape and be usuable to create generative art I started to feel the need for a tool to integrate the workflow and avoid having a bunch of programs open on my desktop and jump between here and there to generate art. It kinda breaks the flow when trying to be creative.");
@@ -208,6 +217,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "Gisp");
+			set_status(p2, STAT_ONGOING);
 			add_preview_description(p2, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
 			add_preview_image(p2, "gisp-test.png");
 			add_paragraph(p2, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
@@ -220,6 +230,7 @@ Page* p0 = NULL;
 
 			{
 				Page* p3 = create_page(p2, "Documentation");
+				set_status(p3, STAT_TOSTART);
 				add_preview_description(p3, "Documentation and API reference for Gisp");
 			}
 		}
@@ -227,6 +238,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "PaYnter");
+			set_status(p2, STAT_PAUSED);
 			add_preview_description(p2, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
 			add_preview_image(p2, "paynter1.png");
 			add_header(p2, "The journey", HEADER_SIZE_SMALL);
@@ -247,6 +259,7 @@ Page* p0 = NULL;
 
 		{
 			Page* p2 = create_page(p1, "RaspberryWallet");
+			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A simple set of python scripts to handle wallet transactions through Telegram bot and Google Spreadsheet.");
 			add_preview_image(p2, "raspwallet.png");
 			add_header(p2, "The idea", HEADER_SIZE_SMALL);
@@ -273,17 +286,42 @@ Page* p0 = NULL;
 ////////////////////////////
 	{
 		Page* p1 = create_page(p0, "Games");
-		Page* beardedbear = create_page(p1, "BeardedBear");
-		create_page(beardedbear, "Concept");
-		create_page(beardedbear, "Iterations");
-		create_page(beardedbear, "Suspension");
+		{
+			Page* p2 = create_page(p1, "BeardedBear");
+			set_status(p2, STAT_SUSPENDED);
+
+			{
+				Page* p3 = create_page(p2, "Concept");
+			}
+			{
+				Page* p3 = create_page(p2, "Iterations");
+			}
+			{
+				Page* p3 = create_page(p2, "Suspension");
+			}
+		}
 
 
-		create_page(p1, "BuildTutto");
-		create_page(p1, "WaveJump");
-		create_page(p1, "AsciiRush");
-		create_page(p1, "Shootshift");
-		create_page(p1, "Get The Fick Out");
+		{
+			Page* p2 = create_page(p1, "BuildTutto");
+			set_status(p2, STAT_SUSPENDED);
+		}
+		{
+			Page* p2 = create_page(p1, "WaveJump");
+			set_status(p2, STAT_FINISHED);
+		}
+		{
+			Page* p2 = create_page(p1, "AsciiRush");
+			set_status(p2, STAT_FINISHED);
+		}
+		{
+			Page* p2 = create_page(p1, "Shootshift");
+			set_status(p2, STAT_FINISHED);
+		}
+		{
+			Page* p2 = create_page(p1, "Get The Fick Out");
+			set_status(p2, STAT_FINISHED);
+		}
 
 	}
 
@@ -295,8 +333,12 @@ Page* p0 = NULL;
 		Page* p1 = create_page(p0, "Studies");
 		add_paragraph(p1, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories.");
 
-		create_page(p1, "Japanese");
-		create_page(p1, "6502 Assembly");
+		{
+			Page* p2 = create_page(p1, "Japanese");
+		}
+		{
+			Page* p2 = create_page(p1, "6502 Assembly");
+		}
 	}
 
 

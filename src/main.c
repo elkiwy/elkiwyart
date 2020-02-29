@@ -25,6 +25,13 @@ char* clickableImg(char* src, char* class);
 #define STR_BUF_LEN 64
 #define MAX_CONTENTS 32
 
+#define STAT_NODATA 0
+#define STAT_PAUSED 1
+#define STAT_ONGOING 2
+#define STAT_FINISHED 3
+#define STAT_SUSPENDED 4
+#define STAT_TOSTART 5
+
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
 char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
 char *html_footer = "<p>Stefano Bertoli © 2020</p><button onclick=\" if(document.documentElement.getAttribute('data-theme')=='dark'){document.documentElement.setAttribute('data-theme', 'light');}else{document.documentElement.setAttribute('data-theme', 'dark');} \" type=\"button\">Theme</button></body></html>";
@@ -55,6 +62,9 @@ typedef struct Page{
 	char* preview_description;
 	char* preview_image;
 	bool has_preview;
+
+	//Project status
+	int status;
 
 	//Contents
 	int contents_count;
@@ -126,10 +136,26 @@ void build_contents(FILE* f, Page* p){
 		fprintf(f,"<h3 class='link' style='display:inline'>%s</h3>", p->parent->name);  
 		fprintf(f,"</a>");
 		fprintf(f,"<h3 style='display:inline'> :: </h3>");  
-		fprintf(f,"<h1 style='display:inline-block;margin-bottom:12px'>%s</h1></br>", p->name);  
+		fprintf(f,"<h1 style='display:inline-block;margin-bottom:0px'>%s</h1></br>", p->name);  
 	}else{
 		fprintf(f,"<h1>%s</h1>", p->name);  
 	}
+
+	if(p->status != STAT_NODATA){
+		char* s;
+		switch(p->status){
+		case STAT_PAUSED:    s = "<span style='color:#aa5a00;font-weight:bold'>Paused</span>";break;
+		case STAT_ONGOING:   s = "<span style='color:#06898c;font-weight:bold'>On going</span>";break;
+		case STAT_SUSPENDED: s = "<span style='color:#920700;font-weight:bold'>Suspended</span>";break;
+		case STAT_FINISHED:  s = "<span style='color:#038f15;font-weight:bold'>Completed</span>";break;
+		case STAT_TOSTART:   s = "<span style='color:#77860c;font-weight:bold'>About to start</span>";break;
+		}
+			
+		fprintf(f, "<span style='display:inline-block;margin-bottom:24px;font-size:14px'>[The development is: %s]</span>", s);
+	}else{
+		fputs("<div style='height:24px'></div>", f);
+	}
+
 
 	//Page content
 	for (int i=0; i<p->contents_count; ++i){
@@ -244,6 +270,7 @@ Page* create_page(Page* parent, char* name){
 	p->preview_description = "";
 	p->preview_image = NULL;
 	p->has_preview = false;
+	p->status = STAT_NODATA;
 
 	if (parent!=NULL){
 		//Assign this page as a child for his parent
@@ -258,6 +285,10 @@ Page* create_page(Page* parent, char* name){
 //////////////////////////////////////////////////////////////////////
 // Content Creation
 //////////////////////////////////////////////////////////////////////
+
+void set_status(Page* p, int s){
+	p->status = s;
+}
 
 ///Add a new paragraph to a page
 void add_paragraph(Page* p, char* s){
