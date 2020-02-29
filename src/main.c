@@ -416,6 +416,6 @@ int main(){
 	
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
-	build_page_recursively(home);
+	build_page_recursively(p0);
 	return 0;
 }
