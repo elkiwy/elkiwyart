@@ -189,8 +189,16 @@ Page* gisp = create_page(programs, "Gisp");
 add_preview_description(gisp, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
 add_preview_image(gisp, "gisp-test.png");
 add_paragraph(gisp, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
-add_paragraph(gisp, "");
+add_paragraph(gisp, "Gisp is a Lisp dialect I made 100% focussed on giving the right tools to generate procedurally images.");
 add_image(gisp, "gisp-test.png");
+add_paragraph(gisp, "The core program is written in C and it consists in a lisp interpreter that reads a .gisp code file and execute it.");
+add_paragraph(gisp, "For the core interpreter structure I used " LINKTEXT("https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html", "this article") " as a great reference that explain everything you need to create your own little interpreter. It's not too advanced and very minimalistic, but I like it that way and give me freedom to expand it by myself in any way I want.");
+add_reference(gisp, "Lisp in less than 200 lines of C", "https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html");
+add_reference(gisp, "Cairo Lib", "https://www.cairographics.org");
+
+Page* gispdoc = create_page(gisp, "Documentation");
+add_preview_description(gispdoc, "Documentation and API reference for Gisp");
+
 
 Page* paynter = create_page(programs, "PaYnter");
 add_preview_description(paynter, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
