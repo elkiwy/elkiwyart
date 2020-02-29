@@ -279,7 +279,7 @@ void add_stub(Page* p, char* s){
 ///Add a new reference to a page
 void add_reference(Page* p, char* text, char* link){
 	Content* cont = malloc(sizeof(Content));
-	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right'><a class='link' href='%s'>%s</a></span> </div>";
+	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'><a class='link' href='%s'>%s</a></span> </div>";
 	char* buff = malloc(sizeof(char)*(strlen(text)+strlen(format)+(strlen(link)*2)+1));
 	sprintf(buff, format, text, link, link);
 	cont->data = buff;
