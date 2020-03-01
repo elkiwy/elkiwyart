@@ -38,7 +38,7 @@ void logStr(char* s){
 
 
 char* clickableImg(char* src, char* class){
-	char* format = "<a href='../media/img/%s'><img class='%s' src='../media/img/%s'/></a>";
+	char* format = "<a href='../media/img/%s'><img class='%s' src='../media/thumb/%s'/></a>";
 	int size = strlen(format) + strlen(src)*2 + strlen(class) + 1;
 	char* buff = malloc(sizeof(char)*size);
 	sprintf(buff, format, src, class, src);

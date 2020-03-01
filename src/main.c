@@ -19,6 +19,14 @@ char* clickableImg(char* src, char* class);
 
 #include "utils.c"
 
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#define STB_IMAGE_RESIZE_STATIC
+#include "stb_image_resize.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 #define PAGE_ITEM_BUFFER 32
 #define PAGE_LINK_BUFFER 32
 #define PAGE_CHILD_BUFFER 32
@@ -74,6 +82,32 @@ typedef struct Page{
 	int references_count;
 	Content* references[MAX_CONTENTS];
 } Page;
+
+
+
+
+
+
+void resize_image(const char* filename, float width_percent, float height_percent, const char* output){
+	int w, h, n;
+	unsigned char* input_data = stbi_load(filename, &w, &h, &n, 0);
+	if (!input_data){
+		printf("Image %s could not be loaded.\n", filename);fflush(stdout);
+		return;
+	}
+
+	int out_w = (int)(w * width_percent);
+	int out_h = (int)(h * height_percent);
+	unsigned char* output_data = (unsigned char*)malloc(out_w * out_h * n);
+
+	stbir_resize(input_data, w, h, 0, output_data, out_w, out_h, 0, STBIR_TYPE_UINT8, n, STBIR_ALPHA_CHANNEL_NONE, 0, STBIR_EDGE_CLAMP, STBIR_EDGE_CLAMP, STBIR_FILTER_BOX, STBIR_FILTER_BOX, STBIR_COLORSPACE_LINEAR, NULL);
+	stbi_image_free(input_data);
+	stbi_write_png(output, out_w, out_h, n, output_data, 0);
+	free(output_data);
+}
+
+
+
 
 
 
@@ -318,8 +352,22 @@ void add_reference(Page* p, char* text, char* link){
 	p->references_count++;
 }
 
+
+void prepare_thumbnail(const char* filename){
+	char* input_format = "../media/img/%s";
+	char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
+	sprintf(input_path, input_format, filename);
+
+	char* output_format = "../media/thumb/%s";
+	char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
+	sprintf(output_path, output_format, filename);
+
+	resize_image(input_path, 0.5, 0.5, output_path);
+}
+
 ///Add a new image to a page
 void add_image(Page* p, char* s){
+	prepare_thumbnail(s);
 	Content* cont = malloc(sizeof(Content));
 	char* img1 = clickableImg(s, "img1");
 	cont->data = img1;
@@ -329,6 +377,8 @@ void add_image(Page* p, char* s){
 
 ///Add two new images side by side to a page
 void add_image2(Page* p, char* s1, char* s2){
+	prepare_thumbnail(s1);
+	prepare_thumbnail(s2);
 	Content* cont = malloc(sizeof(Content));
 	char* img1 = clickableImg(s1, "img2");
 	char* img2 = clickableImg(s2, "img2");
@@ -343,6 +393,9 @@ void add_image2(Page* p, char* s1, char* s2){
 
 ///Add three new images side by side to a page
 void add_image3(Page* p, char* s1, char* s2, char* s3){
+	prepare_thumbnail(s1);
+	prepare_thumbnail(s2);
+	prepare_thumbnail(s3);
 	Content* cont = malloc(sizeof(Content));
 	char* img1 = clickableImg(s1, "img3");
 	char* img2 = clickableImg(s2, "img3");
@@ -447,6 +500,7 @@ int main(){
 	//Make site dire if not already there
 	struct stat st = {0};
 	if (stat("../site", &st) == -1) mkdir("../site", 0700);
+	if (stat("../media/thumb", &st) == -1) mkdir("../media/thumb", 0700);
 	
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
