@@ -320,12 +320,14 @@ Page* p0 = NULL;
 			Page* p2 = create_page(p1, "Hull Breach");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A game about repairing a spaceship trying to escape from bad guys through an asteroids belt.<br>Made with Pico8 for GlobalGameJam2020.");
+			add_preview_image(p2, "hullbreach3.png");
 			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2020/games/hull-breach-4");
 		}
 		{
 			Page* p2 = create_page(p1, "BuildTutto");
 			set_status(p2, STAT_SUSPENDED);
 			add_preview_description(p2, "A deep resource management building and crafting game.<br>Made with C++ and Allegro.");
+			add_preview_image(p2, "buildtutto1.png");
 			add_reference(p2, "IndieDB Page", "https://www.indiedb.com/games/project-buildtutto");
 			add_reference(p2, "Devlog timelapses", "https://www.youtube.com/channel/UC2l3kcw6wUn4Z1-cr5UMLMw");
 		}
@@ -333,18 +335,26 @@ Page* p0 = NULL;
 			Page* p2 = create_page(p1, "WaveJump");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A local multiplayer game about crating and jumping on waves to kill your opponent.<br>Made with Gamemaker for the GlobalGameJam2017.");
+			add_preview_image(p2, "wavejump1.png");
 			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2017/games/wavejump");
+			add_reference(p2, "Itch.io Page", "https://bearsinmind.itch.io/wavejump");
 		}
 		{
 			Page* p2 = create_page(p1, "AsciiRush");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A score-attack speedcrafting ascii game with an abuse of post rendering effects.<br>Made with Gamemaker.");
+			add_preview_image(p2, "asciirush1.png");
+			add_reference(p2, "Itch.io Page", "https://bearsinmind.itch.io/asciirush");
+
 		}
 		{
 			Page* p2 = create_page(p1, "BeardedBear");
 			set_status(p2, STAT_SUSPENDED);
 			add_preview_description(p2, "A game about a bear with a might bear shooting aliens through time and space.<br>Made with GameMaker.");
-			add_reference(p2, "", "");
+			add_preview_image(p2, "beardedbear1.png");
+			add_reference(p2, "YouTube Trailer",  "https://youtu.be/7yaPZY4X-A");
+			add_reference(p2, "IndieDB Page",  "http://www.indiedb.com/games/beardedbea");
+			add_reference(p2, "TIGSource Thread",  "https://forums.tigsource.com/index.php?topic=54839.");
 
 			{
 				Page* p3 = create_page(p2, "Concept");
@@ -360,6 +370,7 @@ Page* p0 = NULL;
 			Page* p2 = create_page(p1, "Asafah");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "An game about a guy who wants to complete a ritual while shooting demons.<br>Made with Pico8 for GlobalGameJam2016.");
+			add_preview_image(p2, "asafah1.png");
 			add_reference(p2, "Gameplay trailer", "https://www.youtube.com/watch?v=fLn9B9L90zQ");
 			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2016/games/asafah");
 		}
@@ -367,11 +378,14 @@ Page* p0 = NULL;
 			Page* p2 = create_page(p1, "Shootshift");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A shooter game where you shapeshift every five action you take.<br>Made with Gamemaker for LudumDare35");
+			add_preview_image(p2, "shootshift1.png");
+			add_reference(p2, "Itch.io Page", "https://elkiwydev.itch.io/shootshift");
 		}
 		{
 			Page* p2 = create_page(p1, "Get The Fick Out");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Silly game about a drunk man, exploding chairs, wild fires, and far-west style saloon.<br>Made with Gamemaker for LudumDare31.");
+			add_preview_image(p2, "getthefickout1.jpg");
 			add_reference(p2, "LudumDare Page", "http://ludumdare.com/compo/ludum-dare-31/?action=preview&uid=40741");
 			add_reference(p2, "Development Timelapse", "https://www.youtube.com/watch?v=hOjXrH4-LeQ");
 		}
@@ -383,7 +397,7 @@ Page* p0 = NULL;
 // Strudies
 ////////////////////////////
 	{
-		Page* p1 = create_page(p0, "Misc");
+		Page* p1 = create_page(p0, "Other");
 		add_paragraph(p1, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories but I still want to talk about it.");
 
 		{
