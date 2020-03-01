@@ -233,9 +233,11 @@ Page* p0 = NULL;
 			char* l4 = "More advance graphics primitive.";
 			char* l5 = "Extended Gisp core library.";
 			add_list(p2, false, 5, l1, l2, l3, l4, l5);
+			add_paragraph(p2, "The project also has a companion project called " SENDTEXT("gispeditor", "Gisp Editor") " which, as the name implies, is a tool to edit and run gisp code without having to manually run from the terminal.");
 			add_reference(p2, "Lisp in less than 200 lines of C", "https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html");
 			add_reference(p2, "Cairo Lib", "https://www.cairographics.org");
 			add_reference(p2, "Gisp Repository", "https://github.com/elkiwy/gisp");
+			add_reference(p2, "Gisp-Editor Repository", "https://github.com/elkiwy/gisp-editor");
 
 			{
 				Page* p3 = create_page(p2, "Documentation");
@@ -253,17 +255,32 @@ Page* p0 = NULL;
 			add_preview_description(p2, "A Python module to procedurally generate images using tools that emulates image editing software tools.");
 			add_preview_image(p2, "paynter1.png");
 			add_header(p2, "The journey", HEADER_SIZE_SMALL);
-			add_paragraph(p2, "I started to make proper generative art with a little python script to automate mouse and keyboard input to interact with Krita, a digital drawing tool. I like the complexity of the brushes and all the tool available inside Krita, but after few generations it started to feel pretty hacky and uncomfortable to use. So after that I wanted to try and replicate the brushes and complexity of an image editing software by myself by making a python program that emulated that.");
-			add_paragraph(p2, "That was the birth of PaYnter.");
-			add_paragraph(p2, "It is has a features like:");
-			char* l1 = "Brush emulation";
-			char* l2 = "Image layering";
-			char* l3 = "Blending modes";
-			add_list(p2, false, 3, l1, l2, l3);
-			add_stub(p2, "Continue with features");
+			add_paragraph(p2, "I started to make proper generative art with a little python script to automate mouse and keyboard input to interact with Krita, a digital drawing tool. I like the complexity of the brushes and all the tool available inside Krita, but after few generations it started to feel pretty hacky and uncomfortable to use.");
+			add_paragraph(p2, "So after that I wanted to try and replicate the brushes and complexity of an image editing software by myself by making a python program that emulated that. That was the birth of PaYnter.");
+			add_paragraph(p2, "The main features of PaYnter are:");
+			add_header(p2, "Brushes emultation", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "With paynter you draw on your digital image with brushes just like you do on Photoshop. You can create brushes starting from images defining the brush tip, and then you can define a bunch of brush parameters like:");
+			char* l1 = "Size";
+			char* l2 = "Spacing";
+			char* l3 = "Angle";
+			char* l4 = "Color mixing";
+			char* l5 = "Hue";
+			char* l6 = "Saturation";
+			char* l7 = "Color Value";
+			char* l8 = "Random position offsetting";
+			add_list(p2, false, 8, l1, l2, l3, l4, l5, l6, l7, l8);
+			add_header(p2, "Layer management", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "Each image is composed by one or multiple layers. Each layer interally is one 3D array of [imageWidth * imageHeight * 4] to store the RGBA value of each pixel of the layer.");
+			add_paragraph(p2, "When drawing you specify on which layer you are using, and then when you are done with the editing you can then merge all the layers using various blend modes to create many different effects.");
+			add_header(p2, "Palette management", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "You can choose color individually or use one of the PaYnter preset palette generation where you can specify some starting values and generate opposite or complementary colors from the starting one.");
+			add_paragraph(p2, "Each color can then be tweaked individually from saturation, hue, and value.");
 			add_image2(p2, "paynter1.png", "paynter2.png");
 			add_image(p2, "paynter3.png");
-			add_paragraph(p2, "The project got discontinued when I realize that it was terribly slow and, even through many optimization iterations the performance wasn't enough for my needs. I used a lot of matrix operation which could have been optimized a lot by using the GPU, but sadly it seems that all the decent framework for that uses nVidia drivers and I don't have a nVidia GPU, so that was not an option.");
+
+			add_paragraph(p2, "The project got discontinued when I realize that it was too slow and, even through many optimization iterations the performance wasn't enough for my needs. I used a lot of matrix operation which could have been optimized a lot by using the GPU, but sadly it seems that all the decent framework for that uses nVidia drivers and I don't have a nVidia GPU, so that was not an option.");
+			add_reference(p2, "PaYnter Documentation", "https://paynter.readthedocs.io/en/latest/");
+		    add_reference(p2, "PaYnter Repository", "https://github.com/elkiwy/paynter");
 		}
 
 
@@ -297,9 +314,37 @@ Page* p0 = NULL;
 ////////////////////////////
 	{
 		Page* p1 = create_page(p0, "Games");
+
+
+		{
+			Page* p2 = create_page(p1, "Hull Breach");
+			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A game about repairing a spaceship trying to escape from bad guys through an asteroids belt.<br>Made with Pico8 for GlobalGameJam2020.");
+			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2020/games/hull-breach-4");
+		}
+		{
+			Page* p2 = create_page(p1, "BuildTutto");
+			set_status(p2, STAT_SUSPENDED);
+			add_preview_description(p2, "A deep resource management building and crafting game.<br>Made with C++ and Allegro.");
+			add_reference(p2, "IndieDB Page", "https://www.indiedb.com/games/project-buildtutto");
+			add_reference(p2, "Devlog timelapses", "https://www.youtube.com/channel/UC2l3kcw6wUn4Z1-cr5UMLMw");
+		}
+		{
+			Page* p2 = create_page(p1, "WaveJump");
+			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A local multiplayer game about crating and jumping on waves to kill your opponent.<br>Made with Gamemaker for the GlobalGameJam2017.");
+			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2017/games/wavejump");
+		}
+		{
+			Page* p2 = create_page(p1, "AsciiRush");
+			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A score-attack speedcrafting ascii game with an abuse of post rendering effects.<br>Made with Gamemaker.");
+		}
 		{
 			Page* p2 = create_page(p1, "BeardedBear");
 			set_status(p2, STAT_SUSPENDED);
+			add_preview_description(p2, "A game about a bear with a might bear shooting aliens through time and space.<br>Made with GameMaker.");
+			add_reference(p2, "", "");
 
 			{
 				Page* p3 = create_page(p2, "Concept");
@@ -311,27 +356,24 @@ Page* p0 = NULL;
 				Page* p3 = create_page(p2, "Suspension");
 			}
 		}
-
-
 		{
-			Page* p2 = create_page(p1, "BuildTutto");
-			set_status(p2, STAT_SUSPENDED);
-		}
-		{
-			Page* p2 = create_page(p1, "WaveJump");
+			Page* p2 = create_page(p1, "Asafah");
 			set_status(p2, STAT_FINISHED);
-		}
-		{
-			Page* p2 = create_page(p1, "AsciiRush");
-			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "An game about a guy who wants to complete a ritual while shooting demons.<br>Made with Pico8 for GlobalGameJam2016.");
+			add_reference(p2, "Gameplay trailer", "https://www.youtube.com/watch?v=fLn9B9L90zQ");
+			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2016/games/asafah");
 		}
 		{
 			Page* p2 = create_page(p1, "Shootshift");
 			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A shooter game where you shapeshift every five action you take.<br>Made with Gamemaker for LudumDare35");
 		}
 		{
 			Page* p2 = create_page(p1, "Get The Fick Out");
 			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "Silly game about a drunk man, exploding chairs, wild fires, and far-west style saloon.<br>Made with Gamemaker for LudumDare31.");
+			add_reference(p2, "LudumDare Page", "http://ludumdare.com/compo/ludum-dare-31/?action=preview&uid=40741");
+			add_reference(p2, "Development Timelapse", "https://www.youtube.com/watch?v=hOjXrH4-LeQ");
 		}
 
 	}
@@ -341,17 +383,35 @@ Page* p0 = NULL;
 // Strudies
 ////////////////////////////
 	{
-		Page* p1 = create_page(p0, "Studies");
-		add_paragraph(p1, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories.");
+		Page* p1 = create_page(p0, "Misc");
+		add_paragraph(p1, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories but I still want to talk about it.");
 
 		{
 			Page* p2 = create_page(p1, "Japanese");
+			add_preview_description(p2, "My studies on the Japanese Language.");
+		}
+		{
+			Page* p2 = create_page(p1, "Emacs");
+			add_preview_description(p2, "My prefered text editor and my thoughts about it.");
 		}
 		{
 			Page* p2 = create_page(p1, "6502 Assembly");
+			add_preview_description(p2, "My studies on 6502 Assembly for NES game development.");
 		}
 	}
 
+
+
+////////////////////////////
+// Guides
+////////////////////////////
+	{
+		Page* p1 = create_page(p0, "Guides");
+		{
+			Page* p2 = create_page(p1, "Simple Hash table in C");
+			add_preview_description(p2, "How to implement an Hash table from scratch in C or any other programming language.");
+		}
+	}
 
 
 ////////////////////////////
