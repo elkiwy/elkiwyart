@@ -17,8 +17,12 @@ char* formatString(char* format, int n, ...);
 char* stringRepl(char* s, char old, char new);
 char* clickableImg(char* src, char* class);
 
+#define CREATING_THUMBNAILS
+
 #include "utils.c"
 
+
+#ifdef CREATING_THUMBNAILS
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC
 #include "stb_image_resize.h"
@@ -26,6 +30,7 @@ char* clickableImg(char* src, char* class);
 #include "stb_image_write.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#endif
 
 #define PAGE_ITEM_BUFFER 32
 #define PAGE_LINK_BUFFER 32
@@ -89,6 +94,7 @@ typedef struct Page{
 
 
 void resize_image(const char* filename, float width_percent, float height_percent, const char* output){
+#ifdef CREATING_THUMBNAILS
 	int w, h, n;
 	unsigned char* input_data = stbi_load(filename, &w, &h, &n, 0);
 	if (!input_data){
@@ -104,6 +110,7 @@ void resize_image(const char* filename, float width_percent, float height_percen
 	stbi_image_free(input_data);
 	stbi_write_png(output, out_w, out_h, n, output_data, 0);
 	free(output_data);
+	#endif
 }
 
 
@@ -354,15 +361,17 @@ void add_reference(Page* p, char* text, char* link){
 
 
 void prepare_thumbnail(const char* filename){
-	char* input_format = "../media/img/%s";
-	char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
-	sprintf(input_path, input_format, filename);
+	#ifdef CREATING_THUMBNAILS
+		char* input_format = "../media/img/%s";
+		char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
+		sprintf(input_path, input_format, filename);
 
-	char* output_format = "../media/thumb/%s";
-	char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
-	sprintf(output_path, output_format, filename);
+		char* output_format = "../media/thumb/%s";
+		char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
+		sprintf(output_path, output_format, filename);
 
-	resize_image(input_path, 0.5, 0.5, output_path);
+		resize_image(input_path, 0.5, 0.5, output_path);
+	#endif
 }
 
 ///Add a new image to a page

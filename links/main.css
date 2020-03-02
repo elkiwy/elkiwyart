@@ -41,6 +41,8 @@ main .imgprevcont {width:var(--preview-img-size); height:var(--preview-img-size)
 main .imgprev {max-width:var(--preview-img-size); max-height:var(--preview-img-size);}
 main .preview {clear:both; height: var(--preview-img-size);}
 
+main .imgdesc {margin-top:0; margin-bottom:12px; text-align:center;font-style:italic; width:100%; display:inline-block}
+
 main .gallery { display:flex;flex-wrap:wrap;justify-content:center; }
 main .galleryImage{ text-align:center;max-width:50%; max-height:500px; padding:12px 12px 0px 12px; display:block; margin-bottom:0px; }
 main .galleryDesc {text-align:center; display:block; margin-top:0px; maring-bottom:12px;}
