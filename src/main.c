@@ -36,7 +36,7 @@ char* clickableImg(char* src, char* class);
 #define PAGE_LINK_BUFFER 32
 #define PAGE_CHILD_BUFFER 32
 #define STR_BUF_LEN 64
-#define MAX_CONTENTS 32
+#define MAX_CONTENTS 128
 
 #define STAT_NODATA 0
 #define STAT_PAUSED 1
