@@ -45,6 +45,7 @@ char* clickableImg(char* src, char* class);
 #define STAT_SUSPENDED 4
 #define STAT_TOSTART 5
 
+
 char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
 char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
 char *html_footer = "<p>Stefano Bertoli © 2020</p></body></html>";
@@ -383,6 +384,26 @@ void add_image(Page* p, char* s){
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
 }
+
+
+///Add a new image to a page
+void add_image_desc(Page* p, char* s, char* d){
+	prepare_thumbnail(s);
+
+	Content* cont = malloc(sizeof(Content));
+	char* img1 = clickableImg(s, "img1");
+
+	char* format = "<div>%s<span class='imgdesc'>%s</span></div>";
+	char* buff = malloc(sizeof(char)*(strlen(format) + strlen(img1) + strlen(d) + 1));
+	sprintf(buff, format, img1, d);
+
+	cont->data = buff;
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+
+}
+
+
 
 ///Add two new images side by side to a page
 void add_image2(Page* p, char* s1, char* s2){
