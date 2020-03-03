@@ -8,6 +8,7 @@
 #define IMAGE(name) "<img src='../media/identity/" name "'/>"
 #define PAR(content) "<p>" content "</p>"
 #define MONOSPACE(content) "<span style='font-family:monospace'>" content "</span>"
+#define BOLD(content) "<b>" content "</b>"
 
 
 #define HEADER_SIZE_SMALL 2
