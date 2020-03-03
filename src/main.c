@@ -17,7 +17,7 @@ char* formatString(char* format, int n, ...);
 char* stringRepl(char* s, char old, char new);
 char* clickableImg(char* src, char* class);
 
-#define CREATING_THUMBNAILS
+//#define CREATING_THUMBNAILS
 
 #include "utils.c"
 
@@ -94,8 +94,8 @@ typedef struct Page{
 
 
 
-void resize_image(const char* filename, float width_percent, float height_percent, const char* output){
 #ifdef CREATING_THUMBNAILS
+void resize_image(const char* filename, float width_percent, float height_percent, const char* output){
 	int w, h, n;
 	unsigned char* input_data = stbi_load(filename, &w, &h, &n, 0);
 	if (!input_data){
@@ -111,8 +111,8 @@ void resize_image(const char* filename, float width_percent, float height_percen
 	stbi_image_free(input_data);
 	stbi_write_png(output, out_w, out_h, n, output_data, 0);
 	free(output_data);
-	#endif
 }
+#endif
 
 
 
@@ -372,6 +372,8 @@ void prepare_thumbnail(const char* filename){
 		sprintf(output_path, output_format, filename);
 
 		resize_image(input_path, 0.5, 0.5, output_path);
+	#else
+		printf("Skipping thumb %s\n", filename);
 	#endif
 }
 
