@@ -397,6 +397,8 @@ Page* p0 = NULL;
 			add_header(p2, "Conclusion", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "With all this in place we finished the rest of the game on Sunday. The final game was \"ok\". We had fun making it, it's cool to watch, but the gameplay could be better.");
 			add_paragraph(p2, "Overall, it was a great event and is always nice to be part of it. Everyone interested in games should try that to push their limits and learn bunch of new things in an unique experience!");
+			add_image3(p2, "hullbreach1.png", "hullbreach2.png", "hullbreach3.png");
+			add_image2(p2, "hullbreach4.png", "hullbreach5.png");
 			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2020/games/hull-breach-4");
 
 		}
@@ -444,6 +446,28 @@ Page* p0 = NULL;
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A local multiplayer game about crating and jumping on waves to kill your opponent.<br>Made with Gamemaker for the GlobalGameJam2017.");
 			add_preview_image(p2, "wavejump1.png");
+			add_paragraph(p2, "Wavejump was made during the Globalgamejam2017 with a group of friend of mines. It was my second GGJ and I really enjoyed it and what was the product of it.");
+			add_image(p2, "wavejump1.gif");
+			add_header(p2, "The concept", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The theme of the jam was " BOLD("\"Waves\"") " so, after some brainstorming, we come up with the idea of a local multiplayer game about blobs making waves by jumping on the ground.");
+			add_paragraph(p2, "The main mechanics was the character jump, and that had two important pourposes:");
+			char* a1 = "Jump to land down of the ground to create a shockwave that can kill the player.";
+			char* a2 = "Jump to " BOLD("hop over") " the shockwave and defend yourself from the attackers.";
+			add_list(p2, false, 2, a1, a2);
+			add_image(p2, "wavejump2.gif");
+			add_header(p2, "The development", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The development was really quick and good, we worked as a team and we had something playable quite early through the jam.");
+			add_paragraph(p2, "The first sketch was a simpler version with only a type of character creating normal circular waves, as that was the core design.");
+			add_paragraph(p2, "After that, since a lot of time was still available, we had the chance to polish and juice it to really make it a fun game:");
+			char* b1 = "A lot of graphical effects like the ground cracks and screenshakes were added to improve the feel of the game.";
+			char* b2 = "We gave the players a bunch of different stages to let them explore the mechanics of the game.";
+			char* b3 = "Since the core game used very few colors we added different palettes to swap them randomly each stage.";
+			char* b4 = "We added the " BOLD("Super jump") " feature were the player can load a bigger jump by slowing himself down while charging it.";
+			char* b5 = "Two more characters that creates shockwaves of different shapes (triangular and square).";
+			add_list(p2, false, 5, b1, b2, b3, b4, b5);
+			add_paragraph(p2, "With all these features in place we reached the 48 hours of the Jam, so we close it very satisfied from the result.");
+			add_image(p2, "wavejump3.gif");
+			add_reference(p2, "Gameplay Trailer", "https://www.youtube.com/watch?time_continue=1&v=gX48s6ZBdTQ&feature=emb_logo");
 			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2017/games/wavejump");
 			add_reference(p2, "Itch.io Page", "https://bearsinmind.itch.io/wavejump");
 		}
@@ -452,6 +476,31 @@ Page* p0 = NULL;
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A score-attack speedcrafting ascii game with an abuse of post rendering effects.<br>Made with Gamemaker.");
 			add_preview_image(p2, "asciirush1.png");
+			add_image(p2, "asciirush1.gif");
+			add_header(p2, "The idea", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "I always loved ascii games like DwarfFortress and Cataclysm DDA, so I wanted to try make an Ascii game too, but with a twist.");
+			add_paragraph(p2, "This game was made with a friend of mine and we gave ourselves only a couple of weeks of development before finish it.");
+			add_paragraph(p2, "AsciiRush core idea was pretty simple: I wanted to build something fast paced and graphically rich with an ascii art style.");
+			add_image_desc(p2, "asciirush5.png", "In the cave the player will even find gold and waterfalls.");
+
+			add_header(p2, "The game", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "To make a fast paced gameplay we structured the game to be a time attack where you had to climb out from a cave, but to do so you had to first dig down to gather some materials to craft a couple of object to help you out to get up and reach the goal.");
+			add_paragraph(p2, "We used a mix of perlin noise and a lot of custom generation rules to create randomly generated levels that could be playable.");
+			add_paragraph(p2, "The graphics was limited to only ascii character and shaders to juice them up, but this didn't stopped us to add a lot of animations and little things to make the environment interesting.");
+			add_image(p2, "asciirush4.png");
+
+			add_header(p2, "The crafting", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "Each run spawns the player in the middle of an old mine. He need to dig down to be able to collect materials which can then be used to craft one of these items:");
+			char* b1 = "A jetpack to be able to hover on empty gaps.";
+			char* b2 = "A grappling hook that leave a rope behind that can be climbed.";
+			char* b3 = "A pair of gloves to help him to climp vertical walls.";
+			char* b4 = "A pickaxe to break block quickly.";
+			char* b5 = "A radar to find quicker rare materials.";
+			add_list(p2, false, 5, b1, b2, b3, b4, b5);
+			add_paragraph(p2, "Each run require the player to at least build a grappling hook to be able to pass the spawning point, then the player has to decide if he wants to craft more tools to help him out or to start to climb up without loosing more time.");
+			add_image2(p2, "asciirush6.png","asciirush7.png");
+			add_image2(p2, "asciirush1.png","asciirush3.png");
+
 			add_reference(p2, "Itch.io Page", "https://bearsinmind.itch.io/asciirush");
 
 		}
@@ -460,19 +509,41 @@ Page* p0 = NULL;
 			set_status(p2, STAT_SUSPENDED);
 			add_preview_description(p2, "A game about a bear with a might bear shooting aliens through time and space.<br>Made with GameMaker.");
 			add_preview_image(p2, "beardedbear1.png");
-			add_reference(p2, "YouTube Trailer",  "https://youtu.be/7yaPZY4X-A");
+			add_paragraph(p2, "BeardedBear is my biggest project on which I worked on. I developed it for almost 3.5 years during my university life. I started the project alone and worked on it for almost a year before Alberto, a friend of mine, started to help me out with sound and programming. After another year Giacomo, another friend from university, joined the team and helped us with pixel art.");
+			add_paragraph(p2, "Sadly, the project got suspended after some problems with the team and I couldn't keep up alone.");
+			add_image(p2, "beardedbear2.gif");
+
+			add_header(p2, "The prototypes", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The game started out as a little learning experiment by trying to clone SuperCrateBox and adding realistic physics to it. At this stage the project was targetting mobile and was developed with Lua and CoronaSDK.");
+			add_paragraph(p2, "After messing around with the game for a while I started to feel that a touchscreen wasn't really a good fir for a platformer game, so I started to recreate it for PC keeping Lua but switching to Love2D.");
+			add_paragraph(p2, "A few months passed by, more features was added to the game, and Lua was feeling inadeguate for a game with a growing scope like that. So I decided to throw everything in the trash again and restart one final time with GameMaker:Studio.");
+			add_paragraph(p2, "Now the unnecessary realistic physics was scrapped away and the game started to have some quite uniques mechanics.");
+			add_image2(p2, "beardedbear4.gif", "beardedbear5.gif");
+
+			add_header(p2, "The features", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "These are the main features of the game:");
+			char* b1 = "Weapons are time based and only lasts 15 seconds before they overheat and explode.";
+			char* b2 = "Each weapon is generated by combining a random weapon type and a random bullet type. Anything can come out (For example: flamethrowers that shoots rockets, lightning pistols, minigun that shoots other miniguns, and more).";
+			char* b3 = "Each enemy killed drops exp. If the player grabs them up he will evenually level up and choose a powerup. Else the exp goes to the enemies and if they level up the player is forced to choose a power up for them.";
+			char* b4 = "The player needs to survive and kill enough enemies in the level to spawn a time portal to go to the next level.";
+			char* b5 = "The weapons can be picked up by grabbing a crate. Every time a crate is picked up, a new one respawns somewhere in the level.";
+			add_list(p2, false, 5, b1, b2, b3, b4, b5);
+			add_paragraph(p2, "The game has more little features and things here and there that made it unique, but here I'll only explain the core ones. If you are interested you can learn more details from the references links on the bottom of this page!");
+			add_image2(p2, "beardedbear1.gif", "beardedbear3.gif");
+			add_image(p2, "beardedbear6.gif");
+
+			add_header(p2, "The experience", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "After 3 years of the development and a team of 3 people working on it, the project was starting to feel really good and polished so we had the chance to present the game in a couple of conventions and events.");
+			add_paragraph(p2, "Presenting a game to the public in real life and talk to them while they experience the game is a priceless experience and a really crucial thing to do when trying to beta test the game and understand what could be improved and what needs changes.");
+			add_paragraph(p2, "Even if the game got suspended, it occupies a special spot in my heart for being my first real game and coding project. It has been a huge learning experience.");
+			add_image_desc(p2, "beardedbear7.jpg", "The setup for our first public event.");
+
+
+			add_reference(p2, "YouTube Trailer", "https://www.youtube.com/watch?v=7yaPZY4X-AY&t=1s");
 			add_reference(p2, "IndieDB Page",  "http://www.indiedb.com/games/beardedbea");
 			add_reference(p2, "TIGSource Thread",  "https://forums.tigsource.com/index.php?topic=54839.");
 
-			{
-				Page* p3 = create_page(p2, "Concept");
-			}
-			{
-				Page* p3 = create_page(p2, "Iterations");
-			}
-			{
-				Page* p3 = create_page(p2, "Suspension");
-			}
+
 		}
 		{
 			Page* p2 = create_page(p1, "Asafah");
