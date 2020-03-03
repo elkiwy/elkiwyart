@@ -15,7 +15,7 @@ char* joinStrings(int n, ...);
 char* joinStringsArr(int n, char** arr);
 char* formatString(char* format, int n, ...);
 char* stringRepl(char* s, char old, char new);
-char* clickableImg(char* src, char* class);
+char* clickableImg(char* src, char* class, char* style);
 
 //#define CREATING_THUMBNAILS
 
@@ -381,7 +381,7 @@ void prepare_thumbnail(const char* filename){
 void add_image(Page* p, char* s){
 	prepare_thumbnail(s);
 	Content* cont = malloc(sizeof(Content));
-	char* img1 = clickableImg(s, "img1");
+	char* img1 = clickableImg(s, "img1", "");
 	cont->data = img1;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
@@ -393,7 +393,7 @@ void add_image_desc(Page* p, char* s, char* d){
 	prepare_thumbnail(s);
 
 	Content* cont = malloc(sizeof(Content));
-	char* img1 = clickableImg(s, "img1");
+	char* img1 = clickableImg(s, "img1", "margin-bottom:0px");
 
 	char* format = "<div>%s<span class='imgdesc'>%s</span></div>";
 	char* buff = malloc(sizeof(char)*(strlen(format) + strlen(img1) + strlen(d) + 1));
@@ -412,8 +412,8 @@ void add_image2(Page* p, char* s1, char* s2){
 	prepare_thumbnail(s1);
 	prepare_thumbnail(s2);
 	Content* cont = malloc(sizeof(Content));
-	char* img1 = clickableImg(s1, "img2");
-	char* img2 = clickableImg(s2, "img2");
+	char* img1 = clickableImg(s1, "img2", "");
+	char* img2 = clickableImg(s2, "img2", "");
 	char* format = "<div class='img2cont'>%s%s</div>";
 	int size = strlen(img1) + strlen(img2) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);
@@ -429,9 +429,9 @@ void add_image3(Page* p, char* s1, char* s2, char* s3){
 	prepare_thumbnail(s2);
 	prepare_thumbnail(s3);
 	Content* cont = malloc(sizeof(Content));
-	char* img1 = clickableImg(s1, "img3");
-	char* img2 = clickableImg(s2, "img3");
-	char* img3 = clickableImg(s3, "img3");
+	char* img1 = clickableImg(s1, "img3", "");
+	char* img2 = clickableImg(s2, "img3", "");
+	char* img3 = clickableImg(s3, "img3", "");
 	char* format = "<div class='img3cont'>%s%s%s</div>";
 	int size = strlen(img1) + strlen(img2) + strlen(img3) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);

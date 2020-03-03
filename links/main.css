@@ -32,16 +32,16 @@ main .link.external:after{ content:"]" }
 main q { font-family:serif;font-size:18px;font-style:italic;display:block } 
 main .img2cont {text-align:center;}
 main .img3cont {text-align:center;}
-main .img1 { max-height:400px;max-width:100%;display:block;margin:10px auto;} 
-main .img2 { max-height:400px;max-width:50%;display:inline-block;padding:12px 12px 10px} 
-main .img3 { max-height:400px;max-width:33%;display:inline-block;padding:4px 4px 10px} 
+main .img1 { margin:24px auto;max-height:400px;max-width:100%;display:block;} 
+main .img2 { margin:24px auto;max-height:400px;max-width:50%;display:inline-block;padding:12px 12px 10px} 
+main .img3 { margin:24px auto;max-height:400px;max-width:33%;display:inline-block;padding:4px 4px 10px} 
 
 
 main .imgprevcont {width:var(--preview-img-size); height:var(--preview-img-size); text-align:center;float:left; margin-right: 12px}
 main .imgprev {max-width:var(--preview-img-size); max-height:var(--preview-img-size);}
 main .preview {clear:both; height: var(--preview-img-size);}
 
-main .imgdesc {margin-top:0; margin-bottom:12px; text-align:center;font-style:italic; width:100%; display:inline-block}
+main .imgdesc {margin-top:0px; margin-bottom:12px; text-align:center;font-style:italic; width:100%; display:inline-block}
 
 main .gallery { display:flex;flex-wrap:wrap;justify-content:center; }
 main .galleryImage{ text-align:center;max-width:50%; max-height:500px; padding:12px 12px 0px 12px; display:block; margin-bottom:0px; }
