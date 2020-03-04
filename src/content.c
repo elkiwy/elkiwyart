@@ -482,13 +482,11 @@ Page* p0 = NULL;
 			add_paragraph(p2, "This game was made with a friend of mine and we gave ourselves only a couple of weeks of development before finish it.");
 			add_paragraph(p2, "AsciiRush core idea was pretty simple: I wanted to build something fast paced and graphically rich with an ascii art style.");
 			add_image_desc(p2, "asciirush5.png", "In the cave the player will even find gold and waterfalls.");
-
 			add_header(p2, "The game", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "To make a fast paced gameplay we structured the game to be a time attack where you had to climb out from a cave, but to do so you had to first dig down to gather some materials to craft a couple of object to help you out to get up and reach the goal.");
 			add_paragraph(p2, "We used a mix of perlin noise and a lot of custom generation rules to create randomly generated levels that could be playable.");
 			add_paragraph(p2, "The graphics was limited to only ascii character and shaders to juice them up, but this didn't stopped us to add a lot of animations and little things to make the environment interesting.");
 			add_image(p2, "asciirush4.png");
-
 			add_header(p2, "The crafting", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "Each run spawns the player in the middle of an old mine. He need to dig down to be able to collect materials which can then be used to craft one of these items:");
 			char* b1 = "A jetpack to be able to hover on empty gaps.";
@@ -500,9 +498,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "Each run require the player to at least build a grappling hook to be able to pass the spawning point, then the player has to decide if he wants to craft more tools to help him out or to start to climb up without loosing more time.");
 			add_image2(p2, "asciirush6.png","asciirush7.png");
 			add_image2(p2, "asciirush1.png","asciirush3.png");
-
 			add_reference(p2, "Itch.io Page", "https://bearsinmind.itch.io/asciirush");
-
 		}
 		{
 			Page* p2 = create_page(p1, "BeardedBear");
@@ -512,14 +508,12 @@ Page* p0 = NULL;
 			add_paragraph(p2, "BeardedBear is my biggest project on which I worked on. I developed it for almost 3.5 years during my university life. I started the project alone and worked on it for almost a year before Alberto, a friend of mine, started to help me out with sound and programming. After another year Giacomo, another friend from university, joined the team and helped us with pixel art.");
 			add_paragraph(p2, "Sadly, the project got suspended after some problems with the team and I couldn't keep up alone.");
 			add_image(p2, "beardedbear2.gif");
-
 			add_header(p2, "The prototypes", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "The game started out as a little learning experiment by trying to clone SuperCrateBox and adding realistic physics to it. At this stage the project was targetting mobile and was developed with Lua and CoronaSDK.");
 			add_paragraph(p2, "After messing around with the game for a while I started to feel that a touchscreen wasn't really a good fir for a platformer game, so I started to recreate it for PC keeping Lua but switching to Love2D.");
 			add_paragraph(p2, "A few months passed by, more features was added to the game, and Lua was feeling inadeguate for a game with a growing scope like that. So I decided to throw everything in the trash again and restart one final time with GameMaker:Studio.");
 			add_paragraph(p2, "Now the unnecessary realistic physics was scrapped away and the game started to have some quite uniques mechanics.");
 			add_image2(p2, "beardedbear4.gif", "beardedbear5.gif");
-
 			add_header(p2, "The features", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "These are the main features of the game:");
 			char* b1 = "Weapons are time based and only lasts 15 seconds before they overheat and explode.";
@@ -531,19 +525,14 @@ Page* p0 = NULL;
 			add_paragraph(p2, "The game has more little features and things here and there that made it unique, but here I'll only explain the core ones. If you are interested you can learn more details from the references links on the bottom of this page!");
 			add_image2(p2, "beardedbear1.gif", "beardedbear3.gif");
 			add_image(p2, "beardedbear6.gif");
-
 			add_header(p2, "The experience", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "After 3 years of the development and a team of 3 people working on it, the project was starting to feel really good and polished so we had the chance to present the game in a couple of conventions and events.");
 			add_paragraph(p2, "Presenting a game to the public in real life and talk to them while they experience the game is a priceless experience and a really crucial thing to do when trying to beta test the game and understand what could be improved and what needs changes.");
 			add_paragraph(p2, "Even if the game got suspended, it occupies a special spot in my heart for being my first real game and coding project. It has been a huge learning experience.");
 			add_image_desc(p2, "beardedbear7.jpg", "The setup for our first public event.");
-
-
 			add_reference(p2, "YouTube Trailer", "https://www.youtube.com/watch?v=7yaPZY4X-AY&t=1s");
 			add_reference(p2, "IndieDB Page",  "http://www.indiedb.com/games/beardedbea");
 			add_reference(p2, "TIGSource Thread",  "https://forums.tigsource.com/index.php?topic=54839.");
-
-
 		}
 		{
 			Page* p2 = create_page(p1, "Asafah");
@@ -586,6 +575,19 @@ Page* p0 = NULL;
 		{
 			Page* p2 = create_page(p1, "Emacs");
 			add_preview_description(p2, "My prefered text editor and my thoughts about it.");
+			add_paragraph(p2, "I tried so many text editors in my coding experience that I now feel the need to talk about the one that I now feel really comfortable and productive: Emacs.");
+			add_paragraph(p2, "But before talking about it, a little context.");
+
+			add_header(p2, "The IDEs", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "Other than many text editors I also used quite a lot of programming languages. This inevitably forced me to use IDE like Eclipse, CodeBlocks, VistualStudio, XCode and probably other that I don't even remember now.");
+			add_paragraph(p2, "An IDE is great for a beginner as it spoon feed you with many handy things like code completion, suggestions, and many more features. And these really helps when you have no idea of what you are doing and you want to finally make the thing you are working on to compile.");
+			add_paragraph(p2, "The downside of the IDEs comes when you start to switch around trying different languages or tools that does not integrate with your current IDE.");
+			add_paragraph(p2, "So, instead of having 10 huge full featured IDEs installed on your machine with every one of them a different configuration and setup, I advise to try to use a \"simpler\" generic text editor that can adapt to any programming language (or also text documents!).");
+
+			add_header(p2, "The Text Editors", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The majore reasons to switch to a text editor is the lightness of it when compared to any IDE and the configurability of it to easily fit any of your need.");
+			add_paragraph(p2, "In fact, any good text editor has a great choice of addons, plugins, or scipting API to force it do whatever you want in any way you want it.");
+
 		}
 		{
 			Page* p2 = create_page(p1, "6502 Assembly");
