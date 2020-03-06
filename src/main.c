@@ -354,11 +354,12 @@ Page* create_page(Page* parent, char* name){
 // Content Creation
 //////////////////////////////////////////////////////////////////////
 
+///~Sets the status of a page
 void set_status(Page* p, int s){
 	p->status = s;
 }
 
-///Add a new paragraph to a page
+///~Adds a new paragraph to a page
 void add_paragraph(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	cont->data = formatString("<p>%s</p>", 1, s);
@@ -366,7 +367,7 @@ void add_paragraph(Page* p, char* s){
 	p->contents_count++;
 }
 
-///Add a new stub to a page
+///~Add a new stub to a page, printing a warning during the execution.
 void add_stub(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	printf("!!! ADDING STUB\n"); fflush(stdout);
@@ -375,7 +376,7 @@ void add_stub(Page* p, char* s){
 	p->contents_count++;
 }
 
-///Add a new reference to a page
+///~Add a new reference to a page bottom
 void add_reference(Page* p, char* text, char* link){
 	Content* cont = malloc(sizeof(Content));
 	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'><a class='link' href='%s'>%s</a></span> </div>";
@@ -386,7 +387,7 @@ void add_reference(Page* p, char* text, char* link){
 	p->references_count++;
 }
 
-///Add a new image to a page
+///~Add a single image to a page
 void add_image(Page* p, char* s){
 	prepare_thumbnail(s);
 	Content* cont = malloc(sizeof(Content));
@@ -396,8 +397,7 @@ void add_image(Page* p, char* s){
 	p->contents_count++;
 }
 
-
-///Add a new image to a page
+///~Add a new image with a simple description text below it
 void add_image_desc(Page* p, char* s, char* d){
 	prepare_thumbnail(s);
 
@@ -414,9 +414,7 @@ void add_image_desc(Page* p, char* s, char* d){
 
 }
 
-
-
-///Add two new images side by side to a page
+///~Add two new images side by side
 void add_image2(Page* p, char* s1, char* s2){
 	prepare_thumbnail(s1);
 	prepare_thumbnail(s2);
@@ -432,7 +430,7 @@ void add_image2(Page* p, char* s1, char* s2){
 	p->contents_count++;
 }
 
-///Add three new images side by side to a page
+///~Add three new images side by side
 void add_image3(Page* p, char* s1, char* s2, char* s3){
 	prepare_thumbnail(s1);
 	prepare_thumbnail(s2);
@@ -450,7 +448,7 @@ void add_image3(Page* p, char* s1, char* s2, char* s3){
 	p->contents_count++;
 }
 
-///Add a new header to a page
+///~Add a new header with a specific size
 void add_header(Page* p, char* s, int hSize){
 	Content* cont = malloc(sizeof(Content));
 	char* buff = malloc(sizeof(char)*strlen(s)+9+1);
@@ -460,7 +458,7 @@ void add_header(Page* p, char* s, int hSize){
 	p->contents_count++;
 }
 
-///Add a new number list to a page
+///~Add a new list of n items. Can be numbered or simply dotted.
 void add_list(Page* p, bool numbered, int n, ...){
 	va_list args;
 	char* listItems[n];
@@ -486,17 +484,18 @@ void add_list(Page* p, bool numbered, int n, ...){
 	p->contents_count++;
 }
 
-///Add a preview description to a page
+///~Add a description to the page's preview
 void add_preview_description(Page* p, char* s){
 	p->has_preview = true;
 	p->preview_description = s;
 }
 
-///Add a preview image to a page
+///~Add a image to the page's preview (requires also a description to be displayed)
 void add_preview_image(Page* p, char* s){
 	p->preview_image = s;	
 }
 
+///~Add n images at the bottom of the page
 void add_gallery(Page* p, int n, ...){
 	va_list ap;
 	char* strings[n];
