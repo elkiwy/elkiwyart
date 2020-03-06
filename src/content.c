@@ -184,6 +184,7 @@ Page* p0 = NULL;
 			Page* p2 = create_page(p1, "Docu");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A tool to generate code documentation from simple docstring written in C99.");
+			add_preview_image(p2, "docu1.png");
 		}
 		{
 			Page* p2 = create_page(p1, "ElkiwyArt");
@@ -540,29 +541,92 @@ Page* p0 = NULL;
 			add_reference(p2, "TIGSource Thread",  "https://forums.tigsource.com/index.php?topic=54839.");
 		}
 		{
-			Page* p2 = create_page(p1, "Asafah");
+			Page* p2 = create_page(p1, "A bear, a Beard, and a lot of Chainsaws.");
 			set_status(p2, STAT_FINISHED);
-			add_preview_description(p2, "An game about a guy who wants to complete a ritual while shooting demons.<br>Made with Pico8 for GlobalGameJam2016.");
-			add_preview_image(p2, "asafah1.png");
-			add_reference(p2, "Gameplay trailer", "https://www.youtube.com/watch?v=fLn9B9L90zQ");
-			add_reference(p2, "GlobalGameJam Page", "https://globalgamejam.org/2016/games/asafah");
+			add_preview_description(p2, "A BeardedBear spin off game made for the LudumDare37.<br>Made with GameMaker.");
+			add_preview_image(p2, "BBandC3.jpg");
+			add_paragraph(p2, "This game is another jam game for the LudumDare. This time the theme was \"One room\".");
+			add_image(p2, "BBandC1.jpg");
+			add_paragraph(p2, "At the time of this, I was still working on BeardedBear, so I wanted to do some sort of spin off for BeardedBear.");
+			add_paragraph(p2, "Here, you play as an old Bearded Bear which is now relaxing in his house in the woods after saving the world. But the rangers found you and they want to destroy everything!");
+			add_paragraph(p2, "To defend yourself and you home you have your trusty machinegun that shoots chainsaws, so those rangers will better be scared!");
+			add_image2(p2, "BBandC2.jpg", "BBandC3.jpg");
+			add_paragraph(p2, "The gameplay is developed around the concept of defending your home without demolishing it yourself since you are shooting an absurd quantity of chainsaws.");
+			add_image(p2, "BBandC4.jpg");
+			add_reference(p2, "Itch.io Page", "https://elkiwydev.itch.io/a-bear-a-beard-and-a-lot-of-chainsaws");
+		}
+		{
+			Page* p2 = create_page(p1, "Escaping the bit");
+			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A 1 bit game made for the 1BitJam.<br>Made with GameMaker.");
+			add_preview_image(p2, "EscapingTheBit1.png");
+			add_image(p2, "EscapingTheBit2.gif");
+			add_paragraph(p2, "This is a weird one.");
+			add_paragraph(p2, "I made EscapingTheBit for the \"1 Bit Jam\" which was hosted Daniel Linssen on itch.io.");
+			add_paragraph(p2, "The rules for it was pretty brutal:");
+			char* b1 = "1-bit colour: 2 colors allowed. No shades, no fades, no alphas.";
+			char* b2 = "1x1 pixel display: the actual window can be upscaled to fullscreen, but the game can only display one colour at the time.";
+			char* b3 = "No audio/feedback: there are no external feedback other than the display, so full silence.";
+			add_list(p2, false, 3, b1, b2, b3);
+
+			add_paragraph(p2, "The game is about a blind guy trapped in a room. You need to find the key and the exit door checking what you have around you.");
+			add_paragraph(p2, "A monster is also randomly wandering in that room.");
+
+			add_header(p2, "The gameplay", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The game has two main state: Idle and checking.");
+			add_paragraph(p2, "The idle mode is the initial one, it's mainly black with white flashes which indicates the beating of your heart, faster it flashes and few hp you have. You switch to checking mode pressing space.");
+			add_paragraph(p2, "The checking mode is mainly white with black flashes. It is divided in four part: checking left, checking up, checking right, and checking down.");
+			add_paragraph(p2, "When you enter the checking mode it will cycle through left up right down automatically and for every direction the screen will flash in different modes indicating what you have on that direction:");
+			char* a1 = "1 long flash = wall;";
+			char* a2 = "1 short flash = free space;";
+			char* a3 = "2 short flashes = key;";
+			char* a4 = "3 short flashes = exit door;";
+			char* a5 = "7 short flashes = enemy;";
+			add_list(p2, false, 5, a1, a2, a3, a4, a5);
+			add_paragraph(p2, "So, for example if you have a wall on your left and your right, a free space up, and a key down the screen will do a long flash, a short one, another long one, and two short flashes and then will return in idle mode.");
+
+
+			add_reference(p2, "Itch.io Page", "https://elkiwydev.itch.io/escaping-the-bit");
 		}
 		{
 			Page* p2 = create_page(p1, "Shootshift");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "A shooter game where you shapeshift every five action you take.<br>Made with Gamemaker for LudumDare35");
 			add_preview_image(p2, "shootshift1.png");
+			add_paragraph(p2, "Shootshift is one game I made for the 35th edition of the LudumDare.");
+			add_image(p2, "shootshift2.png");
+			add_paragraph(p2, "It's a very small game but I really enjoyed how it turned out at the end.");
+			add_paragraph(p2, "Every time I try to make something for a game jam I always try to experiment something new to learn. With this game I tried for the first time a very raw and brutal system of lighting and a simple isaac-style room based map generation.");
+			add_image(p2, "shootshift4.png");
+			add_paragraph(p2, "The player starts in an empty room, and he have to travel around to search for upgrade and boss room to be able to progress.");
+			add_paragraph(p2, "The theme of the jam was \"Shapeshift\", so the core mechanic develops on the player character which continues to shapeshift into a different thing each five action/movement he do. Each shape is a different weapon and the player need to adapt to it to be able to defend himself from the enemies.");
+			add_image2(p2, "shootshift3.png", "shootshift1.png");
 			add_reference(p2, "Itch.io Page", "https://elkiwydev.itch.io/shootshift");
+			add_reference(p2, "LudumDare Page", "http://ludumdare.com/compo/ludum-dare-35/?action=preview&uid=40741");
 		}
 		{
 			Page* p2 = create_page(p1, "Get The Fick Out");
 			set_status(p2, STAT_FINISHED);
 			add_preview_description(p2, "Silly game about a drunk man, exploding chairs, wild fires, and far-west style saloon.<br>Made with Gamemaker for LudumDare31.");
 			add_preview_image(p2, "getthefickout1.jpg");
+			add_image(p2, "gtfo1.png");
+			add_paragraph(p2, "This game is the game I made for my first LudumDare event and is also one of the silliest game I ever made probably.");
+			add_paragraph(p2, "In this game you are a drunk man in a saloon in the far-west. You are so drunk that other people in the saloon wants to kick you out, and your only defense is to throw exploding chairs at them.");
+			add_paragraph(p2, "Since chairs explodes, the saloon will probably catch fire and burn down to the ground.");
+			add_paragraph(p2, "The game features:");
+			char* b1 = "Three randomly generated rooms.";
+			char* b2 = "A very basic and wonky enemy path finding.";
+			char* b3 = "Fire propagation.";
+			char* b4 = "Drunk walking.";
+			char* b5 = "An abuse of particles.";
+			add_list(p2, false, 5, b1, b2, b3, b4, b5);
+			add_image2(p2, "gtfo2.png", "gtfo3.png");
 			add_reference(p2, "LudumDare Page", "http://ludumdare.com/compo/ludum-dare-31/?action=preview&uid=40741");
 			add_reference(p2, "Development Timelapse", "https://www.youtube.com/watch?v=hOjXrH4-LeQ");
 		}
 
+		
+		
 	}
 
 
