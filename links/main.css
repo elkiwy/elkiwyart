@@ -11,11 +11,12 @@ table * { vertical-align: top }
 header { float:left } 
 header #logo { background:none } 
 
-nav { margin:0 0 30px } 
-nav ul { padding:0;margin-bottom:12px;display:flex } 
-nav ul li { list-style-type:none; var(--col-bg)-space:pre; float:left; margin-right:16px; } 
+nav { margin:0px 0px 30px -24px } 
+nav ul { padding:0;margin-bottom:12px;display:inline-grid } 
+nav ul li { margin-left:24px; margin-bottom:4px; list-style-type:none; white-space:pre; float:left; margin-right:16px;} 
 nav ul li a:hover { background:var(--col-fg);color:var(--col-bg);padding:1px 0px;} 
 nav ul li span { background:var(--col-fg);color:var(--col-bg);padding:1px 4px; } 
+nav ul li span:before{content:"> "}
 
 main { max-width:640px;clear:both }
 main figure:first-child img { margin-left: -30px;max-width: calc(100vw - 15px);width: 900px }
