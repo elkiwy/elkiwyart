@@ -181,6 +181,11 @@ Page* p0 = NULL;
 
 
 		{
+			Page* p2 = create_page(p1, "Docu");
+			set_status(p2, STAT_FINISHED);
+			add_preview_description(p2, "A tool to generate code documentation from simple docstring written in C99.");
+		}
+		{
 			Page* p2 = create_page(p1, "ElkiwyArt");
 			set_status(p2, STAT_ONGOING);
 			add_preview_description(p2, "An Open-source static website builder written in C99.");
