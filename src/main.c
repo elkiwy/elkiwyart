@@ -116,6 +116,32 @@ void resize_image(const char* filename, float width_percent, float height_percen
 
 
 
+void prepare_thumbnail(const char* filename){
+	#ifdef CREATING_THUMBNAILS
+		char* input_format = "../media/img/%s";
+		char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
+		sprintf(input_path, input_format, filename);
+
+		char* output_format = "../media/thumb/%s";
+		char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
+		sprintf(output_path, output_format, filename);
+
+		resize_image(input_path, 0.5, 0.5, output_path);
+	#else
+		printf("Skipping thumb %s\n", filename);
+	#endif
+}
+
+
+char* dropLast(char* src, int n){
+	int size = strlen(src)-n;
+	char* buff = malloc(sizeof(char)*(size + 1));
+	for (int i=0; i<size; ++i){
+		buff[i] = src[i];
+	}
+	buff[size] = '\0';
+	return buff;
+}
 
 
 
@@ -360,23 +386,6 @@ void add_reference(Page* p, char* text, char* link){
 	p->references_count++;
 }
 
-
-void prepare_thumbnail(const char* filename){
-	#ifdef CREATING_THUMBNAILS
-		char* input_format = "../media/img/%s";
-		char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
-		sprintf(input_path, input_format, filename);
-
-		char* output_format = "../media/thumb/%s";
-		char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
-		sprintf(output_path, output_format, filename);
-
-		resize_image(input_path, 0.5, 0.5, output_path);
-	#else
-		printf("Skipping thumb %s\n", filename);
-	#endif
-}
-
 ///Add a new image to a page
 void add_image(Page* p, char* s){
 	prepare_thumbnail(s);
@@ -488,23 +497,11 @@ void add_preview_image(Page* p, char* s){
 	p->preview_image = s;	
 }
 
-
-char* dropLast(char* src, int n){
-	int size = strlen(src)-n;
-	char* buff = malloc(sizeof(char)*(size + 1));
-	for (int i=0; i<size; ++i){
-		buff[i] = src[i];
-	}
-	buff[size] = '\0';
-	return buff;
-}
-
 void add_gallery(Page* p, int n, ...){
 	va_list ap;
 	char* strings[n];
 	va_start(ap, n);
 	for(int i=0; i<n; ++i){
-		//strings[i] = clickableImg(va_arg(ap, char*), "galleryImage");
 		char* s = va_arg(ap, char*);
 		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, dropLast(s, 4));
 	}
@@ -533,7 +530,6 @@ int main(){
 	struct stat st = {0};
 	if (stat("../site", &st) == -1) mkdir("../site", 0700);
 	if (stat("../media/thumb", &st) == -1) mkdir("../media/thumb", 0700);
-	
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 	build_page_recursively(p0);
