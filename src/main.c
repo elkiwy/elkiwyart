@@ -146,10 +146,10 @@ char* dropLast(char* src, int n){
 
 
 //////////////////////////////////////////////////////////////////////
-//Page building
+///=Pages building
 //////////////////////////////////////////////////////////////////////
 
-///Build single navigation level
+///~Build a single navigation level, helper for build_nav
 void build_nav_level(FILE* f, Page* p, char** path){
 	fputs("<ul>", f);
 	for (int i=0; i < p->children_len; ++i){
@@ -168,7 +168,7 @@ void build_nav_level(FILE* f, Page* p, char** path){
 	fputs("</ul>", f);
 }
 
-///Build whole navigation section
+///~Build all the navigation levels
 void build_nav(FILE* f, Page* p){
 	fputs("<nav>", f);
 	//Saves the page path
@@ -190,13 +190,13 @@ void build_nav(FILE* f, Page* p){
 	fputs("</nav>", f);
 }
 
-///Build single content
+///~Build a single raw content, helper for build_contents
 void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
 	fputs(c->data, f);
 }
 
-///Build all the contents of a page
+///~Build all the page contents
 void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
@@ -224,14 +224,13 @@ void build_contents(FILE* f, Page* p){
 		fputs("<div style='height:24px'></div>", f);
 	}
 
-
 	//Page content
 	for (int i=0; i<p->contents_count; ++i){
 		build_content(f, p->contents[i]);
 	}
 }
 
-///Build all the child previews for a parent page
+///~Build all the previews of the page's childs
 void build_child_previews(FILE* f, Page* p){
 	if(p->children_len>0){
 		fputs("<div style='height:24px'></div>", f);
@@ -258,6 +257,7 @@ void build_child_previews(FILE* f, Page* p){
 	}
 }
 
+///~Build all the page references
 void build_references(FILE* f, Page* p){
 	if(p->references_count>0 ){
 		fputs("<div>", f);
@@ -269,7 +269,7 @@ void build_references(FILE* f, Page* p){
 	}
 }
 
-///Build a whole page
+///~Fully build a page
 void build_page(Page* page){
 	//Get the proper filename
 	char filename[STR_BUF_LEN];
@@ -308,7 +308,7 @@ void build_page(Page* page){
 	fclose(f);
 }
 
-///Build this page and all his childs
+///~Build this page and all his childs
 void build_page_recursively(Page* page){
 	if (page==NULL) return;
 	printf("Building page %s and his %d childs.\n", page->name, page->children_len); fflush(stdout);
@@ -351,7 +351,7 @@ Page* create_page(Page* parent, char* name){
 
 
 //////////////////////////////////////////////////////////////////////
-// Content Creation
+///=Content Creation
 //////////////////////////////////////////////////////////////////////
 
 ///~Sets the status of a page
