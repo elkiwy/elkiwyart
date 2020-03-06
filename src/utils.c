@@ -40,14 +40,14 @@ void logStr(char* s){
 char* clickableImg(char* src, char* class, char* style){
 #ifdef CREATING_THUMBNAILS
 	char* format;
-	if (strcmp(src + strlen(src) - 4, ".gif") == 0) {
-		format = "<a href='../media/img/%s'><img class='%s' src='../media/img/%s'/></a>";
+	if (strcasecmp(src + strlen(src) - 4, ".png") == 0) {
+		format = "<a href='../media/img/%s'><img class='%s' style='%s' src='../media/thumb/%s'/></a>";
 	}else{
-		format = "<a href='../media/img/%s'><img class='%s' src='../media/thumb/%s'/></a>";
+		format = "<a href='../media/img/%s'><img class='%s' style='%s' src='../media/img/%s'/></a>";
 	}
-	int size = strlen(format) + strlen(src)*2 + strlen(class) + 1;
+	int size = strlen(format) + strlen(style) + strlen(src)*2 + strlen(class) + 1;
 	char* buff = malloc(sizeof(char)*size);
-	sprintf(buff, format, src, class, src);
+	sprintf(buff, format, src, class, style, src);
 	return buff;
 #else
 	char* format = "<a href='../media/img/%s'><img class='%s' style='%s' src='../media/img/%s'/></a>";
