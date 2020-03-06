@@ -116,14 +116,40 @@ void resize_image(const char* filename, float width_percent, float height_percen
 
 
 
+void prepare_thumbnail(const char* filename){
+	#ifdef CREATING_THUMBNAILS
+		char* input_format = "../media/img/%s";
+		char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
+		sprintf(input_path, input_format, filename);
+
+		char* output_format = "../media/thumb/%s";
+		char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
+		sprintf(output_path, output_format, filename);
+
+		resize_image(input_path, 0.5, 0.5, output_path);
+	#else
+		printf("Skipping thumb %s\n", filename);
+	#endif
+}
+
+
+char* dropLast(char* src, int n){
+	int size = strlen(src)-n;
+	char* buff = malloc(sizeof(char)*(size + 1));
+	for (int i=0; i<size; ++i){
+		buff[i] = src[i];
+	}
+	buff[size] = '\0';
+	return buff;
+}
 
 
 
 //////////////////////////////////////////////////////////////////////
-//Page building
+///=Pages building
 //////////////////////////////////////////////////////////////////////
 
-///Build single navigation level
+///~Build a single navigation level, helper for build_nav
 void build_nav_level(FILE* f, Page* p, char** path){
 	fputs("<ul>", f);
 	for (int i=0; i < p->children_len; ++i){
@@ -142,7 +168,7 @@ void build_nav_level(FILE* f, Page* p, char** path){
 	fputs("</ul>", f);
 }
 
-///Build whole navigation section
+///~Build all the navigation levels
 void build_nav(FILE* f, Page* p){
 	fputs("<nav>", f);
 	//Saves the page path
@@ -164,13 +190,13 @@ void build_nav(FILE* f, Page* p){
 	fputs("</nav>", f);
 }
 
-///Build single content
+///~Build a single raw content, helper for build_contents
 void build_content(FILE* f, Content* c){
 	if (c==NULL) return;
 	fputs(c->data, f);
 }
 
-///Build all the contents of a page
+///~Build all the page contents
 void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
@@ -198,14 +224,13 @@ void build_contents(FILE* f, Page* p){
 		fputs("<div style='height:24px'></div>", f);
 	}
 
-
 	//Page content
 	for (int i=0; i<p->contents_count; ++i){
 		build_content(f, p->contents[i]);
 	}
 }
 
-///Build all the child previews for a parent page
+///~Build all the previews of the page's childs
 void build_child_previews(FILE* f, Page* p){
 	if(p->children_len>0){
 		fputs("<div style='height:24px'></div>", f);
@@ -232,6 +257,7 @@ void build_child_previews(FILE* f, Page* p){
 	}
 }
 
+///~Build all the page references
 void build_references(FILE* f, Page* p){
 	if(p->references_count>0 ){
 		fputs("<div>", f);
@@ -243,7 +269,7 @@ void build_references(FILE* f, Page* p){
 	}
 }
 
-///Build a whole page
+///~Fully build a page
 void build_page(Page* page){
 	//Get the proper filename
 	char filename[STR_BUF_LEN];
@@ -282,7 +308,7 @@ void build_page(Page* page){
 	fclose(f);
 }
 
-///Build this page and all his childs
+///~Build this page and all his childs
 void build_page_recursively(Page* page){
 	if (page==NULL) return;
 	printf("Building page %s and his %d childs.\n", page->name, page->children_len); fflush(stdout);
@@ -325,14 +351,15 @@ Page* create_page(Page* parent, char* name){
 
 
 //////////////////////////////////////////////////////////////////////
-// Content Creation
+///=Content Creation
 //////////////////////////////////////////////////////////////////////
 
+///~Sets the status of a page
 void set_status(Page* p, int s){
 	p->status = s;
 }
 
-///Add a new paragraph to a page
+///~Adds a new paragraph to a page
 void add_paragraph(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	cont->data = formatString("<p>%s</p>", 1, s);
@@ -340,7 +367,7 @@ void add_paragraph(Page* p, char* s){
 	p->contents_count++;
 }
 
-///Add a new stub to a page
+///~Add a new stub to a page, printing a warning during the execution.
 void add_stub(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
 	printf("!!! ADDING STUB\n"); fflush(stdout);
@@ -349,7 +376,7 @@ void add_stub(Page* p, char* s){
 	p->contents_count++;
 }
 
-///Add a new reference to a page
+///~Add a new reference to a page bottom
 void add_reference(Page* p, char* text, char* link){
 	Content* cont = malloc(sizeof(Content));
 	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'><a class='link' href='%s'>%s</a></span> </div>";
@@ -360,24 +387,7 @@ void add_reference(Page* p, char* text, char* link){
 	p->references_count++;
 }
 
-
-void prepare_thumbnail(const char* filename){
-	#ifdef CREATING_THUMBNAILS
-		char* input_format = "../media/img/%s";
-		char* input_path = malloc(sizeof(char)*(strlen(input_format)+strlen(filename)+1));
-		sprintf(input_path, input_format, filename);
-
-		char* output_format = "../media/thumb/%s";
-		char* output_path = malloc(sizeof(char)*(strlen(output_format)+strlen(filename)+1));
-		sprintf(output_path, output_format, filename);
-
-		resize_image(input_path, 0.5, 0.5, output_path);
-	#else
-		printf("Skipping thumb %s\n", filename);
-	#endif
-}
-
-///Add a new image to a page
+///~Add a single image to a page
 void add_image(Page* p, char* s){
 	prepare_thumbnail(s);
 	Content* cont = malloc(sizeof(Content));
@@ -387,8 +397,7 @@ void add_image(Page* p, char* s){
 	p->contents_count++;
 }
 
-
-///Add a new image to a page
+///~Add a new image with a simple description text below it
 void add_image_desc(Page* p, char* s, char* d){
 	prepare_thumbnail(s);
 
@@ -405,9 +414,7 @@ void add_image_desc(Page* p, char* s, char* d){
 
 }
 
-
-
-///Add two new images side by side to a page
+///~Add two new images side by side
 void add_image2(Page* p, char* s1, char* s2){
 	prepare_thumbnail(s1);
 	prepare_thumbnail(s2);
@@ -423,7 +430,7 @@ void add_image2(Page* p, char* s1, char* s2){
 	p->contents_count++;
 }
 
-///Add three new images side by side to a page
+///~Add three new images side by side
 void add_image3(Page* p, char* s1, char* s2, char* s3){
 	prepare_thumbnail(s1);
 	prepare_thumbnail(s2);
@@ -441,7 +448,7 @@ void add_image3(Page* p, char* s1, char* s2, char* s3){
 	p->contents_count++;
 }
 
-///Add a new header to a page
+///~Add a new header with a specific size
 void add_header(Page* p, char* s, int hSize){
 	Content* cont = malloc(sizeof(Content));
 	char* buff = malloc(sizeof(char)*strlen(s)+9+1);
@@ -451,7 +458,7 @@ void add_header(Page* p, char* s, int hSize){
 	p->contents_count++;
 }
 
-///Add a new number list to a page
+///~Add a new list of n items. Can be numbered or simply dotted.
 void add_list(Page* p, bool numbered, int n, ...){
 	va_list args;
 	char* listItems[n];
@@ -477,34 +484,23 @@ void add_list(Page* p, bool numbered, int n, ...){
 	p->contents_count++;
 }
 
-///Add a preview description to a page
+///~Add a description to the page's preview
 void add_preview_description(Page* p, char* s){
 	p->has_preview = true;
 	p->preview_description = s;
 }
 
-///Add a preview image to a page
+///~Add a image to the page's preview (requires also a description to be displayed)
 void add_preview_image(Page* p, char* s){
 	p->preview_image = s;	
 }
 
-
-char* dropLast(char* src, int n){
-	int size = strlen(src)-n;
-	char* buff = malloc(sizeof(char)*(size + 1));
-	for (int i=0; i<size; ++i){
-		buff[i] = src[i];
-	}
-	buff[size] = '\0';
-	return buff;
-}
-
+///~Add n images at the bottom of the page
 void add_gallery(Page* p, int n, ...){
 	va_list ap;
 	char* strings[n];
 	va_start(ap, n);
 	for(int i=0; i<n; ++i){
-		//strings[i] = clickableImg(va_arg(ap, char*), "galleryImage");
 		char* s = va_arg(ap, char*);
 		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, dropLast(s, 4));
 	}
@@ -533,7 +529,6 @@ int main(){
 	struct stat st = {0};
 	if (stat("../site", &st) == -1) mkdir("../site", 0700);
 	if (stat("../media/thumb", &st) == -1) mkdir("../media/thumb", 0700);
-	
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 	build_page_recursively(p0);
