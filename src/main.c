@@ -46,9 +46,9 @@ char* clickableImg(char* src, char* class, char* style);
 #define STAT_TOSTART 5
 
 
-char* html_head = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'><title>ElKiwyArt</title></head><body>";
+char* html_head = "<meta charset='utf-8'><meta name='author' content='Stefano Bertoli'><link rel='stylesheet' type='text/css' href='../links/main.css'>";
 char* html_header = "<h1><a id='logo' href='home.html'>ElKiwyArt</a></h1>";
-char *html_footer = "<p>Stefano Bertoli © 2020</p></body></html>";
+char *html_footer = "<p>Stefano Bertoli © 2020</p>";
 
 
 
@@ -112,8 +112,18 @@ void resize_image(const char* filename, float width_percent, float height_percen
 	stbi_write_png(output, out_w, out_h, n, output_data, 0);
 	free(output_data);
 }
+void image_size(const char* filename, int* w, int* h, int* n){
+	unsigned char* input_data = stbi_load(filename, w, h, n, 0);
+	if (!input_data){
+		printf("Image %s could not be loaded.\n", filename);fflush(stdout);
+		*w = 0;
+		*h = 0;
+		*n = 0;
+		return;
+	}
+	free(input_data);
+}
 #endif
-
 
 
 void prepare_thumbnail(const char* filename){
@@ -148,6 +158,51 @@ char* dropLast(char* src, int n){
 //////////////////////////////////////////////////////////////////////
 ///=Pages building
 //////////////////////////////////////////////////////////////////////
+
+void build_head_tags(FILE* f, Page* p){
+
+	fputs("<!-- Normal meta tags -->", f);
+	fprintf(f, "");
+	fprintf(f, "<meta charset='utf-8'>");
+	fprintf(f, "<meta name='viewport' content='width=device-width'>");
+	fprintf(f, "<meta name='description' content='%s'>", p->preview_description);
+	fprintf(f, "<meta name='keywords' content='elkiwyart, elkiwy, elkiwy art, generative, processing, coding, programming'>");
+	fprintf(f, "<meta name='author' content='Stefano Bertoli'>");
+	fprintf(f, "<link rel='canonical' href='https://elkiwyart.com/site/%s.html'>", p->filename);
+	fprintf(f, "<title>ElKiwyArt | %s</title>", p->name);
+
+	fprintf(f, "<!-- twitter cards -->");
+	fprintf(f, "<meta name='twitter:card' content='summary' />");
+	fprintf(f, "<meta name='twitter:site' content='@elkiwydev' />");
+	fprintf(f, "<meta name='twitter:creator' content='@elkiwydev' />");
+
+	fprintf(f, "<!-- Open Graph stuff -->");
+	fprintf(f, "<meta property='og:title' content='ElKiwyArt | %s'>", p->name);
+	fprintf(f, "<meta property='og:type' content='article'>");
+	fprintf(f, "<meta property='og:description' content='%s'>", p->preview_description);
+
+#ifdef CREATING_THUMBNAILS
+	if(p->has_preview && p->preview_image!=NULL){
+		int w = 0;
+		int h = 0;
+		int n = 0;
+		char* img_format = "../media/thumb/%s";
+		char* img_path = malloc(sizeof(char)*(strlen(img_format)+strlen(p->preview_image)+1));
+		sprintf(img_path, img_format, p->preview_image);
+		image_size(img_path, &w, &h, &n);
+		fprintf(f, "<meta property='og:image' content='https://elkiwyart.com/media/img/%s'>", p->preview_image);
+		fprintf(f, "<meta property='og:image:width' content='%d'>", w);
+		fprintf(f, "<meta property='og:image:height' content='%d'>", h);
+	}
+#endif
+	fprintf(f, "<meta property='og:url' content='https://elkiwyart.com/site/%s.html'>", p->filename);
+
+	fprintf(f, "<!-- Robots -->");
+	fprintf(f, "<meta name='robots' content='index, aboutme'>");
+}
+
+
+
 
 ///~Build a single navigation level, helper for build_nav
 void build_nav_level(FILE* f, Page* p, char** path){
@@ -221,7 +276,7 @@ void build_contents(FILE* f, Page* p){
 			
 		fprintf(f, "<span style='display:inline-block;margin-bottom:24px;font-size:14px'>[The development is: %s]</span>", s);
 	}else{
-		fputs("<div style='height:24px'></div>", f);
+		//fputs("<div style='height:4px'></div>", f);
 	}
 
 	//Page content
@@ -240,7 +295,11 @@ void build_child_previews(FILE* f, Page* p){
 
 				fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
 				if (p->children[i]->preview_image != NULL){
+#ifdef CREATING_THUMBNAILS
+					fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/thumb/%s'></div>", p->children[i]->preview_image);
+#else
 					fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/img/%s'></div>", p->children[i]->preview_image);
+#endif
 				}
 
 				//Page title
@@ -284,7 +343,13 @@ void build_page(Page* page){
 	FILE* f = fopen(filepath, "w");
 
 	//Header
+
+	fputs("<!DOCTYPE html><html lang='en'>", f);
+	fputs("<head>", f);
 	fprintf(f, html_head, page->name);
+	build_head_tags(f, page);
+	fputs("</head>", f);
+	fputs("<body>", f);
 	fputs(html_header, f);
 
 	//Navigation
@@ -303,6 +368,8 @@ void build_page(Page* page){
 	
 	//Footer
 	fprintf(f, "<footer>%s</footer>", html_footer);
+	fputs("</body>", f);
+	fputs("</html>", f);
 
 	//Close file
 	fclose(f);
@@ -492,6 +559,7 @@ void add_preview_description(Page* p, char* s){
 
 ///~Add a image to the page's preview (requires also a description to be displayed)
 void add_preview_image(Page* p, char* s){
+	prepare_thumbnail(s);
 	p->preview_image = s;	
 }
 
