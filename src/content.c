@@ -21,11 +21,10 @@
 Page* p0 = NULL;
 {
 	p0 = create_page(NULL, "Home");
+	add_preview_description(p0, "This is my very personal attempt to show who am I, and what I do. Since I do many different things sprinkled around the internet, the scope of this website is to try group all up and present everything to you in a nice and clear way.");
 	add_paragraph(p0, "Welcome to ElKiwyArt website!");
 	add_paragraph(p0, "This is my very personal attempt to show who am I, and what I do. Since I do many different things sprinkled around the internet, the scope of this website is to try group all up and present everything to you in a nice and clear way.");
-	add_paragraph(p0, "But, this is not a portfolio where i present everything I made or released. There will also be random posts on anything I do in a particular time in my life, maybe some big project, or maybe just a little dumb study on something." );
-	add_image(p0, "default_1080.png");
-	add_stub(p0, "Closing");
+	add_paragraph(p0, "This is not a portfolio where I present everything I made or released. There will also be random posts on anything I do in a particular time in my life, maybe some big project, or maybe just a little dumb study on something.");
 
 
 ////////////////////////////
@@ -34,7 +33,7 @@ Page* p0 = NULL;
 	{
 		Page* p1 = create_page(p0, "Art");
 		add_paragraph(p1, "This is a collection of my studies on generative art.");
-
+		add_preview_description(p1, "Even if every software is art, here is where I grouped all my graphic works.");
 
 		{
 			Page* p2 = create_page(p1, "Gates");
@@ -78,7 +77,7 @@ Page* p0 = NULL;
 			add_image3(p2, "sun0.png", "sun1.png", "sun2.png");
 			add_header(p2, "Creating some stability", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "Mountains are another key protagonists in many Japanese artworks and panoramas. A big centered mountain also gave a lot of balance to the artworks by filling the space evenly.");
-			add_paragraph(p2, "So, to create the mountain shape I took advantage of my toolbelt functions for paths like the dispose and chaikin smoothing ones. Then the shape was filled by a gradient to blend it to the background.");
+			add_paragraph(p2, "So, to create the mountain shape I took advantage of my toolbelt functions for paths like the dispose and Chaikin smoothing ones. Then the shape was filled by a gradient to blend it to the background.");
 			add_image3(p2, "mountain0.png", "mountain1.png", "mountain2.png");
 			add_image(p2, "mountain-sun-tree.png");
 			add_header(p2, "Signing the series", HEADER_SIZE_SMALL);
@@ -153,7 +152,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "The algorithm has very distinct iteration steps, so I can easily draw each of its sub-iterations to give a more complex and detailed look to the lines.");
 			add_image2(p2, "chaikin0.png", "chaikin1.png");
 			add_image2(p2, "chaikin2.png", "chaikin3.png");
-			add_paragraph(p2, "With slight randomization of the Chaikin parameters, you can give each line a more impredictable outcome.");
+			add_paragraph(p2, "With slight randomization of the Chaikin parameters, you can give each line a more unpredictable outcome.");
 			add_image3(p2, "params0.png", "params1.png", "params2.png");
 			add_image2(p2, "line0.png", "line1.png");
 			add_image3(p2, "lines0_1.png", "lines1_1.png", "lines2_1.png");
@@ -178,13 +177,14 @@ Page* p0 = NULL;
 	{
 		Page* p1 = create_page(p0, "Programs");
 		add_paragraph(p1, "This section holds every coding project of decent sizes. Often I try to make things Open Source and available on GitHub, but it's not always true, especially for older projects and for the ones I code with other people.");
+		add_preview_description(p1, "Here are all the piece of software I made in various languages and formats.");
 
 
 		{
-			Page* p2 = create_page(p1, "Docu");
-			set_status(p2, STAT_FINISHED);
-			add_preview_description(p2, "A tool to generate code documentation from simple docstring written in C99.");
-			add_preview_image(p2, "docu1.png");
+			//Page* p2 = create_page(p1, "Docu");
+			//set_status(p2, STAT_ONGOING);
+			//add_preview_description(p2, "A tool to generate code documentation from simple docstring written in C99.");
+			//add_preview_image(p2, "docu1.png");
 		}
 		{
 			Page* p2 = create_page(p1, "ElkiwyArt");
@@ -192,7 +192,7 @@ Page* p0 = NULL;
 			add_preview_description(p2, "An Open-source static website builder written in C99.");
 			add_preview_image(p2, "elkiwyart-c99.png");
 			add_paragraph(p2, "This project is the piece of code responsible for the generation of this very website.");
-			add_paragraph(p2, "The first implementation of ElkiwyArt was made mainly with PHP, a simple database, and some HTML templates. This was fine at the beginning, but it quickly became pretty hugly to improve and not really that flexible. PHP started to give errors when I was uploading new articles through forms and it was a pain to handle the creation of new posts.");
+			add_paragraph(p2, "The first implementation of ElkiwyArt was made mainly with PHP, a simple database, and some HTML templates. This was fine at the beginning, but it quickly became pretty ugly to improve and not really that flexible. PHP started to give errors when I was uploading new articles through forms and it was a pain to handle the creation of new posts.");
 			add_paragraph(p2, "So, after I was almost abandoning the website I went through the \"Oscean\" project from Devine Lu Linvega.");
 			add_paragraph(p2, "He did his website with a C99 building every page statically. That approach is ideal if you don't have dynamic pages in your website since it let you forget about PHP servers, MySQL servers, Templates, post forms, and all that crap.");
 			add_paragraph(p2, "This let me focus on the only thing I want to do: create simple static pages for my website and adding anything I want.");
@@ -203,7 +203,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "With builder and content in place, another beauty of this method is visible: you can check the result and your entire website locally with just a normal browser! Since everything is plain HTML there is no need for webservers and database to work. Once the result is just like you desire, you can then upload the entire generated files into your web space and it's done.");
 			add_paragraph(p2, "This is a friction less system compared to my previous one and it's way easier to correct, tweak and improve the website.");
 			add_header(p2, "The source", HEADER_SIZE_SMALL);
-			add_paragraph(p2, "As I state before, this project is heavily inspred by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
+			add_paragraph(p2, "As I state before, this project is heavily inspired by Devine's work, but I rewrote almost everything to be able to understand it and customize more easily. My version is a bit simpler and essential because I still have to add some of the feature I want, but you should be able to understand the core and learn from it enough to be able to recreate a custom version for your needs.");
 			add_paragraph(p2, "The full source is available on my GitHub here: " LINKTEXT("https://github.com/elkiwy/elkiwyart", "Source") ".");
 			add_image(p2, "elkiwyart-c99.png");
 		}
@@ -213,7 +213,7 @@ Page* p0 = NULL;
 			set_status(p2, STAT_ONGOING);
 			add_preview_description(p2, "A simple program to edit and run Gisp files written in Electron and ClojureScript.");
 			add_preview_image(p2, "gisp-editor-thumb.png");
-			add_paragraph(p2, "When my project " SENDTEXT("gisp", "Gisp") " started to take shape and be usuable to create generative art I started to feel the need for a tool to integrate the workflow and avoid having a bunch of programs open on my desktop and jump between here and there to generate art. It kinda breaks the flow when trying to be creative.");
+			add_paragraph(p2, "When my project " SENDTEXT("gisp", "Gisp") " started to take shape and be usable to create generative art I started to feel the need for a tool to integrate the workflow and avoid having a bunch of programs open on my desktop and jump between here and there to generate art. It kinda breaks the flow when trying to be creative.");
 			add_paragraph(p2, "So I started to work on a simple, yet functional, editor to work with the Gisp language being able to write Gisp code, call the interpreter to execute it, and visualize the preview of the generate image right in the editor.");
 			add_image(p2, "gisp-editor-big.png");
 			add_paragraph(p2, "This project is still more like a learning experiment than an actual full featured editor since I'm trying to build every feature from scratch by myself. The program is built with Electron and Clojurescript, and even the code editor is pretty bare bones I started from an editable div and I'm trying to make it work like a normal text editor.");
@@ -229,10 +229,10 @@ Page* p0 = NULL;
 			add_preview_description(p2, "A Graphic-oriented lisp dialect written in C and Cairo lib for drawing.");
 			add_preview_image(p2, "gisp-test.png");
 			add_paragraph(p2, "My journey to find the perfect setup for digital generative art is pretty long, but now it may have come to an end with Gisp, the tool I made and I'm using at the moment.");
-			add_paragraph(p2, "Gisp is a Lisp dialect I made 100% focussed on giving the right tools to generate procedurally images.");
+			add_paragraph(p2, "Gisp is a Lisp dialect I made 100% focused on giving the right tools to generate procedurally images.");
 			add_image(p2, "gisp-test.png");
 			add_paragraph(p2, "The core program is written in C and it consists in a lisp interpreter that reads a .gisp code file and execute it.");
-			add_paragraph(p2, "For the core interpreter structure I used " LINKTEXT("https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html", "this article") " as a great reference that explain everything you need to create your own little interpreter. It's not too advanced and very minimalistic, but I like it that way and give me freedom to expand it by myself in any way I want.");
+			add_paragraph(p2, "For the core interpreter structure I used " LINKTEXT("https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html", "this article") " as a great reference that explain everything you need to create your own little interpreter. It's not too advanced and very minimalist, but I like it that way and give me freedom to expand it by myself in any way I want.");
 			add_paragraph(p2, "Right now the project is pretty stable and capable of generating images, but this doesn't mean that is prefect.");
 			add_paragraph(p2, "It still lacks of: ");
 			char* l1 = "Proper error checking system to be able to give you insights when something in your code is wrong.";
@@ -248,11 +248,11 @@ Page* p0 = NULL;
 			add_reference(p2, "Gisp-Editor Repository", "https://github.com/elkiwy/gisp-editor");
 
 			{
-				Page* p3 = create_page(p2, "Documentation");
-				set_status(p3, STAT_TOSTART);
-				add_preview_description(p3, "Documentation and API reference for Gisp");
-				add_header(p3, "Reference", HEADER_SIZE_SMALL);
-				add_stub(p3, "Autogenerated reference");
+				//Page* p3 = create_page(p2, "Documentation");
+				//set_status(p3, STAT_TOSTART);
+				//add_preview_description(p3, "Documentation and API reference for Gisp");
+				//add_header(p3, "Reference", HEADER_SIZE_SMALL);
+				//add_stub(p3, "Autogenerated reference");
 			}
 		}
 
@@ -266,7 +266,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "I started to make proper generative art with a little python script to automate mouse and keyboard input to interact with Krita, a digital drawing tool. I like the complexity of the brushes and all the tool available inside Krita, but after few generations it started to feel pretty hacky and uncomfortable to use.");
 			add_paragraph(p2, "So after that I wanted to try and replicate the brushes and complexity of an image editing software by myself by making a python program that emulated that. That was the birth of PaYnter.");
 			add_paragraph(p2, "The main features of PaYnter are:");
-			add_header(p2, "Brushes emultation", HEADER_SIZE_SMALL);
+			add_header(p2, "Brushes emulation", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "With paynter you draw on your digital image with brushes just like you do on Photoshop. You can create brushes starting from images defining the brush tip, and then you can define a bunch of brush parameters like:");
 			char* l1 = "Size";
 			char* l2 = "Spacing";
@@ -278,7 +278,7 @@ Page* p0 = NULL;
 			char* l8 = "Random position offsetting";
 			add_list(p2, false, 8, l1, l2, l3, l4, l5, l6, l7, l8);
 			add_header(p2, "Layer management", HEADER_SIZE_SMALL);
-			add_paragraph(p2, "Each image is composed by one or multiple layers. Each layer interally is one 3D array of [imageWidth * imageHeight * 4] to store the RGBA value of each pixel of the layer.");
+			add_paragraph(p2, "Each image is composed by one or multiple layers. Each layer internally is one 3D array of [imageWidth * imageHeight * 4] to store the RGBA value of each pixel of the layer.");
 			add_paragraph(p2, "When drawing you specify on which layer you are using, and then when you are done with the editing you can then merge all the layers using various blend modes to create many different effects.");
 			add_header(p2, "Palette management", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "You can choose color individually or use one of the PaYnter preset palette generation where you can specify some starting values and generate opposite or complementary colors from the starting one.");
@@ -322,7 +322,8 @@ Page* p0 = NULL;
 ////////////////////////////
 	{
 		Page* p1 = create_page(p0, "Games");
-
+		add_paragraph(p1, "I always being passionate about games, so as soon as I started learning how to code, the natural thing to do was to try code some games.");
+		add_preview_description(p1, "All the games I made, from the silliest \"Get the fick out\" to the most ambitious \"BuildTutto\".");
 
 		{
 			Page* p2 = create_page(p1, "Hull Breach");
@@ -351,13 +352,13 @@ Page* p0 = NULL;
 			add_header(p2, "Second Iteration", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "The first improvement of that was to move the 2d array into a single array with only the point needed to draw the ship, so the number of cells dropped from 16'384 to somewhere around 5'000. That was really good for the drawing performance, but had a big drawback: single point checking for specific X and Y.");
 			add_paragraph(p2, "In fact, with the 2D array it was really easy to get the information of a single point knowing its coordinates because the time to get that information was really small and constant, no cycling needed.");
-			add_paragraph(p2, "On the other hand, having a 1D array of non-ordinated points was exponentially slower since you needed to cycle all the point until you find some point with its coordinates equals to the one you needed.");
+			add_paragraph(p2, "On the other hand, having a 1D array of non-sorted points was exponentially slower since you needed to cycle all the point until you find some point with its coordinates equals to the one you needed.");
 			add_paragraph(p2, "The single point access was pretty much crucial to us since we wanted to add A-star pathfinding algorithm for the repair bots and for other things inside the game.");
 			add_header(p2, "Third Iteration", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "We had to somehow get back at a 2D data structure design, but we had to forget the standard way of doing it.");
 			add_paragraph(p2, "After some research on the Pico8 memory layout I found out that it manage its memory in two way: the variables allocated in the code while the game is running uses a special Lua memory which is limited to around 2MB; but there is also the cart RAM which is used by all the cart assets (sprite, map layout, sfx, music, etc). This last one can be used to store extra arbitrary data.");
 			add_paragraph(p2, "So I started to layout some of the memory I needed to move it there while trying to compressing it into the smallest space I could.");
-			add_paragraph(p2, "Pico8 default integer size is 32 bit long: 16bit for the integer part and 16 for the floatin one.");
+			add_paragraph(p2, "Pico8 default integer size is 32 bit long: 16bit for the integer part and 16 for the floating one.");
 			add_paragraph(p2, "That's pretty huge in memory if you only need small integer numbers. The numbers I needed theoretically were:");
 			char* r1 = MONOSPACE("1 bit integers for true/false flags");
 			char* r2 = MONOSPACE("4 bit integers to store the color value of a pixel (numbers from 0 to 15)");
@@ -413,36 +414,30 @@ Page* p0 = NULL;
 			set_status(p2, STAT_SUSPENDED);
 			add_preview_description(p2, "A deep resource management building and crafting game.<br>Made with C++ and Allegro.");
 			add_preview_image(p2, "buildtutto1.png");
-
 			add_paragraph(p2, "After I finished University I wanted to dedicate to game developing again. After the BeardedBear suspension I wanted to do something different and all by myself.");
 			add_paragraph(p2, "At the time I was playing a lot games like Prison Architect, Rimworld, Factorio, Dwarf fortress, and other resource mangement game. So I wanted to do my own game.");
-
 			add_header(p2, "The Idea", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "\"Tutto\" means \"everything\" in italian, so the title kinda explain what the game is about.");
 			add_image_desc(p2, "buildtutto_pipes.png", "A test environment for verify objects interactions.");
-			add_paragraph(p2, "In BuildTutto the main goal is to build and manage a company that creates factories. There are a lot of micromanagement aspects into the building creation like water piping, electring cables layout, lights, structural strenght, weight and more.");
+			add_paragraph(p2, "In BuildTutto the main goal is to build and manage a company that creates factories. There are a lot of micromanagement aspects into the building creation like water piping, electric cables layout, lights, structural strength, weight and more.");
 			add_paragraph(p2, "On top of all that, the player need to research and create every object starting from raw materials. <b>Every</b> object can be made from <b>any</b> materials or part, and that final object inherits the fundamental properties of its components.");
 			add_paragraph(p2, "An example could be the electric cable object. It can be made of copper with a proper electric conductivity, but it can also be made from wood or concrete and have very low or zero electric conductivity. This is an absurd example, but it should explain the concept.");
 			add_image_desc(p2, "buildtutto_blueprint.gif", "Blueprint window to research and create new objects.");
 			add_paragraph(p2, "I spent a lot of time researching physical properties of elements and metals to try to be the most accurate possible and give the player a great choice when planning his buildings.");
 			add_paragraph(p2, "After blueprinting all the object needed, the player has a group of workers available to build anything he wants.");
 			add_image_desc(p2, "buildtutto_unload.gif", "The workers unloading the truck with the raw resources.");
-
 			add_header(p2, "The tech", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "After having played around a lot with GameMaker I wanted to try something different. Also, I was scared that a game like that was too taxing for gamemaker, so I decided to teach myself C++ through this project.");
 			add_paragraph(p2, "I was interested in learning OpenGL too, but probably it would have been too much to learn in one project. So I decided to use " LINKTEXT("https://liballeg.org", "Allegro") " as the main graphics and input library. I choose it after reading that Factorio developers used it, so I thought \"If that can make a game like Factorio it should be more than enough for me\". Of course after one month from the beginning of the development they published another post where they explained why they migrated from Allegro to SDL2, but it was still good enough for me and I kept working with that.");
 			add_paragraph(p2, "It was also the first time using Visual Studio and, to my surprise, it was really good to debugging when something was going wrong. I also like a lot programming with just an editor and a terminal to compile, so I usually sticked with that to program features and then switch to Visual Studio to debug those.");
 			add_image_desc(p2, "buildtutto_darkness.gif", "The dynamic lighting of the rooms and roof structural support testing.");
-
 			add_header(p2, "The implementation", HEADER_SIZE_SMALL);
-			add_paragraph(p2, "Working on that was great, it was very satisfing and I was often working with my friends in libraries or university public areas. It was very productive for me to not being alone in my room.");
+			add_paragraph(p2, "Working on that was great, it was very satisfying and I was often working with my friends in libraries or university public areas. It was very productive for me to not being alone in my room.");
 			add_paragraph(p2, "After almost one year of development the project was starting to feel heavy while going inevitably out of scope for a single person doing all the programming, art, and design.");
 			add_paragraph(p2, "My family went through some financial problems too, so I couldn't afford to work on that without an income. Since if was still very very far from a final product I couldn't hope to make a living out of it, so I had to suspend the project after starting a full time developer job.");
-
 			add_header(p2, "The devlog", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "If you are curious and you want more information about the game I was doing a thing where every week I posted on " LINKTEXT("https://www.indiedb.com/games/project-buildtutto","IndieDB") ", so you can find a lot of details on what I was working and how I was doing it.");
 			add_image_desc(p2, "buildtutto_pipestoassembler.gif", "Workers building pipes from raw materials.");
-
 			add_reference(p2, "Allegro Lib", "https://liballeg.org");
 			add_reference(p2, "IndieDB Page", "https://www.indiedb.com/games/project-buildtutto");
 			add_reference(p2, "Devlog timelapses", "https://www.youtube.com/channel/UC2l3kcw6wUn4Z1-cr5UMLMw");
@@ -456,7 +451,7 @@ Page* p0 = NULL;
 			add_image(p2, "wavejump1.gif");
 			add_header(p2, "The concept", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "The theme of the jam was " BOLD("\"Waves\"") " so, after some brainstorming, we come up with the idea of a local multiplayer game about blobs making waves by jumping on the ground.");
-			add_paragraph(p2, "The main mechanics was the character jump, and that had two important pourposes:");
+			add_paragraph(p2, "The main mechanics was the character jump, and that had two important purpose:");
 			char* a1 = "Jump to land down of the ground to create a shockwave that can kill the player.";
 			char* a2 = "Jump to " BOLD("hop over") " the shockwave and defend yourself from the attackers.";
 			add_list(p2, false, 2, a1, a2);
@@ -497,7 +492,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "Each run spawns the player in the middle of an old mine. He need to dig down to be able to collect materials which can then be used to craft one of these items:");
 			char* b1 = "A jetpack to be able to hover on empty gaps.";
 			char* b2 = "A grappling hook that leave a rope behind that can be climbed.";
-			char* b3 = "A pair of gloves to help him to climp vertical walls.";
+			char* b3 = "A pair of gloves to help him to climb vertical walls.";
 			char* b4 = "A pickaxe to break block quickly.";
 			char* b5 = "A radar to find quicker rare materials.";
 			add_list(p2, false, 5, b1, b2, b3, b4, b5);
@@ -517,14 +512,14 @@ Page* p0 = NULL;
 			add_header(p2, "The prototypes", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "The game started out as a little learning experiment by trying to clone SuperCrateBox and adding realistic physics to it. At this stage the project was targetting mobile and was developed with Lua and CoronaSDK.");
 			add_paragraph(p2, "After messing around with the game for a while I started to feel that a touchscreen wasn't really a good fir for a platformer game, so I started to recreate it for PC keeping Lua but switching to Love2D.");
-			add_paragraph(p2, "A few months passed by, more features was added to the game, and Lua was feeling inadeguate for a game with a growing scope like that. So I decided to throw everything in the trash again and restart one final time with GameMaker:Studio.");
-			add_paragraph(p2, "Now the unnecessary realistic physics was scrapped away and the game started to have some quite uniques mechanics.");
+			add_paragraph(p2, "A few months passed by, more features was added to the game, and Lua was feeling inadequate for a game with a growing scope like that. So I decided to throw everything in the trash again and restart one final time with GameMaker:Studio.");
+			add_paragraph(p2, "Now the unnecessary realistic physics was scrapped away and the game started to have some quite unique mechanics.");
 			add_image2(p2, "beardedbear4.gif", "beardedbear5.gif");
 			add_header(p2, "The features", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "These are the main features of the game:");
 			char* b1 = "Weapons are time based and only lasts 15 seconds before they overheat and explode.";
 			char* b2 = "Each weapon is generated by combining a random weapon type and a random bullet type. Anything can come out (For example: flamethrowers that shoots rockets, lightning pistols, minigun that shoots other miniguns, and more).";
-			char* b3 = "Each enemy killed drops exp. If the player grabs them up he will evenually level up and choose a powerup. Else the exp goes to the enemies and if they level up the player is forced to choose a power up for them.";
+			char* b3 = "Each enemy killed drops exp. If the player grabs them up he will eventually level up and choose a powerup. Else the exp goes to the enemies and if they level up the player is forced to choose a power up for them.";
 			char* b4 = "The player needs to survive and kill enough enemies in the level to spawn a time portal to go to the next level.";
 			char* b5 = "The weapons can be picked up by grabbing a crate. Every time a crate is picked up, a new one respawns somewhere in the level.";
 			add_list(p2, false, 5, b1, b2, b3, b4, b5);
@@ -537,7 +532,7 @@ Page* p0 = NULL;
 			add_paragraph(p2, "Even if the game got suspended, it occupies a special spot in my heart for being my first real game and coding project. It has been a huge learning experience.");
 			add_image_desc(p2, "beardedbear7.jpg", "The setup for our first public event.");
 			add_reference(p2, "YouTube Trailer", "https://www.youtube.com/watch?v=7yaPZY4X-AY&t=1s");
-			add_reference(p2, "IndieDB Page",  "http://www.indiedb.com/games/beardedbea");
+			add_reference(p2, "IndieDB Page",  "http://www.indiedb.com/games/beardedbear");
 			add_reference(p2, "TIGSource Thread",  "https://forums.tigsource.com/index.php?topic=54839.");
 		}
 		{
@@ -568,10 +563,8 @@ Page* p0 = NULL;
 			char* b2 = "1x1 pixel display: the actual window can be upscaled to fullscreen, but the game can only display one colour at the time.";
 			char* b3 = "No audio/feedback: there are no external feedback other than the display, so full silence.";
 			add_list(p2, false, 3, b1, b2, b3);
-
 			add_paragraph(p2, "The game is about a blind guy trapped in a room. You need to find the key and the exit door checking what you have around you.");
 			add_paragraph(p2, "A monster is also randomly wandering in that room.");
-
 			add_header(p2, "The gameplay", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "The game has two main state: Idle and checking.");
 			add_paragraph(p2, "The idle mode is the initial one, it's mainly black with white flashes which indicates the beating of your heart, faster it flashes and few hp you have. You switch to checking mode pressing space.");
@@ -584,8 +577,6 @@ Page* p0 = NULL;
 			char* a5 = "7 short flashes = enemy;";
 			add_list(p2, false, 5, a1, a2, a3, a4, a5);
 			add_paragraph(p2, "So, for example if you have a wall on your left and your right, a free space up, and a key down the screen will do a long flash, a short one, another long one, and two short flashes and then will return in idle mode.");
-
-
 			add_reference(p2, "Itch.io Page", "https://elkiwydev.itch.io/escaping-the-bit");
 		}
 		{
@@ -624,9 +615,6 @@ Page* p0 = NULL;
 			add_reference(p2, "LudumDare Page", "http://ludumdare.com/compo/ludum-dare-31/?action=preview&uid=40741");
 			add_reference(p2, "Development Timelapse", "https://www.youtube.com/watch?v=hOjXrH4-LeQ");
 		}
-
-		
-		
 	}
 
 
@@ -636,31 +624,49 @@ Page* p0 = NULL;
 	{
 		Page* p1 = create_page(p0, "Other");
 		add_paragraph(p1, "This section is for everything I study, research, and everything else that doesn't find a good fit in the other main categories but I still want to talk about it.");
+		add_preview_description(p1, "Everything that doesn't fit in the other categories will go here.");
 
 		{
-			Page* p2 = create_page(p1, "Japanese");
-			add_preview_description(p2, "My studies on the Japanese Language.");
+			//Page* p2 = create_page(p1, "Japanese");
+			//add_preview_description(p2, "My studies on the Japanese Language.");
 		}
 		{
 			Page* p2 = create_page(p1, "Emacs");
-			add_preview_description(p2, "My prefered text editor and my thoughts about it.");
+			add_preview_description(p2, "My preferred text editor and my thoughts about it.");
 			add_paragraph(p2, "I tried so many text editors in my coding experience that I now feel the need to talk about the one that I now feel really comfortable and productive: Emacs.");
 			add_paragraph(p2, "But before talking about it, a little context.");
-
 			add_header(p2, "The IDEs", HEADER_SIZE_SMALL);
 			add_paragraph(p2, "Other than many text editors I also used quite a lot of programming languages. This inevitably forced me to use IDE like Eclipse, CodeBlocks, VistualStudio, XCode and probably other that I don't even remember now.");
 			add_paragraph(p2, "An IDE is great for a beginner as it spoon feed you with many handy things like code completion, suggestions, and many more features. And these really helps when you have no idea of what you are doing and you want to finally make the thing you are working on to compile.");
 			add_paragraph(p2, "The downside of the IDEs comes when you start to switch around trying different languages or tools that does not integrate with your current IDE.");
 			add_paragraph(p2, "So, instead of having 10 huge full featured IDEs installed on your machine with every one of them a different configuration and setup, I advise to try to use a \"simpler\" generic text editor that can adapt to any programming language (or also text documents!).");
-
 			add_header(p2, "The Text Editors", HEADER_SIZE_SMALL);
-			add_paragraph(p2, "The majore reasons to switch to a text editor is the lightness of it when compared to any IDE and the configurability of it to easily fit any of your need.");
-			add_paragraph(p2, "In fact, any good text editor has a great choice of addons, plugins, or scipting API to force it do whatever you want in any way you want it.");
-
+			add_paragraph(p2, "The majore reasons to switch to a text editor is the lightness of it when compared to any IDE and the flexibility of it to easily fit any of your need.");
+			add_paragraph(p2, "In fact, any good text editor has a great choice of addons, plugins, or scripting API to force it do whatever you want in any way you want it.");
+			add_paragraph(p2, "Another advantage of a text editor is that you can switch much more easily between projects or simple text document you have around your computer.");
+			add_header(p2, "Vim", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "Vim is a text editor for your terminal. I'll not describe it in details because it's a huge world and many other people already did that in a better way than what I could do myself.");
+			add_paragraph(p2, "What I'll give importance to is to it's bindings. Normally in any text editor you press a character, and that will be inserted into the file. In Vim is a bit more complicated than that.");
+			add_paragraph(p2, "Vim has \"Modes\", and depending in which mode you are Vim will do different things on the key press. Again, I'll not go too much into details here, but I'll highlight the concept of that: Vim is complex but, once you overcome the steep learning curve, it can do much much more than a normal text editor.");
+			add_paragraph(p2, "These are, in my opinion, the best things of using Vim (Or a program with Vim-bindings in general):");
+			char* b1 = "The speed in which you edit and write code. There are so much shortcut and handy commands that will boost your productivity to the roof.";
+			char* b2 = "The ergonomics of not having to use a mouse. Vim is focused only on the keyboard. The mouse is not needed (some version of vim will not even accept mouse inputs!). This will let your hands stay in place, without the need to keep shifting back and forth between mouse and keyboard.";
+			char* b3 = "The portability. Vim comes preinstalled on anything based on Unix. In any remote server if you connect through SSH, Vim will be there for you. Even porting your config is a matter or simply moving your .vimrc file into the machine you want to use it and everything will be just like your original machine.";
+			add_list(p2, false, 3, b1, b2, b3);
+			add_header(p2, "Emacs", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "And here comes the other giant. Vim and Emacs, black and white, yin and yang.");
+			add_paragraph(p2, "Emacs in my opinion is not a text editor. Emacs is a platform, on which you can build up anything you want.");
+			add_paragraph(p2, "In fact, the best option between Vim and Emacs is Emacs WITH Vim.");
+			add_paragraph(p2, "Emacs has an enormous repository of packages which can extend and modify it's functionality. One of those packages is \"Evil-mode\" which will port everything good of Vim into Emacs!");
+			add_image_desc(p2, "emacs2.png", "If you forget the shortcut for a command, you can simply search its name!");
+			add_paragraph(p2, "With Evil Emacs, you have then a base on which you can build complex tools that will automate so much of your workflows that you will ask yourself why you didn't learn it before.");
+			add_paragraph(p2, "Other than that Emacs has also beautiful packages like \"Org Mode\", \"magit\", \"whichkey\", \"moody\", and all the languages specific packages.");
+			add_image_desc(p2, "emacs3.png", "Emacs can run REPL inside it to better integrate it and interact with it.");
+			add_image_desc(p2, "emacs4.png", "For example it can execute single expressions in Clojure and output on a tooltip the result of that operation.");
 		}
 		{
-			Page* p2 = create_page(p1, "6502 Assembly");
-			add_preview_description(p2, "My studies on 6502 Assembly for NES game development.");
+			//Page* p2 = create_page(p1, "6502 Assembly");
+			//add_preview_description(p2, "My studies on 6502 Assembly for NES game development.");
 		}
 	}
 
@@ -670,11 +676,11 @@ Page* p0 = NULL;
 // Guides
 ////////////////////////////
 	{
-		Page* p1 = create_page(p0, "Guides");
-		{
-			Page* p2 = create_page(p1, "Simple Hash table in C");
-			add_preview_description(p2, "How to implement an Hash table from scratch in C or any other programming language.");
-		}
+		//Page* p1 = create_page(p0, "Guides");
+		//{
+		//	Page* p2 = create_page(p1, "Simple Hash table in C");
+		//	add_preview_description(p2, "How to implement an Hash table from scratch in C or any other programming language.");
+		//}
 	}
 
 
@@ -683,6 +689,15 @@ Page* p0 = NULL;
 ////////////////////////////
 	{
 		Page* p1 = create_page(p0, "About");
+		add_paragraph(p1, "I'm Stefano, but you can call me Kiwy.");
+		add_paragraph(p1, "I'm 27 years old and I live in a very small town in northern Italy near a small lake between mountains.");
+		add_paragraph(p1, "Currently I have a full time job as a software developer in a company near where I live. When I come home from work I usually try to work on some of the projects I show in this website.");
+		add_image(p1, "elkiwy.png");
+
+		add_reference(p1, "Github", "https://github.com/elkiwy");
+		add_reference(p1, "Instagram", "https://www.instagram.com/elkiwy/");
+		add_reference(p1, "Twitter", "https://twitter.com/ElkiwyDev");
+		add_reference(p1, "Mail", "mailto:elkiwydev@gmail.com");
 	}
 
 }
