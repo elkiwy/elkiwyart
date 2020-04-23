@@ -2,20 +2,19 @@
 include .env
 export $(shell sed 's/=.*//' .env)
 
-WARNS = -Wpedantic -Wshadow -Wextra -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=int-conversion
-OPTIONS = -g -Og -fsanitize=address -fsanitize=undefined
+FLAGS = -DDEBUG -Wpedantic -Wshadow -Wextra -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=int-conversion -g -Og -fsanitize=address -fsanitize=undefined -lm -ldl
 
 main: main.c
 	rm -f ../site/*
 	rm -f ../media/thumb/*
-	cc -std=c99 -DDEBUG $(WARNS) $(OPTIONS) -DCREATING_THUMBNAILS main.c -o main
+	gcc -std=c99 $(FLAGS) -DCREATING_THUMBNAILS main.c -o main -lm -ldl
 	./main
 	rm ./main
 
 test: 
 	rm -f ../site/*
 	rm -f ../media/thumb/*
-	cc -std=c99 -DDEBUG $(WARNS) $(OPTIONS) main.c -o main
+	gcc -std=c99 $(FLAGS) main.c -o main -lm -ldl
 	./main
 	rm ./main
 
@@ -25,7 +24,7 @@ env:
 prod: 
 	rm -f ../site/*
 	rm -f ../media/thumb/*
-	cc -std=c99 -DDEBUG $(WARNS) $(OPTIONS) -DCREATING_THUMBNAILS main.c -o main
+	gcc -std=c99 $(FLAGS) -DCREATING_THUMBNAILS main.c -o main -lm -ldl
 	./main
 	rm ./main
 

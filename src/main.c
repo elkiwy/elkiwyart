@@ -162,7 +162,6 @@ char* dropLast(char* src, int n){
 void build_head_tags(FILE* f, Page* p){
 
 	fputs("<!-- Normal meta tags -->", f);
-	fprintf(f, "");
 	fprintf(f, "<meta charset='utf-8'>");
 	fprintf(f, "<meta name='viewport' content='width=device-width'>");
 	fprintf(f, "<meta name='description' content='%s'>", p->preview_description);

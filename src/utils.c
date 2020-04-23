@@ -1,4 +1,4 @@
-
+#include <strings.h>
 
 void to_lowercase(char *str, char *target, size_t tsize) {
   for (size_t i = 0; i < tsize; i++) {
