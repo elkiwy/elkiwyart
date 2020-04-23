@@ -473,6 +473,7 @@ void add_image_desc(Page* p, char* s, char* d){
 	char* format = "<div>%s<span class='imgdesc'>%s</span></div>";
 	char* buff = malloc(sizeof(char)*(strlen(format) + strlen(img1) + strlen(d) + 1));
 	sprintf(buff, format, img1, d);
+	free(img1);
 
 	cont->data = buff;
 	p->contents[p->contents_count] = cont;
@@ -491,6 +492,8 @@ void add_image2(Page* p, char* s1, char* s2){
 	int size = strlen(img1) + strlen(img2) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);
 	sprintf(buff, format, img1, img2);
+	free(img1);
+	free(img2);
 	cont->data = buff;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
@@ -509,6 +512,7 @@ void add_image3(Page* p, char* s1, char* s2, char* s3){
 	int size = strlen(img1) + strlen(img2) + strlen(img3) + strlen(format) + 1;
 	char* buff = malloc(sizeof(char)*size);
 	sprintf(buff, format, img1, img2, img3);
+	free(img1); free(img2); free(img3);
 	cont->data = buff;
 	p->contents[p->contents_count] = cont;
 	p->contents_count++;
@@ -540,8 +544,10 @@ void add_list(Page* p, bool numbered, int n, ...){
 	char* joinedListItems = joinStringsArr(n, listItems);
 	char* format = "<ul>%s</ul>";
 	if (numbered) format = "<ol>%s</ol>";
+	for (int i=0; i<n; ++i){free(listItems[i]);}
 
 	char* data = formatString(format, 1, joinedListItems);
+	free(joinedListItems);
 
 	//Create the content
 	Content* cont = malloc(sizeof(Content));
@@ -569,13 +575,20 @@ void add_gallery(Page* p, int n, ...){
 	va_start(ap, n);
 	for(int i=0; i<n; ++i){
 		char* s = va_arg(ap, char*);
-		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, dropLast(s, 4));
+		char* s1 = dropLast(s, 4);
+		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, s1);
+		free(s1);
 	}
 	va_end(ap);
 
 	//Pack them into a string and add <ul> tag
 	char* joinedImages = joinStringsArr(n, strings);
 	char* data = formatString("<div class='gallery'>%s</div>", 1, joinedImages);
+	free(joinedImages);
+	for(int i=0; i<n; ++i){
+		free(strings[i]);
+	}
+
 
 	//Create the content
 	Content* cont = malloc(sizeof(Content));
@@ -588,6 +601,26 @@ void add_gallery(Page* p, int n, ...){
 //////////////////////////////////////////////////////////////////////
 // Main
 //////////////////////////////////////////////////////////////////////
+void free_content(Content* c){
+	free(c->data);
+	free(c);
+}
+void free_page(Page* p){
+
+	for (int i=0; i<p->references_count; i++){
+		free_content(p->references[i]);
+	}
+
+	for (int i=0; i<p->contents_count; i++){
+		free_content(p->contents[i]);
+	}
+
+	for (int i=0; i<p->children_len; i++){
+		free_page(p->children[i]);
+	}
+	free(p->filename);
+	free(p);
+}
 
 int main(){
     #include "content.c"
@@ -599,5 +632,6 @@ int main(){
 
 	printf("-----\nStart building\n-----\n"); fflush(stdout);
 	build_page_recursively(p0);
+	free_page(p0);
 	return 0;
 }
