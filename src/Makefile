@@ -1,8 +1,12 @@
-#!make
+#!/bin/bash
+
+SHELL := /bin/bash
+
 include .env
 export $(shell sed 's/=.*//' .env)
 
-FLAGS = -DDEBUG -Wpedantic -Wshadow -Wextra -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=int-conversion -g -Og -fsanitize=address -fsanitize=undefined -lm -ldl
+
+FLAGS = -DDEBUG -Wpedantic -Wshadow -Wextra -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=int-conversion -g -Og -lm -ldl #-fsanitize=address -fsanitize=undefined 
 
 main: main.c
 	rm -f ../site/*
@@ -28,5 +32,12 @@ prod:
 	./main
 	rm ./main
 
-deploy:
-	sftp $(FTP_USER)@$(FTP_HOST):$(FTP_ROOT) <<< $$'put -ar ../site\nput -ar ../links\nput -ar ../media'
+deploy_preview:
+	sftp $(FTP_USER)@$(FTP_HOST):$(FTP_ROOT_PREVIEW) <<< $$'put -r ../site\nput -r ../links\nput -r ../media'
+deploy_prod:
+	sftp $(FTP_USER)@$(FTP_HOST):$(FTP_ROOT_PROD) <<< $$'put -r ../site\nput -r ../links\nput -r ../media'
+
+deploy_preview_content_only:
+	sftp $(FTP_USER)@$(FTP_HOST):$(FTP_ROOT_PREVIEW) <<< $$'put -r ../site\nput -r ../links'
+deploy_prod_content_only:
+	sftp $(FTP_USER)@$(FTP_HOST):$(FTP_ROOT_PROD) <<< $$'put -r ../site\nput -r ../links'

@@ -181,10 +181,27 @@ Page* p0 = NULL;
 
 
 		{
-			//Page* p2 = create_page(p1, "Docu");
-			//set_status(p2, STAT_ONGOING);
-			//add_preview_description(p2, "A tool to generate code documentation from simple docstring written in C99.");
-			//add_preview_image(p2, "docu1.png");
+			Page* p2 = create_page(p1, "Docu");
+			set_status(p2, STAT_ONGOING);
+			add_preview_description(p2, "A tool to generate code documentation from simple docstring, written in C99.");
+			add_preview_image(p2, "docu1.png");
+			add_paragraph(p2, "I'm always trying to write clean and understandable code in my projects, but saying that I " BOLD("always") " manage to do that is by far an exaggeration.");
+			add_paragraph(p2, "One thing that it helps me a lot to keep the code \"clean\" is to make it open source and to maintain a documentation of it.<br>But I always felt the mainstream documentation tools unnecessary complex, full of features that I would never use, or with too much feature that makes the whole documentation job boring and slow.");
+			add_paragraph(p2, "But I always felt the mainstream documentation tools unnecessary complex, full of features that I would never use, or with too much feature that makes the whole documentation job boring and slow.");
+			add_paragraph(p2, "So one day I tought: what if I build my own documentation tool from scratch with C99? And I did it.");
+			add_header(p2, "The concept", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "With " BOLD("Docu") " I wanted to make something extremly simple that reads special comments in the code, parse all the information into a data structure, and then let you choose to export that data structure into various format (printing in console, HTML, Emacs Org Mode, etc).");
+			add_paragraph(p2, "The core part of Docu is the parsing of the information of a function declaration to get all the information possible automatically. This works well when using it on descriptive languages like C, a little less well with something more compact like Lisp.");
+			add_image(p2, "docu_c.png");
+			add_paragraph(p2, "When Gisp can't retrieve some data (like a parameter type of a function in Lisp) the programmer can provide it to Docu using other special comments.");
+			add_image(p2, "docu_gisp.png");
+			add_paragraph(p2, "Internally Docu organize the functions data into modules to further organize the informations. Modules can also be defined with special comments.");
+			add_header(p2, "The extras and plans", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "The core part that parse the code into data is driven by special configuration files that defines how Docu should read the functions through some regex. So to add new languages I only need to make the right regex and make the configuration file for it.");
+			add_paragraph(p2, "The plan is to add the most popular languages configuration file and add other renderer formats to export the data.");
+			add_header(p2, "An example", HEADER_SIZE_SMALL);
+			add_paragraph(p2, "If you want to see an example, Gisp documentation is currently generated through Docu and is hosted on this website here: " SENDTEXT("gisp_documentation", "Gisp Documentation"));
+			add_reference(p2, "Docu Repository", "https://github.com/elkiwy/docu");
 		}
 		{
 			Page* p2 = create_page(p1, "ElkiwyArt");
@@ -232,27 +249,26 @@ Page* p0 = NULL;
 			add_paragraph(p2, "Gisp is a Lisp dialect I made 100% focused on giving the right tools to generate procedurally images.");
 			add_image(p2, "gisp-test.png");
 			add_paragraph(p2, "The core program is written in C and it consists in a lisp interpreter that reads a .gisp code file and execute it.");
-			add_paragraph(p2, "For the core interpreter structure I used " LINKTEXT("https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html", "this article") " as a great reference that explain everything you need to create your own little interpreter. It's not too advanced and very minimalist, but I like it that way and give me freedom to expand it by myself in any way I want.");
-			add_paragraph(p2, "Right now the project is pretty stable and capable of generating images, but this doesn't mean that is prefect.");
+			add_paragraph(p2, "For the core interpreter structure I used " LINKTEXT("https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html", "this article") " as a great reference that explain everything you need to create your own little interpreter. It's very minimalist and not too advanced, but perfect to learn the major concepts and it give me freedom to improve it by myself in any way I want.");
+			add_image2(p2, "gisp_disposed.png", "gisp_mandelbrot.png");
+			add_paragraph(p2, "Right now the project is stable enough to generate images, but this doesn't mean that is prefect.");
 			add_paragraph(p2, "It still lacks of: ");
 			char* l1 = "Proper error checking system to be able to give you insights when something in your code is wrong.";
-			char* l2 = "Garbage collection and memory management.";
-			char* l3 = "A REPL to continuously evaluate code and interact live with it.";
-			char* l4 = "More advance graphics primitive.";
-			char* l5 = "Extended Gisp core library.";
-			add_list(p2, false, 5, l1, l2, l3, l4, l5);
+			char* l2 = "A REPL to continuously evaluate code and interact live with it.";
+			char* l3 = "More advance graphics primitive.";
+			char* l4 = "Extended Gisp core library.";
+			add_list(p2, false, 4, l1, l2, l3, l4);
+			add_image(p2, "gisp_fragmented.png");
 			add_paragraph(p2, "The project also has a companion project called " SENDTEXT("gispeditor", "Gisp Editor") " which, as the name implies, is a tool to edit and run gisp code without having to manually run from the terminal.");
 			add_reference(p2, "Lisp in less than 200 lines of C", "https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html");
 			add_reference(p2, "Cairo Lib", "https://www.cairographics.org");
 			add_reference(p2, "Gisp Repository", "https://github.com/elkiwy/gisp");
 			add_reference(p2, "Gisp-Editor Repository", "https://github.com/elkiwy/gisp-editor");
-
 			{
-				//Page* p3 = create_page(p2, "Documentation");
-				//set_status(p3, STAT_TOSTART);
-				//add_preview_description(p3, "Documentation and API reference for Gisp");
-				//add_header(p3, "Reference", HEADER_SIZE_SMALL);
-				//add_stub(p3, "Autogenerated reference");
+				Page* p3 = create_page(p2, "Gisp Documentation");
+				set_status(p3, STAT_ONGOING);
+				add_preview_description(p3, "Documentation and API reference for Gisp");
+				add_html(p3, "Docs.html");
 			}
 		}
 

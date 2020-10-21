@@ -215,9 +215,12 @@ void build_nav_level(FILE* f, Page* p, char** path){
 			if (name == path[j]){inPath = true;}
 		}
 
+
 		//Add the item
-		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", filename, name);  
-		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", filename, name);}
+		char lowercaseFilename[STR_BUF_LEN];
+		to_lowercase(filename, lowercaseFilename, STR_BUF_LEN);
+		if (inPath){fprintf(f, "<li><a href='%s.html'><span>%s</span></a></li>", lowercaseFilename, name);  
+		}else{fprintf(f, "<li><a href='%s.html'>%s</a></li>", lowercaseFilename, name);}
 	}
 	fputs("</ul>", f);
 }
@@ -254,7 +257,9 @@ void build_content(FILE* f, Content* c){
 void build_contents(FILE* f, Page* p){
 	//Page header
 	if (p->parent !=NULL) {
-		fprintf(f,"<a href='%s.html'>", p->parent->filename);
+		char lowercaseFilename[STR_BUF_LEN];
+		to_lowercase(p->parent->filename, lowercaseFilename, STR_BUF_LEN);
+		fprintf(f,"<a href='%s.html'>", lowercaseFilename);
 		fprintf(f,"<h3 class='link' style='display:inline'>%s</h3>", p->parent->name);  
 		fprintf(f,"</a>");
 		fprintf(f,"<h3 style='display:inline'> :: </h3>");  
@@ -292,7 +297,9 @@ void build_child_previews(FILE* f, Page* p){
 			if (p->children[i]->has_preview){
 				fputs("<div class='preview'>", f);
 
-				fprintf(f, "<a href='%s.html'>", p->children[i]->filename);
+				char lowercaseFilename[STR_BUF_LEN];
+				to_lowercase(p->children[i]->filename, lowercaseFilename, STR_BUF_LEN);
+				fprintf(f, "<a href='%s.html'>", lowercaseFilename);
 				if (p->children[i]->preview_image != NULL){
 #ifdef CREATING_THUMBNAILS
 					fprintf(f, "<div class='imgprevcont'><img class='imgprev' src='../media/thumb/%s'></div>", p->children[i]->preview_image);
@@ -303,7 +310,7 @@ void build_child_previews(FILE* f, Page* p){
 
 				//Page title
 				fputs("<div class='textprevcont'>", f);
-				fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\"><a class='link' href='%s.html'>%s</a></h2>", p->children[i]->filename, p->children[i]->name);  
+				fprintf(f, "<h2 class='titleprev' style=\"margin-bottom:0\"><a class='link' href='%s.html'>%s</a></h2>", lowercaseFilename, p->children[i]->name);  
 				fprintf(f, "</a>");
 
 				//Page description
@@ -433,6 +440,29 @@ void add_paragraph(Page* p, char* s){
 	p->contents_count++;
 }
 
+
+///~Adds a raw html from another file
+void add_html(Page* p, char* path){
+	Content* cont = malloc(sizeof(Content));
+
+	FILE* f = fopen(path, "r");
+	fseek(f, 0, SEEK_END);
+	long fsize = ftell(f);
+	fseek(f, 0, SEEK_SET);
+	char* buff = malloc(sizeof(char) * (fsize + 1));
+	fread(buff, sizeof(char), fsize, f);
+	fclose(f);
+
+	cont->data = formatString("<p>%s</p>", 1, buff);
+	free(buff);
+
+
+	p->contents[p->contents_count] = cont;
+	p->contents_count++;
+}
+
+
+
 ///~Add a new stub to a page, printing a warning during the execution.
 void add_stub(Page* p, char* s){
 	Content* cont = malloc(sizeof(Content));
@@ -447,7 +477,10 @@ void add_reference(Page* p, char* text, char* link){
 	Content* cont = malloc(sizeof(Content));
 	char* format = "<div style='margin-bottom:2px'> %s <span style='position:absolute;left:320px'> =&gt; </span> <span style='float:right;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'><a class='link' href='%s'>%s</a></span> </div>";
 	char* buff = malloc(sizeof(char)*(strlen(text)+strlen(format)+(strlen(link)*2)+1));
-	sprintf(buff, format, text, link, link);
+
+	char lowercaseLink[STR_BUF_LEN];
+	to_lowercase(link, lowercaseLink, STR_BUF_LEN);
+	sprintf(buff, format, text, lowercaseLink, link);
 	cont->data = buff;
 	p->references[p->references_count] = cont;
 	p->references_count++;
@@ -576,6 +609,8 @@ void add_gallery(Page* p, int n, ...){
 	for(int i=0; i<n; ++i){
 		char* s = va_arg(ap, char*);
 		char* s1 = dropLast(s, 4);
+		char lowercaseFilename[STR_BUF_LEN];
+		to_lowercase(s, lowercaseFilename, STR_BUF_LEN);
 		strings[i] = formatString("<div class='galleryImage'><a href='../media/img/%s'><img src='../media/img/%s'><span class='galleryDesc'>%s</span></a></div>", 3, s, s, s1);
 		free(s1);
 	}
